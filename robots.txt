@@ -1,0 +1,13 @@
+# SpecHub robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://spechubpro.com/sitemap.xml
+
+# Crawl delay for polite bots
+Crawl-delay: 2
+
+User-agent: Googlebot-Image
+Allow: /images/

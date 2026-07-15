@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog &amp; Smartphone Guides – SpecHub</title>
+<meta name="description" content="Expert smartphone reviews, buying guides, 5G news, camera rankings and comparisons. Stay up to date with the latest in mobile technology.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://spechubpro.com/blog/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog &amp; Smartphone Guides – SpecHub">
+<meta property="og:description" content="Expert smartphone reviews, buying guides, 5G news, camera rankings and comparisons. Stay up to date with the latest in mobile technology.">
+<meta property="og:url" content="https://spechubpro.com/blog/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog &amp; Smartphone Guides – SpecHub">
+<meta name="twitter:description" content="Expert smartphone reviews, buying guides, 5G news, camera rankings and comparisons. Stay up to date with the latest in mobile technology.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a class="nav-logo" href="../">Spec<span>Hub</span></a>
+    <div class="nav-links"><a href="../">Home</a><a href="../brands/">Brands</a><a href="../compare/">Compare</a><a href="../search/">Search</a><a href="../blog/" class="active">Blog</a></div>
+    <div class="nav-search" style="position:relative">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search phones..." id="navSearch"
+        oninput="liveSearch(this.value,'searchDropdown')"
+        onkeydown="if(event.key==='Enter')goSearch()">
+    </div>
+    <div class="nav-actions">
+      <button class="btn-theme" onclick="toggleTheme()" title="Toggle dark mode">
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+      <button class="nav-menu-btn" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="navOverlay" class="nav-overlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <div class="mobile-logo">Spec<span>Hub</span></div>
+    <button class="mobile-nav-close" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="mobile-nav-search">
+    <input type="text" placeholder="Search phones..."
+      oninput="liveSearch(this.value,'searchDropdown')"
+      onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+  <div class="mobile-nav-links">
+    <a href="../"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="../brands/"><i class="fas fa-mobile-screen-button"></i><span>Brands</span></a>
+    <a href="../search/"><i class="fas fa-search"></i><span>Search</span></a>
+    <a href="../compare/"><i class="fas fa-code-compare"></i><span>Compare</span></a>
+    <a href="../blog/"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+  </div>
+  <div class="mobile-nav-footer">
+    <a href="../about/"><i class="fas fa-info-circle"></i>About Us</a>
+    <a href="../contact/"><i class="fas fa-envelope"></i>Contact</a>
+    <a href="../privacy/"><i class="fas fa-shield-halved"></i>Privacy Policy</a>
+    <a href="../terms/"><i class="fas fa-file-contract"></i>Terms &amp; Conditions</a>
+    <a href="../disclaimer/"><i class="fas fa-triangle-exclamation"></i>Disclaimer</a>
+  </div>
+</div>
+<div id="searchDropdown" style="display:none;position:fixed;top:70px;right:20px;z-index:900;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);width:340px;max-height:400px;overflow-y:auto;padding:8px"></div>
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../">Home</a><span class="sep">/</span><span>Blog</span></nav>
+    <h1 style="color:white;margin-top:8px">Blog &amp; Guides</h1>
+    <p style="color:rgba(255,255,255,.7);margin-top:6px">Expert reviews, buying guides, and the latest smartphone news</p>
+  </div>
+</div>
+<div class="container" style="padding:40px 20px">
+  <div class="blog-categories"><button class="blog-cat-btn active" onclick="filterCat('all',this)">All</button><button class="blog-cat-btn" onclick="filterCat('Buying Guides',this)">Buying Guides</button><button class="blog-cat-btn" onclick="filterCat('Comparisons',this)">Comparisons</button><button class="blog-cat-btn" onclick="filterCat('Latest News',this)">Latest News</button><button class="blog-cat-btn" onclick="filterCat('Phone Reviews',this)">Phone Reviews</button></div>
+  <div class="blog-layout">
+    <div><div class="blog-list" id="blogList"><article class="blog-card" data-cat="Buying Guides"><div class="blog-card-img" style="background:linear-gradient(135deg,#0055FF22,#0055FF11);min-height:160px"><i class="fas fa-list-check" style="font-size:3rem;color:#0055FF;opacity:.7"></i></div><div class="blog-card-body"><div class="blog-category">Buying Guides</div><h3><a href="../blog/best-phones-2025/">Best Smartphones of 2025: Our Top Picks Across Every Budget</a></h3><p class="blog-excerpt">We have tested over 50 phones this year. Here are the absolute best across flagship, mid-range, and budget categories.</p><div class="blog-meta"><span><i class="fas fa-user"></i> Tech Editor</span><span><i class="fas fa-calendar"></i> June 10, 2025</span><span><i class="fas fa-clock"></i> 8 min read</span></div></div></article><article class="blog-card" data-cat="Comparisons"><div class="blog-card-img" style="background:linear-gradient(135deg,#7C3AED22,#7C3AED11);min-height:160px"><i class="fas fa-code-compare" style="font-size:3rem;color:#7C3AED;opacity:.7"></i></div><div class="blog-card-body"><div class="blog-category">Comparisons</div><h3><a href="../blog/iphone-vs-android-2026/">iPhone vs Android in 2026: Which Should You Choose?</a></h3><p class="blog-excerpt">The eternal debate continues. We break down the real differences between iOS and Android in 2025 and help you make the right choice.</p><div class="blog-meta"><span><i class="fas fa-user"></i> Review Team</span><span><i class="fas fa-calendar"></i> july 13, 2026</span><span><i class="fas fa-clock"></i> 12 min read</span></div></div></article><article class="blog-card" data-cat="Latest News"><div class="blog-card-img" style="background:linear-gradient(135deg,#00B37E22,#00B37E11);min-height:160px"><i class="fas fa-satellite-dish" style="font-size:3rem;color:#00B37E;opacity:.7"></i></div><div class="blog-card-body"><div class="blog-category">Latest News</div><h3><a href="../blog/5g-guide-africa/">5G in Africa 2025: Which Phones and Networks Are Available?</a></h3><p class="blog-excerpt">5G is expanding rapidly across African markets. Here is a comprehensive breakdown of which networks are live and which phones support it.</p><div class="blog-meta"><span><i class="fas fa-user"></i> Africa Desk</span><span><i class="fas fa-calendar"></i> June 5, 2025</span><span><i class="fas fa-clock"></i> 6 min read</span></div></div></article><article class="blog-card" data-cat="Phone Reviews"><div class="blog-card-img" style="background:linear-gradient(135deg,#FF4D0022,#FF4D0011);min-height:160px"><i class="fas fa-camera" style="font-size:3rem;color:#FF4D00;opacity:.7"></i></div><div class="blog-card-body"><div class="blog-category">Phone Reviews</div><h3><a href="../blog/camera-phones-ranked/">Camera Phone Rankings 2025: Who Takes the Best Photos?</a></h3><p class="blog-excerpt">After 500+ test shots across 15 phones, we rank the best camera phones you can buy right now — from overall winner to best zoom and best video.</p><div class="blog-meta"><span><i class="fas fa-user"></i> Camera Expert</span><span><i class="fas fa-calendar"></i> June 1, 2025</span><span><i class="fas fa-clock"></i> 15 min read</span></div></div></article><article class="blog-card" data-cat="Buying Guides"><div class="blog-card-img" style="background:linear-gradient(135deg,#0055FF22,#0055FF11);min-height:160px"><i class="fas fa-list-check" style="font-size:3rem;color:#0055FF;opacity:.7"></i></div><div class="blog-card-body"><div class="blog-category">Buying Guides</div><h3><a href="../blog/best-budget-smartphones-2026/">Best Budget Smartphones Under $300 in 2026</a></h3><p class="blog-excerpt">Looking for the best budget phone? We compare the top smartphones under $300 based on performance, cameras, battery life, and value for money.</p><div class="blog-meta"><span><i class="fas fa-user"></i> Tech Editor</span><span><i class="fas fa-calendar"></i> July 8, 2026</span><span><i class="fas fa-clock"></i> 9 min read</span></div></div></article><article class="blog-card" data-cat="Phone Reviews"><div class="blog-card-img" style="background:linear-gradient(135deg,#FF4D0022,#FF4D0011);min-height:160px"><i class="fas fa-camera" style="font-size:3rem;color:#FF4D00;opacity:.7"></i></div><div class="blog-card-body"><div class="blog-category">Phone Reviews</div><h3><a href="../blog/best-gaming-phones-2026/">Best Gaming Phones of 2026: Top Picks for Every Budget</a></h3><p class="blog-excerpt">Discover the best gaming smartphones of 2026 with powerful processors, high refresh rate displays, advanced cooling systems, and long battery life.</p><div class="blog-meta"><span><i class="fas fa-user"></i> Gaming Team</span><span><i class="fas fa-calendar"></i> July 5, 2026</span><span><i class="fas fa-clock"></i> 12 min read</span></div></div></article><article class="blog-card" data-cat="Comparisons"><div class="blog-card-img" style="background:linear-gradient(135deg,#7C3AED22,#7C3AED11);min-height:160px"><i class="fas fa-code-compare" style="font-size:3rem;color:#7C3AED;opacity:.7"></i></div><div class="blog-card-body"><div class="blog-category">Comparisons</div><h3><a href="../blog/galaxy-s26-ultra-vs-iphone-17-pro-max/">Samsung Galaxy S26 Ultra vs iPhone 17 Pro Max: Which Should You Buy?</a></h3><p class="blog-excerpt">We compare Samsung's latest flagship with Apple's best iPhone, including cameras, performance, battery life, software, and value.</p><div class="blog-meta"><span><i class="fas fa-user"></i> Review Team</span><span><i class="fas fa-calendar"></i> July 1, 2026</span><span><i class="fas fa-clock"></i> 11 min read</span></div></div></article></div></div>
+    <aside>
+      <div class="sidebar-widget"><div class="ad-banner medium-rect">Advertisement<br>300x250</div></div>
+      <div class="sidebar-widget" style="margin-top:16px">
+        <h4><i class="fas fa-trophy" style="color:var(--primary);margin-right:6px"></i>Top Rated Phones</h4>
+        <div id="sidebarTopPhones"></div>
+      </div>
+      <div class="sidebar-widget" style="margin-top:16px">
+        <h4><i class="fas fa-fire" style="color:var(--accent);margin-right:6px"></i>Popular Articles</h4>
+        <div style="padding:10px 0;border-bottom:1px solid var(--border)"><a href="../blog/best-phones-2025/" style="font-size:.82rem;font-weight:600;color:var(--text)">Best Smartphones of 2025: Our Top Picks Across Every Budget</a><div style="font-size:.72rem;color:var(--text3);margin-top:3px"><i class="fas fa-clock"></i> 8 min read</div></div><div style="padding:10px 0;border-bottom:1px solid var(--border)"><a href="../blog/iphone-vs-android-2026/" style="font-size:.82rem;font-weight:600;color:var(--text)">iPhone vs Android in 2026: Which Should You Choose?</a><div style="font-size:.72rem;color:var(--text3);margin-top:3px"><i class="fas fa-clock"></i> 12 min read</div></div><div style="padding:10px 0;border-bottom:1px solid var(--border)"><a href="../blog/5g-guide-africa/" style="font-size:.82rem;font-weight:600;color:var(--text)">5G in Africa 2025: Which Phones and Networks Are Available?</a><div style="font-size:.72rem;color:var(--text3);margin-top:3px"><i class="fas fa-clock"></i> 6 min read</div></div><div style="padding:10px 0;border-bottom:1px solid var(--border)"><a href="../blog/camera-phones-ranked/" style="font-size:.82rem;font-weight:600;color:var(--text)">Camera Phone Rankings 2025: Who Takes the Best Photos?</a><div style="font-size:.72rem;color:var(--text3);margin-top:3px"><i class="fas fa-clock"></i> 15 min read</div></div>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <div class="ad-banner leaderboard" style="margin-bottom:40px;border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.3)">Advertisement</div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="../" style="display:inline-block;margin-bottom:15px">Spec<span>Hub</span></a>
+        <p class="footer-desc">Africa's most comprehensive smartphone specification database. Find specs, compare phones, and read expert reviews for every budget.</p>
+        <div class="footer-social">
+          <a class="social-link" href="https://www.x.com/spechub9278"><i class="fab fa-x-twitter"></i></a>
+          <a class="social-link" href="https://www.facebook.com/spechub.2025"><i class="fab fa-facebook-f"></i></a>
+          <a class="social-link" href="https://www.instagram.com/spec_hubng/"><i class="fab fa-instagram"></i></a>
+          <a class="social-link" href="https://www.youtube.com/@spechubpro9278"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Top Brands</div>
+        <div class="footer-links">
+          <a href="../brands/samsung/">Samsung</a><a href="../brands/apple/">Apple</a>
+          <a href="../brands/xiaomi/">Xiaomi</a><a href="../brands/tecno/">Tecno</a>
+          <a href="../brands/infinix/">Infinix</a><a href="../brands/itel/">itel</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <div class="footer-links">
+          <a href="../compare/">Compare Phones</a><a href="../search/">Search Phones</a>
+          <a href="../blog/">Blog &amp; Reviews</a><a href="../about/">About Us</a>
+          <a href="../contact/">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <div class="footer-links">
+          <a href="../privacy/">Privacy Policy</a>
+          <a href="../terms/">Terms &amp; Conditions</a>
+          <a href="../disclaimer/">Disclaimer</a>
+        </div>
+        <div class="footer-heading" style="margin-top:20px">Newsletter</div>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="your@email.com">
+          <button onclick="showToast('Subscribed!')">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SpecHub. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy/">Privacy</a><a href="../terms/">Terms</a>
+        <a href="../disclaimer/">Disclaimer</a><a href="../contact/">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div><script src="../data/phones.js"></script>
+<script src="../js/shared.js"></script>
+<script>
+function filterCat(cat, btn) {
+  document.querySelectorAll('.blog-cat-btn').forEach(function(b){ b.classList.remove('active'); });
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(function(c){
+    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+  });
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var er = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23eee'/%3E%3C/svg%3E";
+  var top = PHONE_DB.phones.slice().sort(function(a,b){ return b.rating-a.rating; }).slice(0,4);
+  document.getElementById('sidebarTopPhones').innerHTML = top.map(function(p){
+return `<div class="sidebar-phone-item" onclick="location.href='/phones/${p.id}/'" style="cursor:pointer">`;
+      +'<div class="sidebar-phone-thumb"><img src="'+resolveImg(p.image)+'" alt="'+p.name+'" onerror="this.src=\''+er+'\'"></div>'
+      +'<div><div class="sidebar-phone-name">'+p.name+'</div>'
+      +'<div class="sidebar-phone-price">'+p.price+' &middot; <span style="color:#F59E0B"><i class="fas fa-star"></i></span> '+p.rating+'</div></div></div>';
+  }).join('');
+});
+</script>
+</body>
+</html>

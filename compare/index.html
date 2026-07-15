@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare Smartphones Side by Side – SpecHub</title>
+<meta name="description" content="Compare up to 4 smartphones side by side. Full specs comparison across display, performance, camera, battery and connectivity on SpecHub.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://spechubpro.com/compare/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compare Smartphones Side by Side – SpecHub">
+<meta property="og:description" content="Compare up to 4 smartphones side by side. Full specs comparison across display, performance, camera, battery and connectivity on SpecHub.">
+<meta property="og:url" content="https://spechubpro.com/compare/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Compare Smartphones Side by Side – SpecHub">
+<meta name="twitter:description" content="Compare up to 4 smartphones side by side. Full specs comparison across display, performance, camera, battery and connectivity on SpecHub.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a class="nav-logo" href="../">Spec<span>Hub</span></a>
+    <div class="nav-links"><a href="../">Home</a><a href="../brands/">Brands</a><a href="../compare/" class="active">Compare</a><a href="../search/">Search</a><a href="../blog/">Blog</a></div>
+    <div class="nav-search" style="position:relative">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search phones..." id="navSearch"
+        oninput="liveSearch(this.value,'searchDropdown')"
+        onkeydown="if(event.key==='Enter')goSearch()">
+    </div>
+    <div class="nav-actions">
+      <button class="btn-theme" onclick="toggleTheme()" title="Toggle dark mode">
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+      <button class="nav-menu-btn" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="navOverlay" class="nav-overlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <div class="mobile-logo">Spec<span>Hub</span></div>
+    <button class="mobile-nav-close" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="mobile-nav-search">
+    <input type="text" placeholder="Search phones..."
+      oninput="liveSearch(this.value,'searchDropdown')"
+      onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+  <div class="mobile-nav-links">
+    <a href="../"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="../brands/"><i class="fas fa-mobile-screen-button"></i><span>Brands</span></a>
+    <a href="../search/"><i class="fas fa-search"></i><span>Search</span></a>
+    <a href="../compare/"><i class="fas fa-code-compare"></i><span>Compare</span></a>
+    <a href="../blog/"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+  </div>
+  <div class="mobile-nav-footer">
+    <a href="../about/"><i class="fas fa-info-circle"></i>About Us</a>
+    <a href="../contact/"><i class="fas fa-envelope"></i>Contact</a>
+    <a href="../privacy/"><i class="fas fa-shield-halved"></i>Privacy Policy</a>
+    <a href="../terms/"><i class="fas fa-file-contract"></i>Terms &amp; Conditions</a>
+    <a href="../disclaimer/"><i class="fas fa-triangle-exclamation"></i>Disclaimer</a>
+  </div>
+</div>
+<div id="searchDropdown" style="display:none;position:fixed;top:70px;right:20px;z-index:900;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);width:340px;max-height:400px;overflow-y:auto;padding:8px"></div>
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../">Home</a><span class="sep">/</span><span>Compare Phones</span></nav>
+    <h1 style="color:white;margin-top:8px">Phone Comparison</h1>
+    <p style="color:rgba(255,255,255,.7);margin-top:6px">Compare up to 4 smartphones side by side</p>
+  </div>
+</div>
+<div class="container" style="padding:40px 20px">
+  <div class="ad-banner leaderboard" style="margin-bottom:32px">Advertisement</div>
+  <div class="compare-selectors" id="compareSelectors"></div>
+  <div id="compareTableWrap" style="margin-top:32px"></div>
+  <div class="modal-overlay" id="phoneSelectModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-mobile-alt" style="color:var(--primary);margin-right:8px"></i>Select a Phone</h3>
+        <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <input class="modal-search" type="text" placeholder="Search phones..." id="modalSearch" oninput="filterModal(this.value)">
+        <div class="modal-phone-list" id="modalPhoneList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="compare-bar" id="compareBar">
+  <span style="font-size:.8rem;font-weight:700;white-space:nowrap;color:white">
+    <i class="fas fa-code-compare" style="margin-right:6px"></i>Compare:</span>
+  <div class="compare-phones" id="comparePhones"></div>
+  <button class="btn-compare-now" onclick="goCompare()">Compare Now</button>
+  <button class="compare-bar-close" onclick="clearCompare()"><i class="fas fa-times"></i></button>
+</div><footer class="footer">
+  <div class="container">
+    <div class="ad-banner leaderboard" style="margin-bottom:40px;border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.3)">Advertisement</div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="../" style="display:inline-block;margin-bottom:15px">Spec<span>Hub</span></a>
+        <p class="footer-desc">Africa's most comprehensive smartphone specification database. Find specs, compare phones, and read expert reviews for every budget.</p>
+        <div class="footer-social">
+          <a class="social-link" href="https://www.x.com/spechub9278"><i class="fab fa-x-twitter"></i></a>
+          <a class="social-link" href="https://www.facebook.com/spechub.2025"><i class="fab fa-facebook-f"></i></a>
+          <a class="social-link" href="https://www.instagram.com/spec_hubng/"><i class="fab fa-instagram"></i></a>
+          <a class="social-link" href="https://www.youtube.com/@spechubpro9278"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Top Brands</div>
+        <div class="footer-links">
+          <a href="../brands/samsung/">Samsung</a><a href="../brands/apple/">Apple</a>
+          <a href="../brands/xiaomi/">Xiaomi</a><a href="../brands/tecno/">Tecno</a>
+          <a href="../brands/infinix/">Infinix</a><a href="../brands/itel/">itel</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <div class="footer-links">
+          <a href="../compare/">Compare Phones</a><a href="../search/">Search Phones</a>
+          <a href="../blog/">Blog &amp; Reviews</a><a href="../about/">About Us</a>
+          <a href="../contact/">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <div class="footer-links">
+          <a href="../privacy/">Privacy Policy</a>
+          <a href="../terms/">Terms &amp; Conditions</a>
+          <a href="../disclaimer/">Disclaimer</a>
+        </div>
+        <div class="footer-heading" style="margin-top:20px">Newsletter</div>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="your@email.com">
+          <button onclick="showToast('Subscribed!')">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SpecHub. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy/">Privacy</a><a href="../terms/">Terms</a>
+        <a href="../disclaimer/">Disclaimer</a><a href="../contact/">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div><script src="../data/phones.js"></script>
+<script src="../js/shared.js"></script>
+<script>
+var sel = [null,null,null,null], editSlot = 0;
+
+(function(){
+  var ids = (new URLSearchParams(window.location.search).get('phones')||'').split(',').filter(Boolean).slice(0,4);
+  ids.forEach(function(id,i){ var p=PHONE_DB.phones.find(function(x){return x.id===id;}); if(p) sel[i]=p; });
+  if(!ids.length) compareList.forEach(function(id,i){ var p=PHONE_DB.phones.find(function(x){return x.id===id;}); if(p&&i<4) sel[i]=p; });
+})();
+
+function renderSel() {
+  var er = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23eee'/%3E%3C/svg%3E";
+  document.getElementById('compareSelectors').innerHTML = sel.map(function(p,i){
+    if(p) return '<div class="compare-selector filled">'
+      +'<div style="text-align:center"><img src="'+resolveImg(p.image)+'" alt="'+p.name+'" style="height:100px;object-fit:contain;margin-bottom:8px" onerror="this.src=\''+er+'\'">'
+      +'<div style="font-size:.8rem;font-weight:700">'+p.name+'</div>'
+      +'<div style="font-size:.72rem;color:var(--text3);margin-top:2px">'+p.price+'</div></div>'
+      +'<button onclick="event.stopPropagation();removeSel('+i+')" style="margin-top:10px;font-size:.72rem;color:var(--danger);background:none;border:none;cursor:pointer"><i class="fas fa-times"></i> Remove</button>'
+      +'</div>';
+    return '<div class="compare-selector" onclick="openModal('+i+')">'
+      +'<i class="fas fa-plus-circle" style="font-size:2rem;color:var(--border)"></i>'
+      +'<div style="font-size:.82rem;color:var(--text3);margin-top:8px">Add a phone</div>'
+      +'<button class="btn-primary" style="margin-top:10px;font-size:.78rem"><i class="fas fa-plus"></i> Select Phone</button></div>';
+  }).join('');
+  buildTable();
+}
+
+function removeSel(i){ sel[i]=null; renderSel(); }
+
+function openModal(i){ editSlot=i; document.getElementById('phoneSelectModal').classList.add('open'); document.getElementById('modalSearch').value=''; filterModal(''); }
+function closeModal(){ document.getElementById('phoneSelectModal').classList.remove('open'); }
+
+function filterModal(q){
+  var er = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23eee'/%3E%3C/svg%3E";
+  var phones = PHONE_DB.phones.filter(function(p){
+    return !sel.some(function(s){return s&&s.id===p.id;}) &&
+      (!q||p.name.toLowerCase().indexOf(q.toLowerCase())>=0||p.brand.toLowerCase().indexOf(q.toLowerCase())>=0);
+  });
+  document.getElementById('modalPhoneList').innerHTML = phones.map(function(p){
+    return '<div class="modal-phone-item" onclick="pickPhone(\''+p.id+'\')">'
+      +'<div class="modal-phone-thumb"><img src="'+resolveImg(p.image)+'" alt="'+p.name+'" onerror="this.src=\''+er+'\'"></div>'
+      +'<div><div style="font-size:.85rem;font-weight:600">'+p.name+'</div>'
+      +'<div style="font-size:.75rem;color:var(--text3)">'+p.brand+' &middot; '+p.price+'</div></div></div>';
+  }).join('') || '<p style="text-align:center;color:var(--text3);padding:20px">No phones found</p>';
+}
+
+function pickPhone(id){ var p=PHONE_DB.phones.find(function(x){return x.id===id;}); if(p) sel[editSlot]=p; closeModal(); renderSel(); }
+
+var ROWS=[
+  {s:'Overview'},{l:'Brand',f:function(p){return p.brand;}},{l:'Price',f:function(p){return p.price;}},
+  {l:'Rating',f:function(p){return'<span style="color:#F59E0B"><i class="fas fa-star"></i></span> '+p.rating+'/5';}},
+  {l:'Released',f:function(p){return p.releaseDate||p.year;}},
+  {s:'Display'},{l:'Size',f:function(p){return(p.specs&&p.specs.Display&&p.specs.Display.Size)||'—';}},
+  {l:'Resolution',f:function(p){return(p.specs&&p.specs.Display&&p.specs.Display.Resolution)||'—';}},
+  {l:'Refresh Rate',f:function(p){return(p.specs&&p.specs.Display&&p.specs.Display['Refresh Rate'])||'—';}},
+  {l:'Protection',f:function(p){return(p.specs&&p.specs.Display&&p.specs.Display.Protection)||'—';}},
+  {s:'Performance'},{l:'Chipset',f:function(p){return(p.specs&&p.specs.Platform&&p.specs.Platform.Chipset)||'—';}},
+  {l:'CPU',f:function(p){return(p.specs&&p.specs.Platform&&p.specs.Platform.CPU)||'—';}},
+  {l:'OS',f:function(p){return(p.specs&&p.specs.Platform&&p.specs.Platform.OS)||'—';}},
+  {s:'Memory'},{l:'RAM',f:function(p){return(p.specs&&p.specs.Memory&&p.specs.Memory.RAM)||'—';}},
+  {l:'Storage',f:function(p){return(p.specs&&p.specs.Memory&&p.specs.Memory.Storage)||'—';}},
+  {l:'Card Slot',f:function(p){return(p.specs&&p.specs.Memory&&p.specs.Memory['Card Slot'])||'—';}},
+  {s:'Camera'},{l:'Main',f:function(p){return(p.specs&&p.specs.Camera&&p.specs.Camera.Main)||'—';}},
+  {l:'Ultrawide',f:function(p){return(p.specs&&p.specs.Camera&&p.specs.Camera.Ultrawide)||'—';}},
+  {l:'Telephoto',f:function(p){return(p.specs&&p.specs.Camera&&p.specs.Camera.Telephoto)||'—';}},
+  {l:'Front',f:function(p){return(p.specs&&p.specs.Camera&&p.specs.Camera.Front)||'—';}},
+  {s:'Battery'},{l:'Capacity',f:function(p){return(p.specs&&p.specs.Battery&&p.specs.Battery.Capacity)||'—';}},
+  {l:'Wired',f:function(p){return(p.specs&&p.specs.Battery&&p.specs.Battery['Wired Charging'])||'—';}},
+  {l:'Wireless',f:function(p){return(p.specs&&p.specs.Battery&&p.specs.Battery.Wireless)||'—';}},
+  {s:'Connectivity'},{l:'5G',f:function(p){return(p.specs&&p.specs.Network&&p.specs.Network['5G'])||'—';}},
+  {l:'Wi-Fi',f:function(p){return(p.specs&&p.specs.Connectivity&&p.specs.Connectivity['Wi-Fi'])||'—';}},
+  {l:'Bluetooth',f:function(p){return(p.specs&&p.specs.Connectivity&&p.specs.Connectivity.Bluetooth)||'—';}},
+  {l:'NFC',f:function(p){return(p.specs&&p.specs.Connectivity&&p.specs.Connectivity.NFC)||'—';}},
+  {l:'USB',f:function(p){return(p.specs&&p.specs.Connectivity&&p.specs.Connectivity.USB)||'—';}},
+  {s:'Body'},{l:'Dimensions',f:function(p){return(p.specs&&p.specs.Body&&p.specs.Body.Dimensions)||'—';}},
+  {l:'Weight',f:function(p){return(p.specs&&p.specs.Body&&p.specs.Body.Weight)||'—';}},
+  {l:'Build',f:function(p){return(p.specs&&p.specs.Body&&p.specs.Body.Build)||'—';}},
+  {l:'SIM',f:function(p){return(p.specs&&p.specs.Body&&p.specs.Body.SIM)||'—';}}
+];
+
+function buildTable(){
+  var active = sel.filter(Boolean);
+  var wrap = document.getElementById('compareTableWrap');
+  if(active.length < 2){
+    wrap.innerHTML = active.length === 0
+      ? '<div style="text-align:center;padding:60px 20px;color:var(--text3)"><i class="fas fa-code-compare" style="font-size:3rem;display:block;margin-bottom:16px;opacity:.3"></i><h3>Select phones to compare</h3><p style="margin-top:8px">Choose at least 2 phones using the slots above</p></div>'
+      : '<div style="text-align:center;padding:40px;color:var(--text3)"><i class="fas fa-plus-circle" style="font-size:2rem;display:block;margin-bottom:10px;opacity:.4"></i>Add one more phone to start comparing</div>';
+    return;
+  }
+  var rows = '';
+  ROWS.forEach(function(row){
+    if(row.s){ rows += '<tr class="section-row"><td colspan="'+(active.length+1)+'">'+row.s+'</td></tr>'; return; }
+    rows += '<tr><td>'+row.l+'</td>'+active.map(function(p){ return '<td>'+row.f(p)+'</td>'; }).join('')+'</tr>';
+  });
+  rows += '<tr><td>Full Specs</td>'+active.map(function(p){ return '<td><a href="../phones/'+p.id+'/" class="btn-specs" style="display:inline-block">View Page</a></td>'; }).join('')+'</tr>';
+  wrap.innerHTML = '<div class="compare-table-wrap"><table class="compare-table"><thead><tr>'
+    + '<th>Specification</th>'
+    + active.map(function(p){ return '<th><a href="../phones/'+p.id+'/" style="color:white;display:block;font-size:.9rem;margin-bottom:4px">'+p.name+'</a><div style="font-size:.72rem;opacity:.75">'+p.price+'</div></th>'; }).join('')
+    + '</tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+
+document.addEventListener('DOMContentLoaded', renderSel);
+
+</script>
+</body>
+</html>

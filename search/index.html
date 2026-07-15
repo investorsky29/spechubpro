@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Phones – SpecHub Smartphone Database</title>
+<meta name="description" content="Search and filter smartphones by brand, chipset, RAM, battery, camera and more. Find the perfect phone for your budget on SpecHub.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://spechubpro.com/search/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Search Phones – SpecHub Smartphone Database">
+<meta property="og:description" content="Search and filter smartphones by brand, chipset, RAM, battery, camera and more. Find the perfect phone for your budget on SpecHub.">
+<meta property="og:url" content="https://spechubpro.com/search/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Search Phones – SpecHub Smartphone Database">
+<meta name="twitter:description" content="Search and filter smartphones by brand, chipset, RAM, battery, camera and more. Find the perfect phone for your budget on SpecHub.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a class="nav-logo" href="../">Spec<span>Hub</span></a>
+    <div class="nav-links"><a href="../">Home</a><a href="../brands/">Brands</a><a href="../compare/">Compare</a><a href="../search/" class="active">Search</a><a href="../blog/">Blog</a></div>
+    <div class="nav-search" style="position:relative">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search phones..." id="navSearch"
+        oninput="liveSearch(this.value,'searchDropdown')"
+        onkeydown="if(event.key==='Enter')goSearch()">
+    </div>
+    <div class="nav-actions">
+      <button class="btn-theme" onclick="toggleTheme()" title="Toggle dark mode">
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+      <button class="nav-menu-btn" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="navOverlay" class="nav-overlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <div class="mobile-logo">Spec<span>Hub</span></div>
+    <button class="mobile-nav-close" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="mobile-nav-search">
+    <input type="text" placeholder="Search phones..."
+      oninput="liveSearch(this.value,'searchDropdown')"
+      onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+  <div class="mobile-nav-links">
+    <a href="../"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="../brands/"><i class="fas fa-mobile-screen-button"></i><span>Brands</span></a>
+    <a href="../search/"><i class="fas fa-search"></i><span>Search</span></a>
+    <a href="../compare/"><i class="fas fa-code-compare"></i><span>Compare</span></a>
+    <a href="../blog/"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+  </div>
+  <div class="mobile-nav-footer">
+    <a href="../about/"><i class="fas fa-info-circle"></i>About Us</a>
+    <a href="../contact/"><i class="fas fa-envelope"></i>Contact</a>
+    <a href="../privacy/"><i class="fas fa-shield-halved"></i>Privacy Policy</a>
+    <a href="../terms/"><i class="fas fa-file-contract"></i>Terms &amp; Conditions</a>
+    <a href="../disclaimer/"><i class="fas fa-triangle-exclamation"></i>Disclaimer</a>
+  </div>
+</div>
+<div id="searchDropdown" style="display:none;position:fixed;top:70px;right:20px;z-index:900;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);width:340px;max-height:400px;overflow-y:auto;padding:8px"></div>
+<div class="page-header" style="padding:40px 0">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../">Home</a><span class="sep">/</span><span>Search</span></nav>
+    <h1 style="color:white;margin-top:8px">Search Phones</h1>
+    <p style="color:rgba(255,255,255,.7);margin-top:6px">Find specs for any smartphone instantly</p>
+  </div>
+</div>
+<div class="container" style="padding:40px 20px">
+  <div class="search-big">
+    <input type="text" placeholder="Search by name, brand, chipset, RAM..." id="mainSearch" oninput="runSearch()">
+    <button onclick="runSearch()"><i class="fas fa-search" style="margin-right:6px"></i>Search</button>
+  </div>
+  <div class="search-filters" id="brandFilters"></div>
+  <div class="search-results-header">
+    <span class="results-count" id="resultsCount">Loading...</span>
+    <select class="sort-select-light" id="sortSelect" onchange="runSearch()">
+      <option value="rating">Top Rated</option>
+      <option value="year">Newest First</option>
+      <option value="name">Name A–Z</option>
+      <option value="price_low">Price: Low to High</option>
+      <option value="price_high">Price: High to Low</option>
+    </select>
+  </div>
+  <div class="ad-banner leaderboard" style="margin-bottom:24px">Advertisement</div>
+  <div class="grid-auto" id="searchResults"></div>
+  <div class="pagination" id="searchPagination"></div>
+</div>
+<div class="compare-bar" id="compareBar">
+  <span style="font-size:.8rem;font-weight:700;white-space:nowrap;color:white">
+    <i class="fas fa-code-compare" style="margin-right:6px"></i>Compare:</span>
+  <div class="compare-phones" id="comparePhones"></div>
+  <button class="btn-compare-now" onclick="goCompare()">Compare Now</button>
+  <button class="compare-bar-close" onclick="clearCompare()"><i class="fas fa-times"></i></button>
+</div><footer class="footer">
+  <div class="container">
+    <div class="ad-banner leaderboard" style="margin-bottom:40px;border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.3)">Advertisement</div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="../" style="display:inline-block;margin-bottom:15px">Spec<span>Hub</span></a>
+        <p class="footer-desc">Africa's most comprehensive smartphone specification database. Find specs, compare phones, and read expert reviews for every budget.</p>
+        <div class="footer-social">
+          <a class="social-link" href="https://www.x.com/spechub9278"><i class="fab fa-x-twitter"></i></a>
+          <a class="social-link" href="https://www.facebook.com/spechub.2025"><i class="fab fa-facebook-f"></i></a>
+          <a class="social-link" href="https://www.instagram.com/spec_hubng/"><i class="fab fa-instagram"></i></a>
+          <a class="social-link" href="https://www.youtube.com/@spechubpro9278"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Top Brands</div>
+        <div class="footer-links">
+          <a href="../brands/samsung/">Samsung</a><a href="../brands/apple/">Apple</a>
+          <a href="../brands/xiaomi/">Xiaomi</a><a href="../brands/tecno/">Tecno</a>
+          <a href="../brands/infinix/">Infinix</a><a href="../brands/itel/">itel</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <div class="footer-links">
+          <a href="../compare/">Compare Phones</a><a href="../search/">Search Phones</a>
+          <a href="../blog/">Blog &amp; Reviews</a><a href="../about/">About Us</a>
+          <a href="../contact/">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <div class="footer-links">
+          <a href="../privacy/">Privacy Policy</a>
+          <a href="../terms/">Terms &amp; Conditions</a>
+          <a href="../disclaimer/">Disclaimer</a>
+        </div>
+        <div class="footer-heading" style="margin-top:20px">Newsletter</div>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="your@email.com">
+          <button onclick="showToast('Subscribed!')">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SpecHub. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy/">Privacy</a><a href="../terms/">Terms</a>
+        <a href="../disclaimer/">Disclaimer</a><a href="../contact/">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div><script src="../data/phones.js"></script>
+<script src="../js/shared.js"></script>
+<script>
+var PER_PAGE = 12, filteredPhones = [], curPage = 1, activeBrand = 'all';
+
+function initFilters() {
+  var brands = [];
+  PHONE_DB.phones.forEach(function(p){ if(brands.indexOf(p.brand) < 0) brands.push(p.brand); });
+  brands.sort();
+  var h = '<button class="brand-filter-pill active" onclick="setBrand(\'all\',this)">All Brands</button>';
+  brands.forEach(function(b){ h += '<button class="brand-filter-pill" onclick="setBrand(\''+b+'\',this)">'+b+'</button>'; });
+  document.getElementById('brandFilters').innerHTML = h;
+}
+
+function setBrand(brand, btn) {
+  activeBrand = brand;
+  document.querySelectorAll('.brand-filter-pill').forEach(function(b){ b.classList.remove('active'); });
+  if(btn) btn.classList.add('active');
+  curPage = 1; runSearch();
+}
+
+function phoneCard(p) {
+  var ic = compareList.indexOf(p.id) >= 0;
+  var sp = p.shortSpecs.map(function(s){ return '<span class="spec-tag">'+s+'</span>'; }).join('');
+  var bd = p.badge ? '<span class="phone-badge">'+p.badge+'</span>' : '';
+  var er = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23eee'/%3E%3C/svg%3E";
+  return '<a href="../phones/'+p.id+'/" class="phone-card" style="text-decoration:none;color:inherit">'
+    + '<div class="phone-card-img"><img src="'+resolveImg(p.image)+'" alt="'+p.name+'" loading="lazy" onerror="this.src=\''+er+'\'">'+bd+'</div>'
+    + '<div class="phone-card-body">'
+    + '<div class="phone-brand">'+p.brand+'</div>'
+    + '<div class="phone-name">'+p.name+'</div>'
+    + '<div class="phone-year">'+p.year+'</div>'
+    + '<div class="phone-specs-mini">'+sp+'</div>'
+    + '<div class="phone-card-footer"><div class="phone-rating"><i class="fas fa-star"></i> '+p.rating+'</div>'
+    + '<div style="display:flex;gap:6px;align-items:center">'
+    + '<button class="compare-toggle'+(ic?' active':'')+'" data-compare-id="'+p.id+'"'
+    + ' onclick="event.preventDefault();event.stopPropagation();toggleCompare(\''+p.id+'\',\''+p.name+'\',this)"'
+    + ' title="Compare"><i class="fas fa-code-compare"></i></button>'
+    + '<span class="btn-specs">'+p.price+'</span></div></div></div></a>';
+}
+
+function runSearch() {
+  var q = (document.getElementById('mainSearch').value || '').toLowerCase();
+  var sort = document.getElementById('sortSelect').value;
+  var phones = PHONE_DB.phones.slice();
+  if(activeBrand !== 'all') phones = phones.filter(function(p){ return p.brand === activeBrand; });
+  if(q) phones = phones.filter(function(p){
+    return p.name.toLowerCase().indexOf(q) >= 0 || p.brand.toLowerCase().indexOf(q) >= 0
+      || p.shortSpecs.some(function(s){ return s.toLowerCase().indexOf(q) >= 0; });
+  });
+  if(sort === 'rating') phones.sort(function(a,b){ return b.rating - a.rating; });
+  else if(sort === 'year') phones.sort(function(a,b){ return b.year - a.year; });
+  else if(sort === 'name') phones.sort(function(a,b){ return a.name.localeCompare(b.name); });
+  else if(sort === 'price_low') phones.sort(function(a,b){ return parseFloat(a.price.replace(/[^0-9.]/g,'')) - parseFloat(b.price.replace(/[^0-9.]/g,'')); });
+  else phones.sort(function(a,b){ return parseFloat(b.price.replace(/[^0-9.]/g,'')) - parseFloat(a.price.replace(/[^0-9.]/g,'')); });
+  filteredPhones = phones; renderPage();
+}
+
+function renderPage() {
+  var start = (curPage - 1) * PER_PAGE;
+  var slice = filteredPhones.slice(start, start + PER_PAGE);
+  document.getElementById('resultsCount').textContent = 'Showing ' + filteredPhones.length + ' phone' + (filteredPhones.length !== 1 ? 's' : '');
+  document.getElementById('searchResults').innerHTML = slice.map(phoneCard).join('')
+    || '<p style="color:var(--text3);text-align:center;grid-column:1/-1;padding:60px 20px"><i class="fas fa-search" style="font-size:2rem;display:block;margin-bottom:10px;opacity:.4"></i>No phones found. Try a different search.</p>';
+  var pages = Math.ceil(filteredPhones.length / PER_PAGE), pag = '';
+  for(var i = 1; i <= pages; i++) pag += '<button class="page-btn'+(curPage===i?' active':'')+'" onclick="curPage='+i+';renderPage()">'+i+'</button>';
+  document.getElementById('searchPagination').innerHTML = pages > 1 ? pag : '';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  initFilters();
+  var urlQ = new URLSearchParams(window.location.search).get('q');
+  if(urlQ) document.getElementById('mainSearch').value = urlQ;
+  runSearch();
+});
+
+</script>
+</body>
+</html>

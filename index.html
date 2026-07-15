@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpecHub – Smartphone Specifications, Reviews &amp; Comparisons</title>
+<meta name="description" content="Africa's most comprehensive smartphone database. Compare specs, prices, cameras and battery life across all brands.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://spechubpro.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SpecHub – Smartphone Specifications, Reviews &amp; Comparisons">
+<meta property="og:description" content="Africa's most comprehensive smartphone database. Compare specs, prices, cameras and battery life across all brands.">
+<meta property="og:url" content="https://spechubpro.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SpecHub – Smartphone Specifications, Reviews &amp; Comparisons">
+<meta name="twitter:description" content="Africa's most comprehensive smartphone database. Compare specs, prices, cameras and battery life across all brands.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"SpecHub","url":"https://spechubpro.com","potentialAction":{"@type":"SearchAction","target":"https://spechubpro.com/search/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body><nav class="navbar">
+  <div class="container">
+    <a class="nav-logo" href="./">Spec<span>Hub</span></a>
+    <div class="nav-links"><a href="./" class="active">Home</a><a href="brands/">Brands</a><a href="compare/">Compare</a><a href="search/">Search</a><a href="blog/">Blog</a></div>
+    <div class="nav-search" style="position:relative">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search phones..." id="navSearch"
+        oninput="liveSearch(this.value,'searchDropdown')"
+        onkeydown="if(event.key==='Enter')goSearch()">
+    </div>
+    <div class="nav-actions">
+      <button class="btn-theme" onclick="toggleTheme()" title="Toggle dark mode">
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+      <button class="nav-menu-btn" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="navOverlay" class="nav-overlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <div class="mobile-logo">Spec<span>Hub</span></div>
+    <button class="mobile-nav-close" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="mobile-nav-search">
+    <input type="text" placeholder="Search phones..."
+      oninput="liveSearch(this.value,'searchDropdown')"
+      onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+  <div class="mobile-nav-links">
+    <a href="./"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="brands/"><i class="fas fa-mobile-screen-button"></i><span>Brands</span></a>
+    <a href="search/"><i class="fas fa-search"></i><span>Search</span></a>
+    <a href="compare/"><i class="fas fa-code-compare"></i><span>Compare</span></a>
+    <a href="blog/"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+  </div>
+  <div class="mobile-nav-footer">
+    <a href="about/"><i class="fas fa-info-circle"></i>About Us</a>
+    <a href="contact/"><i class="fas fa-envelope"></i>Contact</a>
+    <a href="privacy/"><i class="fas fa-shield-halved"></i>Privacy Policy</a>
+    <a href="terms/"><i class="fas fa-file-contract"></i>Terms &amp; Conditions</a>
+    <a href="disclaimer/"><i class="fas fa-triangle-exclamation"></i>Disclaimer</a>
+  </div>
+</div>
+<div id="searchDropdown" style="display:none;position:fixed;top:70px;right:20px;z-index:900;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);width:340px;max-height:400px;overflow-y:auto;padding:8px"></div>
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fas fa-rocket" style="margin-right:6px"></i>Africa's Smartphone Database</span>
+      <h1>Find The Right Phone<br>Before You Buy.</h1>
+      <p>Compare smartphone specifications, prices, cameras, battery life and performance. Search thousands of phones and make smarter buying decisions.</p>
+      <div class="hero-search" style="position:relative">
+        <input type="text" placeholder="Search by name, brand or specs..." id="heroSearch"
+          oninput="liveSearch(this.value,'heroDropdown')"
+          onkeydown="if(event.key==='Enter')goSearch()">
+        <button onclick="goSearch()"><i class="fas fa-search" style="margin-right:6px"></i>Search</button>
+        <div id="heroDropdown" style="display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;
+          background:var(--surface);border:1px solid var(--border);border-radius:14px;
+          box-shadow:var(--shadow-lg);max-height:320px;overflow-y:auto;z-index:500;padding:8px"></div>
+      </div>
+      <div class="hero-tags">
+        <a href="brands/samsung/"><span>Samsung</span></a>
+        <a href="brands/apple/"><span>Apple</span></a>
+        <a href="brands/xiaomi/"><span>Xiaomi</span></a>
+        <a href="brands/tecno/"><span>Tecno</span></a>
+        <a href="brands/infinix/"><span>Infinix</span></a>
+        <a href="brands/google/"><span>Google</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container" style="margin-top:24px">
+  <div class="ad-banner leaderboard">Advertisement</div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title"><small>Hand-picked</small><h2>Featured Phones</h2></div>
+      <a href="search/" class="btn-view-all">View All</a>
+    </div>
+    <div class="grid-4" id="featuredPhones"></div>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title"><small>Just Launched</small><h2>Latest Smartphones</h2></div>
+      <a href="search/" class="btn-view-all">View All</a>
+    </div>
+    <div class="grid-auto" id="latestPhones"></div>
+  </div>
+</section>
+<div class="container"><div class="ad-banner" style="min-height:250px">Advertisement</div></div>
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title"><small>By Manufacturer</small><h2>Browse by Brand</h2></div>
+      <a href="brands/" class="btn-view-all">All Brands</a>
+    </div>
+    <div class="brands-grid" id="brandsGrid"></div>
+  </div>
+</section>
+<section class="section" style="background:var(--surface2);padding:56px 0;margin:0">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title"><small>Community Picks</small><h2>Most Popular</h2></div>
+    </div>
+    <div class="grid-auto" id="popularPhones"></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title"><small>Side by Side</small><h2>Quick Comparisons</h2></div>
+      <a href="compare/" class="btn-view-all">Full Compare Tool</a>
+    </div>
+    <div class="grid-2" id="compareTeasers"></div>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title"><small>Knowledge Hub</small><h2>Latest Articles</h2></div>
+      <a href="blog/" class="btn-view-all">View All</a>
+    </div>
+    <div class="grid-4" id="homeArticles"></div>
+  </div>
+</section>
+<div class="container" style="margin-bottom:32px">
+  <div class="ad-banner leaderboard">Advertisement</div>
+</div>
+<div class="compare-bar" id="compareBar">
+  <span style="font-size:.8rem;font-weight:700;white-space:nowrap;color:white">
+    <i class="fas fa-code-compare" style="margin-right:6px"></i>Compare:</span>
+  <div class="compare-phones" id="comparePhones"></div>
+  <button class="btn-compare-now" onclick="goCompare()">Compare Now</button>
+  <button class="compare-bar-close" onclick="clearCompare()"><i class="fas fa-times"></i></button>
+</div><footer class="footer">
+  <div class="container">
+    <div class="ad-banner leaderboard" style="margin-bottom:40px;border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.3)">Advertisement</div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="./" style="display:inline-block;margin-bottom:15px">Spec<span>Hub</span></a>
+        <p class="footer-desc">Africa's most comprehensive smartphone specification database. Find specs, compare phones, and read expert reviews for every budget.</p>
+        <div class="footer-social">
+          <a class="social-link" href="https://www.x.com/spechub9278" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          <a class="social-link" href="https://www.facebook.com/spechub.2025" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a class="social-link" href="https://www.instagram.com/spec_hubng/" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a class="social-link" href="https://www.youtube.com/@spechubpro9278" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Top Brands</div>
+        <div class="footer-links">
+          <a href="brands/samsung/">Samsung</a><a href="brands/apple/">Apple</a>
+          <a href="brands/xiaomi/">Xiaomi</a><a href="brands/tecno/">Tecno</a>
+          <a href="brands/infinix/">Infinix</a><a href="brands/itel/">itel</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <div class="footer-links">
+          <a href="compare/">Compare Phones</a><a href="search/">Search Phones</a>
+          <a href="blog/">Blog &amp; Reviews</a><a href="about/">About Us</a>
+          <a href="contact/">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <div class="footer-links">
+          <a href="privacy/">Privacy Policy</a>
+          <a href="terms/">Terms &amp; Conditions</a>
+          <a href="disclaimer/">Disclaimer</a>
+        </div>
+        <div class="footer-heading" style="margin-top:20px">Newsletter</div>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="your@email.com">
+          <button onclick="showToast('Subscribed!')">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SpecHub. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy/">Privacy</a><a href="terms/">Terms</a>
+        <a href="disclaimer/">Disclaimer</a><a href="contact/">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div><script src="data/phones.js"></script>
+<script src="js/shared.js"></script>
+<script>
+
+function phoneCard(p) {
+  var inCompare = compareList.indexOf(p.id) >= 0;
+  var specs = p.shortSpecs.map(function(s){ return '<span class="spec-tag">'+s+'</span>'; }).join('');
+  var badge = p.badge ? '<span class="phone-badge">'+p.badge+'</span>' : '';
+  var img = resolveImg(p.image);
+  var errImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23f0f0f0'/%3E%3C/svg%3E";
+  return '<a href="phones/'+p.id+'/" class="phone-card" style="text-decoration:none;color:inherit">'
+    + '<div class="phone-card-img">'
+    + '<img src="'+img+'" alt="'+p.name+'" loading="lazy" onerror="this.src=\''+errImg+'\'">'
+    + badge
+    + '</div>'
+    + '<div class="phone-card-body">'
+    + '<div class="phone-brand">'+p.brand+'</div>'
+    + '<div class="phone-name">'+p.name+'</div>'
+    + '<div class="phone-year">'+p.year+'</div>'
+    + '<div class="phone-specs-mini">'+specs+'</div>'
+    + '<div class="phone-card-footer">'
+    + '<div class="phone-rating"><i class="fas fa-star"></i> '+p.rating+'</div>'
+    + '<div style="display:flex;gap:6px;align-items:center">'
+    + '<button class="compare-toggle'+(inCompare?' active':'')+'" data-compare-id="'+p.id+'"'
+    + ' onclick="event.preventDefault();event.stopPropagation();toggleCompare(\''+p.id+'\',\''+p.name+'\',this)" title="Compare">'
+    + '<i class="fas fa-code-compare"></i></button>'
+    + '<span class="btn-specs">'+p.price+'</span>'
+    + '</div></div></div></a>';
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var phones = PHONE_DB.phones;
+  var brands = PHONE_DB.brands;
+  var articles = PHONE_DB.articles;
+
+  // Featured
+  var featured = phones.slice().sort(function(a,b){return b.rating-a.rating;}).slice(0,4);
+  document.getElementById('featuredPhones').innerHTML = featured.map(phoneCard).join('');
+
+  // Latest
+  var latest = phones.slice().sort(function(a,b){return b.year-a.year;}).slice(0,6);
+  document.getElementById('latestPhones').innerHTML = latest.map(phoneCard).join('');
+
+  // Brands
+  document.getElementById('brandsGrid').innerHTML = brands.map(function(b) {
+    var count = phones.filter(function(p){ return p.brand.toLowerCase()===b.name.toLowerCase(); }).length;
+    var logo = resolveImg(b.logo);
+    return '<a href="brands/'+b.id+'/" class="brand-card" style="text-decoration:none;color:inherit">'
+      + '<img src="'+logo+'" alt="'+b.name+'" class="brand-logo" onerror="this.style.display=\'none\'">'
+      + '<div class="brand-name">'+b.name+'</div>'
+      + '<div class="brand-count">'+count+' phone'+(count!==1?'s':'')+'</div></a>';
+  }).join('');
+
+  // Popular (shuffled)
+  var pop = phones.slice().sort(function(){return Math.random()-.5;}).slice(0,6);
+  document.getElementById('popularPhones').innerHTML = pop.map(phoneCard).join('');
+
+  // Compare teasers
+  var pairs = [[phones[0],phones[1]],[phones[2],phones[4]]];
+  document.getElementById('compareTeasers').innerHTML = pairs.map(function(pair) {
+    var a = pair[0], b = pair[1];
+    return '<a href="compare/?phones='+a.id+','+b.id+'" class="phone-card" style="text-decoration:none;color:inherit">'
+      + '<div style="display:flex;align-items:center;justify-content:center;padding:28px;gap:20px;background:var(--surface2)">'
+      + '<div style="text-align:center"><img src="'+resolveImg(a.image)+'" alt="'+a.name+'" style="height:90px;object-fit:contain"><div style="font-size:.75rem;font-weight:700;margin-top:6px">'+a.name+'</div></div>'
+      + '<div style="font-size:1.4rem;font-weight:900;color:var(--accent);flex-shrink:0">VS</div>'
+      + '<div style="text-align:center"><img src="'+resolveImg(b.image)+'" alt="'+b.name+'" style="height:90px;object-fit:contain"><div style="font-size:.75rem;font-weight:700;margin-top:6px">'+b.name+'</div></div>'
+      + '</div>'
+      + '<div style="padding:14px;display:flex;align-items:center;justify-content:space-between">'
+      + '<span style="font-size:.82rem;color:var(--text2)">Compare side by side</span>'
+      + '<span class="btn-specs">Compare</span></div></a>';
+  }).join('');
+
+  // Articles
+  var catIcons = {'Buying Guides':'fa-list-check','Comparisons':'fa-code-compare','Latest News':'fa-satellite-dish','Phone Reviews':'fa-camera'};
+  document.getElementById('homeArticles').innerHTML = articles.map(function(a) {
+    var icon = catIcons[a.category] || 'fa-newspaper';
+    return '<a href="blog/'+a.id+'/" class="phone-card" style="text-decoration:none;color:inherit">'
+      + '<div class="phone-card-img" style="background:linear-gradient(135deg,var(--primary-light),var(--surface2));min-height:140px">'
+      + '<i class="fas '+icon+'" style="font-size:2.5rem;color:var(--primary);opacity:.6"></i></div>'
+      + '<div class="phone-card-body">'
+      + '<div class="phone-brand">'+a.category+'</div>'
+      + '<div class="phone-name" style="font-size:.9rem;line-height:1.4;margin-bottom:6px">'+a.title+'</div>'
+      + '<div class="phone-year">'+a.author+' &middot; '+a.date+'</div>'
+      + '<div style="margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between">'
+      + '<span style="font-size:.75rem;color:var(--text3)"><i class="fas fa-clock" style="margin-right:4px"></i>'+a.readTime+' read</span>'
+      + '<span class="btn-specs">Read</span></div></div></a>';
+  }).join('');
+});
+</script>
+</body>
+</html>

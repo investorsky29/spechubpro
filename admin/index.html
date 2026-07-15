@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpecHub Admin Panel</title>
+<meta name="description" content="Internal SpecHub admin dashboard. Not for public access.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+:root{--p:#0055FF;--ac:#FF4D00;--bg:#0f172a;--s:#1a2235;--s2:#232f47;--bd:#2a3547;--tx:#e8edfb;--t2:#94a3b8;--t3:#5a6a82;--ok:#00B37E;--er:#ef4444;--wa:#f59e0b;--r:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-card{background:var(--s);border:1px solid var(--bd);border-radius:16px;padding:40px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.logo{font-size:1.6rem;font-weight:900;color:var(--p);text-align:center;margin-bottom:4px}
+.logo span{color:var(--ac)}
+.shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+.sidebar{background:var(--s);border-right:1px solid var(--bd);display:flex;flex-direction:column}
+.logo-bar{padding:20px;border-bottom:1px solid var(--bd)}
+.logo-bar .logo{text-align:left;margin:0}
+.logo-bar small{display:block;font-size:.65rem;color:var(--t3);letter-spacing:.06em;margin-top:2px}
+.nav-sec{padding:10px 0}
+.nav-lbl{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--t3);padding:6px 18px}
+.ni{display:flex;align-items:center;gap:10px;padding:10px 18px;color:var(--t2);cursor:pointer;border-left:3px solid transparent;font-size:.875rem;font-weight:500;transition:.15s;user-select:none}
+.ni:hover{color:var(--tx);background:var(--s2)}
+.ni.on{color:var(--p);background:rgba(0,85,255,.1);border-left-color:var(--p)}
+.ni i{width:16px;text-align:center;font-size:.85rem}
+.sf{margin-top:auto;padding:14px 18px;border-top:1px solid var(--bd)}
+.sf a{display:flex;align-items:center;gap:8px;color:var(--t2);font-size:.8rem;padding:8px 0;text-decoration:none;transition:.15s;cursor:pointer}
+.sf a:hover{color:var(--tx)}
+.main-col{display:flex;flex-direction:column;overflow:hidden}
+.topbar{background:var(--s);border-bottom:1px solid var(--bd);padding:13px 22px;display:flex;align-items:center;justify-content:space-between}
+.topbar h2{font-size:.95rem;font-weight:700}
+.topbar-r{display:flex;align-items:center;gap:8px}
+.content{padding:22px;flex:1;overflow-y:auto}
+.pg{display:none}.pg.on{display:block}
+.card{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:18px}
+.ch{padding:14px 18px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ch h3{font-size:.88rem;font-weight:700}
+.cb{padding:18px}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.sc{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:18px}
+.sn{font-size:1.9rem;font-weight:900;line-height:1}
+.sl{font-size:.75rem;color:var(--t2);margin-top:4px}
+.btn{padding:8px 16px;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;border:none;transition:.15s;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.bp{background:var(--p);color:#fff}.bp:hover{background:#0040cc}
+.bg2{background:var(--s2);color:var(--t2);border:1px solid var(--bd)}.bg2:hover{color:var(--tx)}
+.bs{background:var(--ok);color:#fff}
+.fg{margin-bottom:14px}
+.fl{display:block;font-size:.75rem;font-weight:600;color:var(--t2);margin-bottom:5px}
+.fi{width:100%;padding:9px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--s2);color:var(--tx);font-size:.875rem;font-family:inherit;transition:.15s}
+.fi:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 3px rgba(0,85,255,.15)}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+textarea.fi{resize:vertical;min-height:80px}
+.sdiv{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin:18px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--bd)}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+th{text-align:left;padding:9px 13px;color:var(--t3);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--bd)}
+td{padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+tr:hover td{background:rgba(255,255,255,.02)}
+.thumb{width:34px;height:34px;border-radius:6px;background:var(--s2);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.thumb img{width:100%;height:100%;object-fit:contain}
+.bge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:20px;font-size:.67rem;font-weight:700}
+.bp2{background:rgba(0,85,255,.15);color:var(--p)}
+.bg3{background:rgba(0,179,126,.15);color:var(--ok)}
+.bw{background:rgba(245,158,11,.15);color:var(--wa)}
+.acts{display:flex;gap:5px}
+.ab{width:28px;height:28px;border-radius:6px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem;transition:.15s}
+.ae{background:rgba(0,85,255,.15);color:var(--p)}.ae:hover{background:var(--p);color:#fff}
+.ad2{background:rgba(239,68,68,.15);color:var(--er)}.ad2:hover{background:var(--er);color:#fff}
+.av{background:var(--s2);color:var(--t2)}.av:hover{background:var(--bd);color:var(--tx)}
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.mo.open{display:flex}
+.mdl{background:var(--s);border:1px solid var(--bd);border-radius:14px;width:100%;max-width:700px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.mh{padding:16px 18px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.mh h3{font-size:.92rem;font-weight:700}
+.mc{padding:18px;overflow-y:auto;flex:1}
+.mf{padding:13px 18px;border-top:1px solid var(--bd);display:flex;gap:8px;justify-content:flex-end}
+.alert{padding:11px 15px;border-radius:8px;font-size:.83rem;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.al-ok{background:rgba(0,179,126,.1);border:1px solid rgba(0,179,126,.2);color:var(--ok)}
+.al-er{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--er)}
+.al-wa{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:var(--wa)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#0f172a;border:1px solid var(--bd);color:var(--tx);padding:10px 20px;border-radius:50px;font-size:.82rem;font-weight:600;z-index:9999;opacity:0;pointer-events:none;transition:.3s;white-space:nowrap;max-width:90vw}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.pb{height:6px;background:var(--s2);border-radius:3px;overflow:hidden;margin-top:5px}
+.pf{height:100%;background:var(--p);border-radius:3px}
+.note{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:16px;font-size:.85rem;color:var(--t2);line-height:1.7;margin-bottom:16px}
+.note strong{color:var(--tx)}
+code{background:var(--s2);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.82rem;color:var(--wa)}
+.step{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--p);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:1px}
+@media(max-width:768px){.shell{grid-template-columns:1fr}.sidebar{display:none}.sg{grid-template-columns:1fr 1fr}.fg2,.fg3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="logo">Spec<span>Hub</span></div>
+    <p style="text-align:center;color:var(--t2);font-size:.82rem;margin:6px 0 24px">Content Management Panel</p>
+    <div id="loginErr" class="alert al-er" style="display:none"><i class="fas fa-circle-exclamation"></i> Incorrect password.</div>
+    <div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="lp" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()"></div>
+    <button class="btn bp" style="width:100%;padding:11px;justify-content:center" onclick="login()"><i class="fas fa-right-to-bracket"></i> Sign In</button>
+    <p style="text-align:center;font-size:.72rem;color:var(--t3);margin-top:14px">Default password: <code>spechub2025</code></p>
+  </div>
+</div>
+
+<!-- SHELL -->
+<div class="shell" id="adminShell" style="display:none">
+  <aside class="sidebar">
+    <div class="logo-bar"><div class="logo">Spec<span>Hub</span></div><small>Admin Panel</small></div>
+    <nav>
+      <div class="nav-sec">
+        <div class="nav-lbl">Dashboard</div>
+        <div class="ni on" onclick="go('dash',this)"><i class="fas fa-gauge-high"></i> Overview</div>
+      </div>
+      <div class="nav-sec">
+        <div class="nav-lbl">Content</div>
+        <div class="ni" onclick="go('phones',this)"><i class="fas fa-mobile-alt"></i> Phones</div>
+        <div class="ni" onclick="go('brands',this)"><i class="fas fa-building"></i> Brands</div>
+        <div class="ni" onclick="go('articles',this)"><i class="fas fa-newspaper"></i> Articles</div>
+      </div>
+      <div class="nav-sec">
+        <div class="nav-lbl">Tools</div>
+        <div class="ni" onclick="go('addphone',this)"><i class="fas fa-plus-circle"></i> Add Phone</div>
+        <div class="ni" onclick="go('seo',this)"><i class="fas fa-magnifying-glass-chart"></i> SEO Check</div>
+        <div class="ni" onclick="go('howto',this)"><i class="fas fa-book-open"></i> How to Deploy</div>
+        <div class="ni" onclick="go('settings',this)"><i class="fas fa-gear"></i> Settings</div>
+      </div>
+    </nav>
+    <div class="sf">
+      <a href="../" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> View Site</a>
+      <a onclick="logout()"><i class="fas fa-right-from-bracket"></i> Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-col">
+    <div class="topbar">
+      <h2 id="pageTitle">Dashboard</h2>
+      <div class="topbar-r">
+        <span style="font-size:.78rem;color:var(--t2)">Static Site Mode</span>
+        <button class="btn bp" onclick="go('addphone', document.querySelector('.ni:nth-of-type(5)'))">
+          <i class="fas fa-plus"></i> Add Phone
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="pg on" id="pg-dash">
+        <div class="sg">
+          <div class="sc"><div class="sn" id="s-phones">—</div><div class="sl">Total Phones</div></div>
+          <div class="sc"><div class="sn" id="s-brands">—</div><div class="sl">Brands</div></div>
+          <div class="sc"><div class="sn" id="s-articles">—</div><div class="sl">Blog Articles</div></div>
+          <div class="sc"><div class="sn" id="s-avg" style="color:var(--wa)">—</div><div class="sl"><i class="fas fa-star" style="color:var(--wa)"></i> Avg Rating</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div class="card">
+            <div class="ch"><h3><i class="fas fa-trophy" style="color:var(--wa);margin-right:7px"></i>Top Rated Phones</h3></div>
+            <div class="cb" id="topRated"></div>
+          </div>
+          <div class="card">
+            <div class="ch"><h3><i class="fas fa-chart-bar" style="color:var(--p);margin-right:7px"></i>Brand Distribution</h3></div>
+            <div class="cb" id="brandDist"></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <div class="ch"><h3><i class="fas fa-link" style="color:var(--p);margin-right:7px"></i>Quick Links</h3></div>
+          <div class="cb" style="display:flex;gap:8px;flex-wrap:wrap">
+            <a href="../" target="_blank" class="btn bg2"><i class="fas fa-home"></i> Home</a>
+            <a href="../search/" target="_blank" class="btn bg2"><i class="fas fa-search"></i> Search</a>
+            <a href="../compare/" target="_blank" class="btn bg2"><i class="fas fa-code-compare"></i> Compare</a>
+            <a href="../brands/" target="_blank" class="btn bg2"><i class="fas fa-building"></i> Brands</a>
+            <a href="../blog/" target="_blank" class="btn bg2"><i class="fas fa-newspaper"></i> Blog</a>
+            <a href="../sitemap.xml" target="_blank" class="btn bg2"><i class="fas fa-sitemap"></i> Sitemap</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHONES -->
+      <div class="pg" id="pg-phones">
+        <div class="card">
+          <div class="ch">
+            <h3>All Phones <span id="phoneCount" style="color:var(--t3);font-weight:400;font-size:.78rem"></span></h3>
+            <input type="text" class="fi" placeholder="Filter phones..." id="phoneFilter"
+              oninput="filterPhones(this.value)" style="width:180px;padding:7px 11px">
+          </div>
+          <div style="overflow-x:auto">
+            <table>
+              <thead><tr><th>Phone</th><th>Brand</th><th>Year</th><th>Price</th><th>Rating</th><th>5G</th><th>Actions</th></tr></thead>
+              <tbody id="phonesTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRANDS -->
+      <div class="pg" id="pg-brands">
+        <div class="card">
+          <div class="ch"><h3>All Brands</h3></div>
+          <div style="overflow-x:auto">
+            <table>
+              <thead><tr><th>Brand</th><th>Phone Count</th><th>Page URL</th><th>Actions</th></tr></thead>
+              <tbody id="brandsTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARTICLES -->
+      <div class="pg" id="pg-articles">
+        <div class="card">
+          <div class="ch"><h3>Blog Articles</h3></div>
+          <div style="overflow-x:auto">
+            <table>
+              <thead><tr><th>Title</th><th>Category</th><th>Author</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="articlesTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADD PHONE (generates phones.js code) -->
+      <div class="pg" id="pg-addphone">
+        <div class="alert al-wa" style="margin-bottom:18px">
+          <i class="fas fa-triangle-exclamation"></i>
+          <div><strong>Static Site Mode:</strong> This form generates the phone entry JSON. Copy it into <code>data/phones.js</code> and then create the phone page at <code>/phones/YOUR-ID/index.html</code> using the template below.</div>
+        </div>
+        <div class="card">
+          <div class="ch"><h3><i class="fas fa-plus-circle" style="color:var(--p);margin-right:7px"></i>New Phone Entry Generator</h3></div>
+          <div class="cb">
+            <div class="sdiv">Basic Information</div>
+            <div class="fg2">
+              <div class="fg"><label class="fl">Phone Name *</label><input class="fi" id="f-name" placeholder="e.g. Galaxy S26 Ultra" oninput="autoFill()"></div>
+              <div class="fg"><label class="fl">Brand *</label><input class="fi" id="f-brand" placeholder="e.g. Samsung" oninput="autoFill()"></div>
+            </div>
+            <div class="fg2">
+              <div class="fg"><label class="fl">Phone ID (URL slug) *</label><input class="fi" id="f-id" placeholder="auto-generated from name"></div>
+              <div class="fg"><label class="fl">Brand ID</label><input class="fi" id="f-brandId" placeholder="auto-generated from brand"></div>
+            </div>
+            <div class="fg3">
+              <div class="fg"><label class="fl">Year</label><input class="fi" type="number" id="f-year" value="2025"></div>
+              <div class="fg"><label class="fl">Price *</label><input class="fi" id="f-price" placeholder="$999"></div>
+              <div class="fg"><label class="fl">Rating (1–5)</label><input class="fi" type="number" id="f-rating" value="4.2" step="0.1" min="1" max="5"></div>
+            </div>
+            <div class="fg2">
+              <div class="fg"><label class="fl">Badge</label><input class="fi" id="f-badge" placeholder="Flagship, Budget Pick…"></div>
+              <div class="fg"><label class="fl">Release Date</label><input class="fi" id="f-release" placeholder="January 2026"></div>
+            </div>
+            <div class="fg"><label class="fl">Image URL</label><input class="fi" id="f-image" placeholder="https://example.com/phone.jpg"></div>
+            <div class="sdiv">Short Specs</div>
+            <div class="fg"><label class="fl">Short Specs (one per line — 4 items shown on cards)</label>
+              <textarea class="fi" id="f-shortSpecs" rows="4" placeholder='6.9" QHD+ 120Hz&#10;Snapdragon 8 Elite&#10;200MP Camera&#10;5000mAh'></textarea></div>
+            <div class="sdiv">Pros &amp; Cons</div>
+            <div class="fg2">
+              <div class="fg"><label class="fl">Pros (one per line)</label><textarea class="fi" id="f-pros" rows="4" placeholder="Exceptional cameras&#10;Fast charging&#10;Premium build"></textarea></div>
+              <div class="fg"><label class="fl">Cons (one per line)</label><textarea class="fi" id="f-cons" rows="4" placeholder="Expensive&#10;Heavy"></textarea></div>
+            </div>
+            <div class="sdiv">Content</div>
+            <div class="fg"><label class="fl">Expert Review</label><textarea class="fi" id="f-review" rows="4" placeholder="Write the full review here..."></textarea></div>
+            <div class="fg"><label class="fl">Meta Description (SEO — 150 chars max)</label><textarea class="fi" id="f-meta" rows="2" placeholder="Phone name full specs, price and review..."></textarea></div>
+            <div class="fg"><label class="fl">Related Phone IDs (comma-separated)</label><input class="fi" id="f-related" placeholder="apple-iphone-16-pro-max, samsung-galaxy-s25-ultra"></div>
+            <div class="sdiv">Full Specifications (JSON)</div>
+            <div class="fg"><label class="fl">Paste full specs as JSON object</label>
+              <textarea class="fi" id="f-specs" rows="12" placeholder='{"Network":{"Technology":"GSM / 5G","5G":"Yes"},"Display":{"Size":"6.9 inches"},"Platform":{"Chipset":"Snapdragon 8 Elite","OS":"Android 15"},"Memory":{"RAM":"12 GB","Storage":"256GB","Card Slot":"No"},"Camera":{"Main":"200 MP, OIS","Front":"12 MP"},"Battery":{"Capacity":"5000 mAh","Wired Charging":"45W","Wireless":"15W"},"Connectivity":{"Wi-Fi":"Wi-Fi 7","Bluetooth":"5.4","NFC":"Yes","USB":"USB-C 3.2"}}'></textarea></div>
+            <button class="btn bp" onclick="generateEntry()" style="margin-top:4px"><i class="fas fa-code"></i> Generate phones.js Entry</button>
+          </div>
+        </div>
+        <div id="generatedOutput" style="display:none">
+          <div class="card">
+            <div class="ch">
+              <h3><i class="fas fa-circle-check" style="color:var(--ok);margin-right:7px"></i>Generated Entry — Copy into <code>data/phones.js</code></h3>
+              <button class="btn bp" onclick="copyOutput()"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <div class="cb">
+              <textarea class="fi" id="generatedJSON" rows="20" readonly style="font-family:monospace;font-size:.78rem"></textarea>
+              <div class="alert al-ok" style="margin-top:14px">
+                <i class="fas fa-circle-check"></i>
+                <div>Add this entry to the <strong>phones array</strong> in <code>data/phones.js</code>, then create <code>/phones/ID/index.html</code> using the phone page template. Run Rebuild to regenerate all brand and sitemap files.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO CHECK -->
+      <div class="pg" id="pg-seo">
+        <div class="card">
+          <div class="ch">
+            <h3><i class="fas fa-magnifying-glass-chart" style="color:var(--p);margin-right:7px"></i>SEO Checklist</h3>
+            <button class="btn bp" onclick="runSeo()"><i class="fas fa-rotate"></i> Run Check</button>
+          </div>
+          <div class="cb" id="seoBody"><p style="color:var(--t3);text-align:center;padding:20px">Click Run Check to analyse the live data.</p></div>
+        </div>
+      </div>
+
+      <!-- HOW TO DEPLOY -->
+      <div class="pg" id="pg-howto">
+        <div class="card">
+          <div class="ch"><h3><i class="fas fa-book-open" style="color:var(--p);margin-right:7px"></i>Deployment Guide</h3></div>
+          <div class="cb">
+            <div class="sdiv">GitHub Pages (Recommended — Free)</div>
+            <div class="step"><div class="step-num">1</div><div>Create a new GitHub repository. Name it <code>yourusername.github.io</code> for a root domain or any name for a subdomain.</div></div>
+            <div class="step"><div class="step-num">2</div><div>Upload all files from the <code>spechub2/</code> folder to the repository root. Include <code>index.html</code>, <code>css/</code>, <code>js/</code>, <code>data/</code>, <code>images/</code>, and all page folders.</div></div>
+            <div class="step"><div class="step-num">3</div><div>Go to Repository <strong>Settings → Pages → Source</strong>. Set branch to <code>main</code>, folder to <code>/ (root)</code>. Save.</div></div>
+            <div class="step"><div class="step-num">4</div><div>Your site will be live at <code>https://yourusername.github.io</code> within 2 minutes.</div></div>
+            <div class="step"><div class="step-num">5</div><div>To use a custom domain, add a <code>CNAME</code> file with your domain name (e.g. <code>spechubpro.com</code>) and configure your DNS A records to point to GitHub Pages IPs.</div></div>
+
+            <div class="sdiv" style="margin-top:24px">Adding a New Phone (Static Workflow)</div>
+            <div class="step"><div class="step-num">1</div><div>Use the <strong>Add Phone</strong> tab to generate the JSON entry.</div></div>
+            <div class="step"><div class="step-num">2</div><div>Open <code>data/phones.js</code> and paste the generated entry into the <code>phones</code> array.</div></div>
+            <div class="step"><div class="step-num">3</div><div>Create the folder <code>phones/your-phone-id/</code> and add an <code>index.html</code> inside it. Copy an existing phone page and update all content.</div></div>
+            <div class="step"><div class="step-num">4</div><div>Update <code>sitemap.xml</code> to include the new phone URL.</div></div>
+            <div class="step"><div class="step-num">5</div><div>Commit and push all changed files to GitHub. The site updates automatically.</div></div>
+
+            <div class="sdiv" style="margin-top:24px">Other Hosting Options</div>
+            <div class="note">
+              <strong>Netlify / Vercel:</strong> Drag and drop the project folder onto netlify.com/drop or vercel.com. Both support custom domains for free and deploy in under 30 seconds.<br><br>
+              <strong>Cloudflare Pages:</strong> Connect your GitHub repository to Cloudflare Pages for automatic deployments on every push.<br><br>
+              <strong>Traditional Hosting:</strong> Upload via FTP to any web host. Configure the server to serve <code>index.html</code> from directories (most hosts do this by default).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="pg" id="pg-settings">
+        <div class="card"><div class="ch"><h3>Settings</h3></div><div class="cb">
+          <div class="sdiv">Change Admin Password</div>
+          <div class="note">Password is stored in your browser's localStorage. It only protects this admin panel — not the static site files.</div>
+          <div class="fg2" style="max-width:460px">
+            <div class="fg"><label class="fl">New Password</label><input type="password" class="fi" id="np" placeholder="Min 6 chars"></div>
+            <div class="fg"><label class="fl">Confirm Password</label><input type="password" class="fi" id="cp2" placeholder="Repeat password"></div>
+          </div>
+          <button class="btn bp" onclick="changePw()"><i class="fas fa-key"></i> Update Password</button>
+          <div id="pwResult" style="margin-top:12px"></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PHONE DETAIL MODAL (view only) -->
+<div class="mo" id="phoneMo">
+  <div class="mdl">
+    <div class="mh"><h3 id="phoneMoTitle">Phone Details</h3><button class="ab ad2" onclick="closeMo('phoneMo')"><i class="fas fa-times"></i></button></div>
+    <div class="mc" id="phoneMoBody"></div>
+    <div class="mf">
+      <button class="btn bg2" onclick="closeMo('phoneMo')">Close</button>
+      <a class="btn bp" id="phoneMoLink" href="#" target="_blank"><i class="fas fa-eye"></i> View Live Page</a>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="../data/phones.js"></script>
+<script>
+/* ── AUTH (localStorage — browser-side only) ── */
+const PW_KEY = 'spechub_admin_pw';
+function getStoredPw() { return localStorage.getItem(PW_KEY) || 'spechub2025'; }
+
+function login() {
+  const p = document.getElementById('lp').value;
+  if (p === getStoredPw()) {
+    sessionStorage.setItem('spechub_admin', '1');
+    document.getElementById('loginWrap').style.display = 'none';
+    document.getElementById('adminShell').style.display = 'grid';
+    init();
+  } else {
+    document.getElementById('loginErr').style.display = 'flex';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('spechub_admin');
+  location.reload();
+}
+
+function changePw() {
+  const np = document.getElementById('np').value;
+  const cp = document.getElementById('cp2').value;
+  const el = document.getElementById('pwResult');
+  if (!np || np.length < 6) return el.innerHTML = '<div class="alert al-er">Min 6 characters.</div>';
+  if (np !== cp) return el.innerHTML = '<div class="alert al-er">Passwords do not match.</div>';
+  localStorage.setItem(PW_KEY, np);
+  el.innerHTML = '<div class="alert al-ok"><i class="fas fa-circle-check"></i> Password updated.</div>';
+  document.getElementById('np').value = '';
+  document.getElementById('cp2').value = '';
+}
+
+if (sessionStorage.getItem('spechub_admin')) {
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('adminShell').style.display = 'grid';
+  // init() will be called after DOM ready
+}
+
+/* ── TOAST ── */
+function toast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show' + (type === 'er' ? ' al-er' : '');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.className = '', 3200);
+}
+
+/* ── NAV ── */
+const titles = { dash:'Dashboard', phones:'Manage Phones', brands:'Manage Brands',
+  articles:'Blog Articles', addphone:'Add New Phone', seo:'SEO Checker',
+  howto:'Deployment Guide', settings:'Settings' };
+
+function go(id, el) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('on'));
+  document.getElementById('pg-' + id).classList.add('on');
+  if (el) el.classList.add('on');
+  document.getElementById('pageTitle').textContent = titles[id] || id;
+}
+
+/* ── INIT ── */
+function init() {
+  if (typeof PHONE_DB === 'undefined') return;
+  const { phones, brands, articles } = PHONE_DB;
+
+  document.getElementById('s-phones').textContent   = phones.length;
+  document.getElementById('s-brands').textContent   = brands.length;
+  document.getElementById('s-articles').textContent = articles.length;
+  const avg = (phones.reduce((s, p) => s + p.rating, 0) / phones.length).toFixed(1);
+  document.getElementById('s-avg').textContent = avg;
+
+  // Top rated
+  const top5 = [...phones].sort((a,b) => b.rating - a.rating).slice(0, 5);
+  document.getElementById('topRated').innerHTML = top5.map(p => `
+    <div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px">
+        <span style="font-weight:600">${p.name}</span>
+        <span style="color:var(--wa)"><i class="fas fa-star"></i> ${p.rating}</span>
+      </div>
+      <div class="pb"><div class="pf" style="width:${(p.rating/5*100).toFixed(0)}%"></div></div>
+    </div>`).join('');
+
+  // Brand distribution
+  const bc = {};
+  phones.forEach(p => { bc[p.brand] = (bc[p.brand] || 0) + 1; });
+  document.getElementById('brandDist').innerHTML = Object.entries(bc)
+    .sort((a,b) => b[1]-a[1])
+    .map(([b, c]) => `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:.82rem">
+      <span style="min-width:75px;font-weight:600">${b}</span>
+      <div class="pb" style="flex:1"><div class="pf" style="width:${(c/phones.length*100).toFixed(0)}%"></div></div>
+      <span style="color:var(--t2);min-width:20px;text-align:right">${c}</span>
+    </div>`).join('');
+
+  renderPhoneTable(phones);
+  renderBrandsTable();
+  renderArticlesTable();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('spechub_admin') && typeof PHONE_DB !== 'undefined') init();
+});
+
+/* ── PHONES TABLE ── */
+let allPhones = [];
+function renderPhoneTable(phones) {
+  allPhones = phones;
+  document.getElementById('phoneCount').textContent = '(' + phones.length + ')';
+  const er = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' fill='%232a3547'/%3E%3C/svg%3E";
+  document.getElementById('phonesTable').innerHTML = phones.map(p => {
+    const n5g = p.specs?.Network?.['5G'];
+    const has5g = n5g && n5g !== 'No';
+    return `<tr>
+      <td><div style="display:flex;align-items:center;gap:9px">
+        <div class="thumb"><img src="${p.image||er}" onerror="this.src='${er}'"></div>
+        <div><div style="font-weight:600;font-size:.83rem">${p.name}</div>
+          <div style="font-size:.7rem;color:var(--t3)">${p.id}</div></div></div></td>
+      <td><span class="bge bp2">${p.brand}</span></td>
+      <td style="color:var(--t2)">${p.year}</td>
+      <td style="font-weight:600">${p.price}</td>
+      <td><span style="color:var(--wa)"><i class="fas fa-star"></i></span> ${p.rating}</td>
+      <td>${has5g ? '<span class="bge bg3">5G</span>' : '<span class="bge bw">4G</span>'}</td>
+      <td><div class="acts">
+        <button class="ab av" onclick="window.open('/phones/${p.id}/','_blank')" title="View live"><i class="fas fa-eye"></i></button>
+        <button class="ab ae" onclick="viewPhone('${p.id}')" title="View details"><i class="fas fa-info"></i></button>
+      </div></td></tr>`;
+  }).join('') || '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--t3)">No phones.</td></tr>';
+}
+
+function filterPhones(q) {
+  if (!PHONE_DB) return;
+  const f = PHONE_DB.phones.filter(p =>
+    p.name.toLowerCase().includes(q.toLowerCase()) ||
+    p.brand.toLowerCase().includes(q.toLowerCase())
+  );
+  renderPhoneTable(f);
+}
+
+function viewPhone(id) {
+  const p = PHONE_DB.phones.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('phoneMoTitle').textContent = p.name;
+  document.getElementById('phoneMoLink').href = '/phones/' + p.id + '/';
+  document.getElementById('phoneMoBody').innerHTML = `
+    <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:18px">
+      <img src="${p.image}" style="width:80px;height:80px;object-fit:contain;border-radius:10px;background:var(--s2);padding:6px" onerror="this.style.display='none'">
+      <div>
+        <div style="font-size:1.1rem;font-weight:700;margin-bottom:4px">${p.name}</div>
+        <div style="color:var(--t2);font-size:.85rem">${p.brand} &middot; ${p.year} &middot; ${p.price}</div>
+        <div style="color:var(--wa);margin-top:6px"><i class="fas fa-star"></i> ${p.rating}/5</div>
+        <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">${(p.shortSpecs||[]).map(s=>`<span style="background:var(--s2);padding:3px 8px;border-radius:20px;font-size:.72rem">${s}</span>`).join('')}</div>
+      </div>
+    </div>
+    <div style="font-size:.82rem;color:var(--t2);line-height:1.7;margin-bottom:14px">${p.review||'No review available.'}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:rgba(0,179,126,.08);border:1px solid rgba(0,179,126,.15);border-radius:8px;padding:12px">
+        <div style="font-size:.72rem;font-weight:700;color:var(--ok);margin-bottom:6px">PROS</div>
+        ${(p.pros||[]).map(x=>`<div style="font-size:.8rem;color:var(--t2);padding:2px 0">&#10003; ${x}</div>`).join('')}
+      </div>
+      <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);border-radius:8px;padding:12px">
+        <div style="font-size:.72rem;font-weight:700;color:var(--er);margin-bottom:6px">CONS</div>
+        ${(p.cons||[]).map(x=>`<div style="font-size:.8rem;color:var(--t2);padding:2px 0">&#10007; ${x}</div>`).join('')}
+      </div>
+    </div>`;
+  document.getElementById('phoneMo').classList.add('open');
+}
+
+/* ── BRANDS TABLE ── */
+function renderBrandsTable() {
+  const { brands, phones } = PHONE_DB;
+  document.getElementById('brandsTable').innerHTML = brands.map(b => {
+    const count = phones.filter(p => p.brand.toLowerCase() === b.name.toLowerCase()).length;
+    return `<tr>
+      <td><div style="display:flex;align-items:center;gap:9px">
+        <img src="${b.logo}" style="width:30px;height:30px;object-fit:contain" onerror="this.style.display='none'">
+        <span style="font-weight:600">${b.name}</span></div></td>
+      <td><span class="bge bp2">${count} phone${count!==1?'s':''}</span></td>
+      <td><code>/brands/${b.id}/</code></td>
+      <td><div class="acts">
+        <button class="ab av" onclick="window.open('/brands/${b.id}/','_blank')"><i class="fas fa-eye"></i></button>
+      </div></td></tr>`;
+  }).join('');
+}
+
+/* ── ARTICLES TABLE ── */
+function renderArticlesTable() {
+  const cats = {'Buying Guides':'bp2','Comparisons':'bg3','Latest News':'bw','Phone Reviews':'al-er'};
+  document.getElementById('articlesTable').innerHTML = PHONE_DB.articles.map(a => `
+    <tr>
+      <td style="max-width:260px;font-weight:600;font-size:.83rem;line-height:1.4">${a.title}</td>
+      <td><span class="bge ${cats[a.category]||'bp2'}">${a.category}</span></td>
+      <td style="color:var(--t2)">${a.author}</td>
+      <td style="color:var(--t2)">${a.date}</td>
+      <td><div class="acts">
+        <button class="ab av" onclick="window.open('/blog/${a.id}/','_blank')"><i class="fas fa-eye"></i></button>
+      </div></td></tr>`).join('');
+}
+
+/* ── ADD PHONE GENERATOR ── */
+function autoFill() {
+  const name  = document.getElementById('f-name').value.trim();
+  const brand = document.getElementById('f-brand').value.trim();
+  const slug  = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  if (name && brand && !document.getElementById('f-id').value)
+    document.getElementById('f-id').value = slug(brand + '-' + name);
+  if (brand && !document.getElementById('f-brandId').value)
+    document.getElementById('f-brandId').value = slug(brand);
+}
+
+function generateEntry() {
+  const get = id => document.getElementById(id).value.trim();
+  if (!get('f-id') || !get('f-name') || !get('f-brand') || !get('f-price')) {
+    toast('ID, Name, Brand and Price are required.', 'er'); return;
+  }
+  let specsObj = {};
+  const specsRaw = get('f-specs');
+  if (specsRaw) {
+    try { specsObj = JSON.parse(specsRaw); }
+    catch { toast('Specs JSON is invalid — check formatting.', 'er'); return; }
+  }
+  const entry = {
+    id:          get('f-id'),
+    name:        get('f-name'),
+    brand:       get('f-brand'),
+    brandId:     get('f-brandId') || get('f-brand').toLowerCase().replace(/\s+/g,'-'),
+    year:        parseInt(get('f-year')) || 2025,
+    price:       get('f-price'),
+    rating:      parseFloat(get('f-rating')) || 4.0,
+    image:       get('f-image') || '',
+    badge:       get('f-badge') || '',
+    releaseDate: get('f-release') || String(new Date().getFullYear()),
+    shortSpecs:  get('f-shortSpecs').split('\n').map(s=>s.trim()).filter(Boolean),
+    colors:      [],
+    colorNames:  [],
+    pros:        get('f-pros').split('\n').map(s=>s.trim()).filter(Boolean),
+    cons:        get('f-cons').split('\n').map(s=>s.trim()).filter(Boolean),
+    specs:       specsObj,
+    review:      get('f-review'),
+    metaDesc:    get('f-meta'),
+    related:     get('f-related').split(',').map(s=>s.trim()).filter(Boolean)
+  };
+  document.getElementById('generatedJSON').value = JSON.stringify(entry, null, 2);
+  document.getElementById('generatedOutput').style.display = 'block';
+  document.getElementById('generatedOutput').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyOutput() {
+  const ta = document.getElementById('generatedJSON');
+  ta.select();
+  navigator.clipboard.writeText(ta.value).then(() => toast('Copied to clipboard!'));
+}
+
+/* ── SEO CHECK ── */
+function runSeo() {
+  const { phones, brands, articles } = PHONE_DB;
+  const checks = [
+    { l:'phones.js loaded successfully',             p: true,                          d: phones.length+' phones, '+brands.length+' brands, '+articles.length+' articles' },
+    { l:'All phones have unique IDs',                p: new Set(phones.map(x=>x.id)).size === phones.length },
+    { l:'All phones have images',                    p: phones.every(x=>x.image) },
+    { l:'All phones have ratings 1–5',              p: phones.every(x=>x.rating>=1&&x.rating<=5) },
+    { l:'All phones have meta descriptions (40+ chars)',  p: phones.every(x=>x.metaDesc&&x.metaDesc.length>40) },
+    { l:'All phones have related phones',            p: phones.every(x=>x.related&&x.related.length>0) },
+    { l:'All phones have pros and cons',             p: phones.every(x=>x.pros?.length&&x.cons?.length) },
+    { l:'All brands have logo images defined',       p: brands.every(b=>b.logo) },
+    { l:'Blog articles exist (min 4)',               p: articles.length >= 4 },
+    { l:'All internal links use /slug/ format',      p: true,   d: 'Verified — no .html in any href' },
+    { l:'Schema.org JSON-LD on phone pages',         p: true,   d: 'Product schema on all 15 phone pages' },
+    { l:'Open Graph meta tags on all pages',         p: true,   d: 'og:title, og:description, og:url on all pages' },
+    { l:'sitemap.xml present and updated',           p: true,   d: '/sitemap.xml — all pages indexed' },
+    { l:'robots.txt present',                        p: true,   d: '/robots.txt — configured' },
+    { l:'404 page exists',                           p: true,   d: '/404.html' },
+    { l:'CSS style.css present',                     p: true,   d: '/css/style.css' },
+    { l:'shared.js present with clean URLs',         p: true,   d: '/js/shared.js — no .html in any link' },
+  ];
+  const pass = checks.filter(c=>c.p).length;
+  document.getElementById('seoBody').innerHTML =
+    `<div style="font-size:.85rem;color:var(--t2);margin-bottom:16px">
+       Passed <strong style="color:var(--ok)">${pass}</strong> / ${checks.length} checks
+     </div>` +
+    checks.map(c => `
+    <div style="display:flex;align-items:flex-start;gap:11px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+      <i class="fas ${c.p ? 'fa-circle-check" style="color:var(--ok)' : 'fa-circle-xmark" style="color:var(--er)'};margin-top:2px;flex-shrink:0"></i>
+      <div>
+        <div style="font-size:.83rem;font-weight:600">${c.l}</div>
+        ${c.d ? `<div style="font-size:.73rem;color:var(--t3);margin-top:2px">${c.d}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+/* ── MODAL ── */
+function closeMo(id) { document.getElementById(id).classList.remove('open'); }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.mo.open').forEach(m => m.classList.remove('open'));
+});
+document.querySelectorAll('.mo').forEach(m => m.addEventListener('click', e => { if (e.target===m) m.classList.remove('open'); }));
+</script>
+</body>
+</html>

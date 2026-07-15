@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found – SpecHub</title>
+<meta name="description" content="The page you are looking for could not be found. Search our smartphone database or browse all brands on SpecHub.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://spechubpro.com/404/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Page Not Found – SpecHub">
+<meta property="og:description" content="The page you are looking for could not be found. Search our smartphone database or browse all brands on SpecHub.">
+<meta property="og:url" content="https://spechubpro.com/404/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Page Not Found – SpecHub">
+<meta name="twitter:description" content="The page you are looking for could not be found. Search our smartphone database or browse all brands on SpecHub.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a class="nav-logo" href="./">Spec<span>Hub</span></a>
+    <div class="nav-links"><a href="./">Home</a><a href="brands/">Brands</a><a href="compare/">Compare</a><a href="search/">Search</a><a href="blog/">Blog</a></div>
+    <div class="nav-search" style="position:relative">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search phones..." id="navSearch"
+        oninput="liveSearch(this.value,'searchDropdown')"
+        onkeydown="if(event.key==='Enter')goSearch()">
+    </div>
+    <div class="nav-actions">
+      <button class="btn-theme" onclick="toggleTheme()" title="Toggle dark mode">
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+      <button class="nav-menu-btn" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="navOverlay" class="nav-overlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <div class="mobile-logo">Spec<span>Hub</span></div>
+    <button class="mobile-nav-close" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="mobile-nav-search">
+    <input type="text" placeholder="Search phones..."
+      oninput="liveSearch(this.value,'searchDropdown')"
+      onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+  <div class="mobile-nav-links">
+    <a href="./"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="brands/"><i class="fas fa-mobile-screen-button"></i><span>Brands</span></a>
+    <a href="search/"><i class="fas fa-search"></i><span>Search</span></a>
+    <a href="compare/"><i class="fas fa-code-compare"></i><span>Compare</span></a>
+    <a href="blog/"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+  </div>
+  <div class="mobile-nav-footer">
+    <a href="about/"><i class="fas fa-info-circle"></i>About Us</a>
+    <a href="contact/"><i class="fas fa-envelope"></i>Contact</a>
+    <a href="privacy/"><i class="fas fa-shield-halved"></i>Privacy Policy</a>
+    <a href="terms/"><i class="fas fa-file-contract"></i>Terms &amp; Conditions</a>
+    <a href="disclaimer/"><i class="fas fa-triangle-exclamation"></i>Disclaimer</a>
+  </div>
+</div>
+<div id="searchDropdown" style="display:none;position:fixed;top:70px;right:20px;z-index:900;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);width:340px;max-height:400px;overflow-y:auto;padding:8px"></div>
+<div style="min-height:70vh;display:flex;align-items:center;justify-content:center;padding:60px 20px">
+  <div style="text-align:center;max-width:560px">
+    <div style="font-size:6rem;font-weight:900;color:var(--primary);opacity:.12;line-height:1;user-select:none">404</div>
+    <div style="margin-top:-20px;margin-bottom:16px"><i class="fas fa-mobile-alt" style="font-size:3rem;color:var(--primary);opacity:.5"></i></div>
+    <h1 style="margin-bottom:12px;font-size:1.8rem">Page Not Found</h1>
+    <p style="color:var(--text2);line-height:1.7;margin-bottom:32px">The page you are looking for does not exist or has been moved. Try searching our smartphone database or browse all brands.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="./" class="btn-primary"><i class="fas fa-home"></i> Go Home</a>
+      <a href="search/" class="btn-primary" style="background:var(--accent)"><i class="fas fa-search"></i> Search Phones</a>
+      <a href="brands/" class="btn-secondary" style="border-color:var(--border);color:var(--text)"><i class="fas fa-mobile-screen-button"></i> Browse Brands</a>
+    </div>
+    <div style="margin-top:40px">
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:12px">Popular Phones</div>
+      <div id="popular404" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"></div>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <div class="ad-banner leaderboard" style="margin-bottom:40px;border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.3)">Advertisement</div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="./" style="display:inline-block;margin-bottom:15px">Spec<span>Hub</span></a>
+        <p class="footer-desc">Africa's most comprehensive smartphone specification database. Find specs, compare phones, and read expert reviews for every budget.</p>
+        <div class="footer-social">
+          <a class="social-link" href="https://www.x.com/spechub9278"><i class="fab fa-x-twitter"></i></a>
+          <a class="social-link" href="https://www.facebook.com/spechub.2025"><i class="fab fa-facebook-f"></i></a>
+          <a class="social-link" href="https://www.instagram.com/spec_hubng/"><i class="fab fa-instagram"></i></a>
+          <a class="social-link" href="https://www.youtube.com/@spechubpro9278"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Top Brands</div>
+        <div class="footer-links">
+          <a href="brands/samsung/">Samsung</a><a href="brands/apple/">Apple</a>
+          <a href="brands/xiaomi/">Xiaomi</a><a href="brands/tecno/">Tecno</a>
+          <a href="brands/infinix/">Infinix</a><a href="brands/itel/">itel</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <div class="footer-links">
+          <a href="compare/">Compare Phones</a><a href="search/">Search Phones</a>
+          <a href="blog/">Blog &amp; Reviews</a><a href="about/">About Us</a>
+          <a href="contact/">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <div class="footer-links">
+          <a href="privacy/">Privacy Policy</a>
+          <a href="terms/">Terms &amp; Conditions</a>
+          <a href="disclaimer/">Disclaimer</a>
+        </div>
+        <div class="footer-heading" style="margin-top:20px">Newsletter</div>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="your@email.com">
+          <button onclick="showToast('Subscribed!')">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SpecHub. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy/">Privacy</a><a href="terms/">Terms</a>
+        <a href="disclaimer/">Disclaimer</a><a href="contact/">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div><script src="data/phones.js"></script>
+<script src="js/shared.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var top = PHONE_DB.phones.slice().sort(function(a,b){return b.rating-a.rating;}).slice(0,6);
+  document.getElementById('popular404').innerHTML = top.map(function(p){
+    return '<a href="phones/'+p.id+'/" style="display:inline-block;padding:7px 14px;border:1px solid var(--border);border-radius:20px;font-size:.8rem;font-weight:600;color:var(--text);text-decoration:none;transition:.2s" onmouseover="this.style.borderColor=\'var(--primary)\';this.style.color=\'var(--primary)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--text)\'">'+p.name+'</a>';
+  }).join('');
+});
+</script>
+</body>
+</html>

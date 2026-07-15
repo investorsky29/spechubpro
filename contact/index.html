@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us – SpecHub</title>
+<meta name="description" content="Contact the SpecHub team for spec corrections, partnerships, advertising inquiries, or general questions about our smartphone database.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://spechubpro.com/contact/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact Us – SpecHub">
+<meta property="og:description" content="Contact the SpecHub team for spec corrections, partnerships, advertising inquiries, or general questions about our smartphone database.">
+<meta property="og:url" content="https://spechubpro.com/contact/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact Us – SpecHub">
+<meta name="twitter:description" content="Contact the SpecHub team for spec corrections, partnerships, advertising inquiries, or general questions about our smartphone database.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a class="nav-logo" href="../">Spec<span>Hub</span></a>
+    <div class="nav-links"><a href="../">Home</a><a href="../brands/">Brands</a><a href="../compare/">Compare</a><a href="../search/">Search</a><a href="../blog/">Blog</a></div>
+    <div class="nav-search" style="position:relative">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search phones..." id="navSearch"
+        oninput="liveSearch(this.value,'searchDropdown')"
+        onkeydown="if(event.key==='Enter')goSearch()">
+    </div>
+    <div class="nav-actions">
+      <button class="btn-theme" onclick="toggleTheme()" title="Toggle dark mode">
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+      <button class="nav-menu-btn" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="navOverlay" class="nav-overlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <div class="mobile-logo">Spec<span>Hub</span></div>
+    <button class="mobile-nav-close" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="mobile-nav-search">
+    <input type="text" placeholder="Search phones..."
+      oninput="liveSearch(this.value,'searchDropdown')"
+      onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+  <div class="mobile-nav-links">
+    <a href="../"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="../brands/"><i class="fas fa-mobile-screen-button"></i><span>Brands</span></a>
+    <a href="../search/"><i class="fas fa-search"></i><span>Search</span></a>
+    <a href="../compare/"><i class="fas fa-code-compare"></i><span>Compare</span></a>
+    <a href="../blog/"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+  </div>
+  <div class="mobile-nav-footer">
+    <a href="../about/"><i class="fas fa-info-circle"></i>About Us</a>
+    <a href="../contact/"><i class="fas fa-envelope"></i>Contact</a>
+    <a href="../privacy/"><i class="fas fa-shield-halved"></i>Privacy Policy</a>
+    <a href="../terms/"><i class="fas fa-file-contract"></i>Terms &amp; Conditions</a>
+    <a href="../disclaimer/"><i class="fas fa-triangle-exclamation"></i>Disclaimer</a>
+  </div>
+</div>
+<div id="searchDropdown" style="display:none;position:fixed;top:70px;right:20px;z-index:900;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);width:340px;max-height:400px;overflow-y:auto;padding:8px"></div>
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../">Home</a><span class="sep">/</span><span>Contact Us</span></nav>
+    <h1 style="color:white;margin-top:8px">Contact Us</h1>
+    <p style="color:rgba(255,255,255,.7);margin-top:6px">Questions, corrections, or partnership inquiries — we want to hear from you</p>
+  </div>
+</div>
+<div class="page-content">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <h2>Get In Touch</h2>
+        <p>Have a question about our phone database? Found an error in our specifications? Want to discuss advertising or partnerships?</p>
+        <div class="contact-info-item" style="margin-top:28px">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div><div style="font-weight:700;margin-bottom:3px">Email Us</div>
+            <div style="color:var(--text2);font-size:.9rem">hello@spechubpro.com</div>
+            <div style="color:var(--text3);font-size:.8rem;margin-top:2px">We reply within 24 hours</div></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-clock"></i></div>
+          <div><div style="font-weight:700;margin-bottom:3px">Response Time</div>
+            <div style="color:var(--text2);font-size:.9rem">Monday – Friday, 9am – 5pm WAT</div></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-bug"></i></div>
+          <div><div style="font-weight:700;margin-bottom:3px">Report a Spec Error</div>
+            <div style="color:var(--text2);font-size:.9rem">Found incorrect specifications? Email us the phone name and correct data and we will update it within 48 hours.</div></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-handshake"></i></div>
+          <div><div style="font-weight:700;margin-bottom:3px">Partnerships &amp; Advertising</div>
+            <div style="color:var(--text2);font-size:.9rem">For brand partnerships and advertising inquiries, reach out with your proposal and we will respond within 2 business days.</div></div>
+        </div>
+        <div style="margin-top:24px">
+          <div style="font-weight:700;margin-bottom:12px">Follow Us</div>
+          <div style="display:flex;gap:10px">
+            <a class="social-link" href="https://www.x.com/spechub9278" style="background:var(--surface2);color:var(--text)"><i class="fab fa-x-twitter"></i></a>
+            <a class="social-link" href="https://www.facebook.com/spechub.2025" style="background:var(--surface2);color:var(--text)"><i class="fab fa-facebook-f"></i></a>
+            <a class="social-link" href="https://www.instagram.com/spec_hubng/" style="background:var(--surface2);color:var(--text)"><i class="fab fa-instagram"></i></a>
+            <a class="social-link" href="https://www.youtube.com/@spechubpro9278" style="background:var(--surface2);color:var(--text)"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-widget" style="padding:32px">
+          <h3 style="margin-bottom:6px">Send a Message</h3>
+          <p style="color:var(--text2);font-size:.85rem;margin-bottom:24px">Fill out the form below and we will get back to you shortly.</p>
+          <form id="contactForm" onsubmit="submitContact(event)">
+            <div class="form-grid">
+              <div class="form-group"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="John" required></div>
+              <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="Doe" required></div>
+            </div>
+            <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="john@email.com" required></div>
+            <div class="form-group"><label class="form-label">Subject</label>
+              <select class="form-input">
+                <option>General Question</option><option>Spec Error Report</option>
+                <option>Phone Submission</option><option>Advertising Inquiry</option>
+                <option>Partnership</option><option>Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" rows="5" placeholder="Tell us how we can help..." required></textarea></div>
+            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane" style="margin-right:8px"></i>Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <div class="ad-banner leaderboard" style="margin-bottom:40px;border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.3)">Advertisement</div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="../" style="display:inline-block;margin-bottom:15px">Spec<span>Hub</span></a>
+        <p class="footer-desc">Africa's most comprehensive smartphone specification database. Find specs, compare phones, and read expert reviews for every budget.</p>
+        <div class="footer-social">
+          <a class="social-link" href="https://www.x.com/spechub9278"><i class="fab fa-x-twitter"></i></a>
+          <a class="social-link" href="https://www.facebook.com/spechub.2025"><i class="fab fa-facebook-f"></i></a>
+          <a class="social-link" href="https://www.instagram.com/spec_hubng/"><i class="fab fa-instagram"></i></a>
+          <a class="social-link" href="https://www.youtube.com/@spechubpro9278"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Top Brands</div>
+        <div class="footer-links">
+          <a href="../brands/samsung/">Samsung</a><a href="../brands/apple/">Apple</a>
+          <a href="../brands/xiaomi/">Xiaomi</a><a href="../brands/tecno/">Tecno</a>
+          <a href="../brands/infinix/">Infinix</a><a href="../brands/itel/">itel</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <div class="footer-links">
+          <a href="../compare/">Compare Phones</a><a href="../search/">Search Phones</a>
+          <a href="../blog/">Blog &amp; Reviews</a><a href="../about/">About Us</a>
+          <a href="../contact/">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <div class="footer-links">
+          <a href="../privacy/">Privacy Policy</a>
+          <a href="../terms/">Terms &amp; Conditions</a>
+          <a href="../disclaimer/">Disclaimer</a>
+        </div>
+        <div class="footer-heading" style="margin-top:20px">Newsletter</div>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="your@email.com">
+          <button onclick="showToast('Subscribed!')">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SpecHub. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy/">Privacy</a><a href="../terms/">Terms</a>
+        <a href="../disclaimer/">Disclaimer</a><a href="../contact/">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div><script src="../data/phones.js"></script>
+<script src="../js/shared.js"></script>
+
+</body>
+</html>
