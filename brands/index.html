@@ -159,7 +159,7 @@ function buildBrands(){
   allCards=PHONE_DB.brands.map(function(b){
     var count=PHONE_DB.phones.filter(function(p){return p.brand.toLowerCase()===b.name.toLowerCase();}).length;
     var card=document.createElement('a');
-    card.href='/brands/'+b.id+'/';
+    card.href = SITE_BASE + '/brands/' + b.id + '/';
     card.className='brand-card';
     card.style.textDecoration='none';
     card.style.color='inherit';
