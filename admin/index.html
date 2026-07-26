@@ -107,7 +107,7 @@ code{background:var(--s2);padding:2px 6px;border-radius:4px;font-family:monospac
     <div id="loginErr" class="alert al-er" style="display:none"><i class="fas fa-circle-exclamation"></i> Incorrect password.</div>
     <div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="lp" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()"></div>
     <button class="btn bp" style="width:100%;padding:11px;justify-content:center" onclick="login()"><i class="fas fa-right-to-bracket"></i> Sign In</button>
-    <p style="text-align:center;font-size:.72rem;color:var(--t3);margin-top:14px">Default password: <code>spechub2025</code></p>
+    <p style="text-align:center;font-size:.72rem;color:var(--t3);margin-top:14px">Default password: <code>###</code></p>
   </div>
 </div>
 
@@ -366,7 +366,7 @@ code{background:var(--s2);padding:2px 6px;border-radius:4px;font-family:monospac
 <script>
 /* ── AUTH (localStorage — browser-side only) ── */
 const PW_KEY = 'spechub_admin_pw';
-function getStoredPw() { return localStorage.getItem(PW_KEY) || 'spechub2025'; }
+function getStoredPw() { return localStorage.getItem(PW_KEY) || 'spechub@202'; }
 
 function login() {
   const p = document.getElementById('lp').value;
