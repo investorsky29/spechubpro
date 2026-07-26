@@ -3056,10 +3056,10 @@ brands: [
 ],
 
 articles: [
-  {id:"best-phones-2025",       title:"Best Smartphones of 2025: Our Top Picks Across Every Budget", category:"Buying Guides", author:"Tech Editor",   date:"June 10, 2025", readTime:"8 min"},
+  {id:"best-camera-phones-2026", title:"Best Camera Phones of 2026: Top Picks for Every Budget", category:"Phone Reviews", author:"Camera Expert",   date:"July 21, 2026", readTime:"12 min"},
   {id:"iphone-vs-android-2026", title:"iPhone vs Android in 2026: Which Should You Choose?",         category:"Comparisons",   author:"Review Team",   date:"May 28, 2025",  readTime:"12 min"},
-  {id:"5g-guide-africa",        title:"5G in Africa 2025: Which Phones and Networks Are Available?",  category:"Latest News",    author:"Africa Desk",   date:"June 5, 2025",  readTime:"6 min"},
-  {id:"camera-phones-ranked",   title:"Camera Phone Rankings 2025: Who Takes the Best Photos?",       category:"Phone Reviews",  author:"Camera Expert", date:"June 1, 2025",  readTime:"15 min"}
+  {id:"iphone-18-pro-max-review",        title:"iPhone 18 Pro Max Review: Everything You Need to Know",  category:"Latest News",    author:"Global News Desk",   date:"July 25, 2026",  readTime:"14 min"},
+  {id:"best-budget-smartphones-2026",   title:"iPhone vs Android in 2026: Which Should You Choose?",       category:"Buying Guides",  author:"Tech Edito", date:"July 18, 2026",  readTime:"18 min"}
 ]
 
 };
