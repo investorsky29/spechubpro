@@ -3050,6 +3050,7 @@ brands: [
   {id:"infinix",  name:"Infinix",  logo:"/images/brands/infinix-logo.png"},
   {id:"motorola", name:"Motorola", logo:"/images/brands/motorola-logo.png"},
   {id:"huawei",   name:"Huawei",   logo:"/images/brands/huawei-logo.png"},
+ // {id:"honor",    name:"honor",    logo:"/images/brands/honor-brand-logo.jpg"},
   {id:"realme",   name:"Realme",   logo:"/images/brands/realme_logo.png"},
   {id:"nokia",    name:"Nokia",    logo:"/images/brands/nokia-logo.png"},
   {id:"itel",     name:"itel",     logo:"/images/brands/Itel_Mobile_logo.png"}
