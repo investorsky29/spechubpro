@@ -3145,6 +3145,18 @@ phones: [
       review:"The Honor X9b is a durable mid-range smartphone known for its Ultra-Bounce Anti-Drop display and outstanding battery life. It combines a curved 6.78-inch AMOLED display with a 120Hz refresh rate, the Snapdragon 6 Gen 1 processor, and a 5800mAh battery that comfortably lasts more than a full day. The 108MP main camera captures detailed photos, while the lightweight design and strong durability make it an excellent choice for everyday use.",
       metaDesc:"Honor X9b full specs, price and review. Snapdragon 6 Gen 1, 6.78-inch AMOLED 120Hz display, 108MP camera and 5800mAh battery.",
       related:["honor-x9c","honor-200","honor-magic7-lite","honor-400"]},
+      
+    {id:"iphone-18-pro-max",name:"iPhone 18 Pro Max",fullName:"Apple iPhone 18 Pro Max",brand:"apple",brandid:"apple",year:2026,price:"Not announced",rating:4.9,
+      image:"images/iphone-18-pro-max.jpg",badge:"Upcoming Flagship",
+      releaseDate:"Not announced",
+      shortSpecs:["6.9\" LTPO Super Retina XDR","Apple A20 Pro","48MP Triple Camera","5000mAh (expected)"],
+      colors:["Not announced"],
+      pros:["Expected next-generation A20 Pro performance","Expected advanced camera upgrades","Expected improved display technology","Expected longer battery life","Expected major Apple Intelligence improvements"],
+      cons:["Not announced yet","Specifications are based on reports and leaks","Expected premium price","Official camera and battery details unavailable"],
+      specs:{"Network":{"Technology":"GSM / HSPA / LTE / 5G","5G":"Expected"},"Body":{"Dimensions":"Not announced","Weight":"Not announced","Build":"Not announced","SIM":"Not announced","Protection":"Not announced"},"Display":{"Size":"6.9 inches (expected)","Resolution":"Not announced","Type":"LTPO Super Retina XDR OLED (expected)","Refresh Rate":"120Hz ProMotion (expected)","Brightness":"Not announced","Protection":"Not announced","HDR":"Expected HDR support"},"Platform":{"OS":"iOS 26 (expected)","Chipset":"Apple A20 Pro (expected)","CPU":"Not announced","GPU":"Not announced"},"Memory":{"RAM":"Not announced","Storage":"Not announced","Card Slot":"No (expected)","Storage Type":"Not announced"},"Camera":{"Main":"48 MP (expected)","Telephoto":"48 MP (expected)","Ultrawide":"48 MP (expected)","Front":"Not announced"},"Battery":{"Capacity":"Not announced","Wired Charging":"Not announced","Wireless":"Not announced","Reverse Charging":"Not announced"},"Connectivity":{"Wi-Fi":"Not announced","Bluetooth":"Not announced","NFC":"Expected","USB":"USB Type-C (expected)","Fingerprint":"No","Face Unlock":"Face ID","Speakers":"Stereo Speakers (expected)"}},
+      review:"The iPhone 18 Pro Max is Apple's upcoming flagship smartphone and has not yet been officially announced. Apple has not confirmed its final specifications, price, release date, camera system, battery capacity, or design. Current information about the device comes from industry reports and leaks, which suggest that it could feature Apple's next-generation A20 Pro chip, an advanced 6.9-inch LTPO OLED display, upgraded camera hardware, and further improvements to Apple Intelligence. These specifications should be treated as unconfirmed until Apple officially announces the device.",
+      metaDesc:"iPhone 18 Pro Max expected specs, price and release date. See the latest rumors about Apple's next flagship, including display, camera and A20 Pro chip.",
+      related:["iphone-17-pro-max","iphone-17-pro","iphone-16-pro-max","samsung-galaxy-s26-ultra"]},
 
 ], 
 
@@ -3170,7 +3182,7 @@ brands: [
 articles: [
   {id:"best-camera-phones-2026", title:"Best Camera Phones of 2026: Top Picks for Every Budget", category:"Phone Reviews", author:"Camera Expert",   date:"July 21, 2026", readTime:"12 min"},
   {id:"iphone-vs-android-2026", title:"iPhone vs Android in 2026: Which Should You Choose?",         category:"Comparisons",   author:"Review Team",   date:"May 28, 2025",  readTime:"12 min"},
-  {id:"iphone-18-pro-max-review",        title:"iPhone 18 Pro Max Review: Everything You Need to Know",  category:"Latest News",    author:"Global News Desk",   date:"July 25, 2026",  readTime:"14 min"},
+  {id:"iphone-18-rumor",        title:"iPhone 18 Pro Max: Everything We Know So Far",  category:"Latest News",    author:"Global News Desk",   date:"August 9, 2026",  readTime:"10 min"},
   {id:"best-budget-smartphones-2026",   title:"iPhone vs Android in 2026: Which Should You Choose?",       category:"Buying Guides",  author:"Tech Edito", date:"July 18, 2026",  readTime:"18 min"}
 ]
 
