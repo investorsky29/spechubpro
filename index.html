@@ -220,8 +220,8 @@
     </div>
   </div>
 </footer>
-<div class="toast" id="toast"></div><script src="data/phones.js"></script>
-<script src="js/shared.js"></script>
+<div class="toast" id="toast"></div><script src="data/phones.js" defer></script>
+<script src="js/shared.js" defer></script>
 <script>
 
 function phoneCard(p) {
@@ -232,7 +232,7 @@ function phoneCard(p) {
   var errImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23f0f0f0'/%3E%3C/svg%3E";
   return '<a href="phones/'+p.id+'/" class="phone-card" style="text-decoration:none;color:inherit">'
     + '<div class="phone-card-img">'
-    + '<img src="'+img+'" alt="'+p.name+'" loading="lazy" onerror="this.src=\''+errImg+'\'">'
+    + '<img src="'+img+'" alt="'+p.name+'" width="600" height="800" loading="lazy" onerror="this.src=\''+errImg+'\'">'
     + badge
     + '</div>'
     + '<div class="phone-card-body">'
