@@ -3269,7 +3269,6 @@ phones: [
       review:"The Google Pixel 11 is the standard flagship model in Google's 2026 Pixel lineup. It uses the same Tensor G6 processor as the Pro models and includes 12GB of RAM with 256GB of base storage. A new telephoto camera, Qi2 magnetic charging, improved AI tools, Camera Looks, Magic Capture, and upgraded Gemini features make it a major step up for users who want flagship Pixel features at a lower price than the Pro models.",
       metaDesc:"Google Pixel 11 full specs, price and review. Tensor G6, 6.3-inch OLED display, triple camera, Qi2 charging and advanced Gemini AI features.",
       related:["google-pixel-11-pro","google-pixel-11-pro-xl","google-pixel-11a","google-pixel-10"]},
-    /*
       {id:"google-pixel-11-pro-fold",name:"Pixel 11 Pro Fold",fullName:"Google Pixel 11 Pro Fold",brand:"google",brandid:"google",year:2026,price:"$1,899",rating:4.8,
       image:"images/google-pixel-11-pro-fold.jpg",badge:"Ultimate Foldable",
       releaseDate:"August 20, 2026",
@@ -3281,7 +3280,6 @@ phones: [
       review:"The Google Pixel 11 Pro Fold is Google's most advanced foldable smartphone for 2026. It features a thinner and lighter design than its predecessor, a large 8.0-inch inner OLED display, a 6.5-inch cover screen, and both displays reaching up to 3600 nits of peak brightness. Powered by the Tensor G6 chipset and 16GB of RAM, it is designed for Gemini Intelligence, advanced multitasking, and AI-powered photography. The phone also introduces a new 48MP main camera, up to 30x Super Zoom, IP68 protection, faster 30W wired charging, and 25W Qi2.2 wireless charging. With Android 17 and seven years of software support, it is one of the most capable foldable phones in Google's lineup.",
       metaDesc:"Google Pixel 11 Pro Fold full specs, price and review. Tensor G6, 8-inch foldable OLED display, 48MP triple camera, IP68 protection and Qi2.2 charging.",
       related:["google-pixel-11-pro","google-pixel-11-pro-xl","samsung-galaxy-z-fold8","honor-magic-v6"]},
-    */
 
 ], 
 
