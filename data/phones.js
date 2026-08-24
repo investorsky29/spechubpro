@@ -3236,7 +3236,6 @@ phones: [
       review:"The Google Pixel 11a has not been officially announced. Reports and leaks suggest that Google's next affordable Pixel could use the Tensor G6 chipset, retain a 6.3-inch 1080p display, include 8GB of RAM, and receive a new front-facing camera. The phone is expected to launch around 2027, but Google has not confirmed its design, price, final specifications, or release date. All rumored specifications should therefore be treated as unconfirmed.",
       metaDesc:"Google Pixel 11a expected specs, price and release date. See the latest rumors about the Tensor G6 chip, 6.3-inch display, camera and battery.",
       related:["google-pixel-11-pro","google-pixel-10a","google-pixel-10","google-pixel-9a"]},
-    /*
     {id:"google-pixel-11-pro",name:"Pixel 11 Pro",fullName:"Google Pixel 11 Pro",brand:"google",brandid:"google",year:2026,price:"$1,099",rating:4.8,
       image:"images/google-pixel-11-pro.jpg",badge:"Pro AI Camera",
       releaseDate:"August 20, 2026",
@@ -3259,7 +3258,7 @@ phones: [
       review:"The Google Pixel 11 Pro XL is Google's largest premium flagship for 2026. It combines a 6.8-inch LTPO OLED display with the Tensor G6 processor, advanced Gemini-powered AI features, and an upgraded triple-camera system. The large model adds a 5115mAh battery and up to 120x Pro Res Zoom, making it ideal for users who want the biggest Pixel display and Google's most capable camera experience. Qi2 magnetic charging and seven years of software support further strengthen its flagship appeal.",
       metaDesc:"Google Pixel 11 Pro XL full specs, price and review. Tensor G6, 6.8-inch LTPO OLED display, 50MP triple camera, 5115mAh battery and AI features.",
       related:["google-pixel-11-pro","google-pixel-11","google-pixel-11-pro-fold","google-pixel-10-pro-xl"]},
-    {id:"google-pixel-11",name:"Pixel 11",fullName:"Google Pixel 11",brand:"google",brandid:"google",year:2026,price:"$899",rating:4.8,
+      {id:"google-pixel-11",name:"Pixel 11",fullName:"Google Pixel 11",brand:"google",brandid:"google",year:2026,price:"$899",rating:4.8,
       image:"images/google-pixel-11.jpg",badge:"Smart Flagship",
       releaseDate:"August 20, 2026",
       shortSpecs:["6.3\" OLED 120Hz","Google Tensor G6","48MP Triple Camera","Fast Charging"],
@@ -3270,7 +3269,8 @@ phones: [
       review:"The Google Pixel 11 is the standard flagship model in Google's 2026 Pixel lineup. It uses the same Tensor G6 processor as the Pro models and includes 12GB of RAM with 256GB of base storage. A new telephoto camera, Qi2 magnetic charging, improved AI tools, Camera Looks, Magic Capture, and upgraded Gemini features make it a major step up for users who want flagship Pixel features at a lower price than the Pro models.",
       metaDesc:"Google Pixel 11 full specs, price and review. Tensor G6, 6.3-inch OLED display, triple camera, Qi2 charging and advanced Gemini AI features.",
       related:["google-pixel-11-pro","google-pixel-11-pro-xl","google-pixel-11a","google-pixel-10"]},
-    {id:"google-pixel-11-pro-fold",name:"Pixel 11 Pro Fold",fullName:"Google Pixel 11 Pro Fold",brand:"google",brandid:"google",year:2026,price:"$1,899",rating:4.8,
+    /*
+      {id:"google-pixel-11-pro-fold",name:"Pixel 11 Pro Fold",fullName:"Google Pixel 11 Pro Fold",brand:"google",brandid:"google",year:2026,price:"$1,899",rating:4.8,
       image:"images/google-pixel-11-pro-fold.jpg",badge:"Ultimate Foldable",
       releaseDate:"August 20, 2026",
       shortSpecs:["8.0\" OLED 120Hz","Tensor G6","48MP Triple Camera","4750mAh"],
