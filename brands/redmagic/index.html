@@ -148,7 +148,14 @@ function setF(t,btn){af=t;document.querySelectorAll(".filter-btn").forEach(funct
 function render(){
   var s=document.getElementById("srt").value;
   var phones=PHONE_DB.phones.filter(function(p){return p.brand.toLowerCase()===BN.toLowerCase();});
-  if(af==="5g")phones=phones.filter(function(p){var n=p.specs&&p.specs.network?p.specs.network["5G"]||"":"";return n&&n!=="No"&&n!=="—";});
+  if(af==="5g") {
+  phones = phones.filter(function(p) {
+    var network = p.specs && p.specs.Network ? p.specs.Network : {};
+    var fiveG = String(network["5G"] || "").toLowerCase().trim();
+
+    return fiveG === "yes" || fiveG === "supported";
+  });
+}
   if(s==="rating")phones.sort(function(a,b){return b.rating-a.rating;});
   else if(s==="year")phones.sort(function(a,b){return b.year-a.year;});
   else if(s==="name")phones.sort(function(a,b){return a.name.localeCompare(b.name);});
