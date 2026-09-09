@@ -162,77 +162,324 @@
 <div class="toast" id="toast"></div><script src="../data/phones.js"></script>
 <script src="../js/shared.js"></script>
 <script>
-var PER_PAGE = 12, filteredPhones = [], curPage = 1, activeBrand = 'all';
+var PER_PAGE = 12;
+var filteredPhones = [];
+var curPage = 1;
+var activeBrand = 'all';
 
 function initFilters() {
   var brands = [];
-  PHONE_DB.phones.forEach(function(p){ if(brands.indexOf(p.brand) < 0) brands.push(p.brand); });
+
+  PHONE_DB.phones.forEach(function(p) {
+    if (brands.indexOf(p.brand) < 0) brands.push(p.brand);
+  });
+
   brands.sort();
+
   var h = '<button class="brand-filter-pill active" onclick="setBrand(\'all\',this)">All Brands</button>';
-  brands.forEach(function(b){ h += '<button class="brand-filter-pill" onclick="setBrand(\''+b+'\',this)">'+b+'</button>'; });
+
+  brands.forEach(function(b) {
+    h += '<button class="brand-filter-pill" onclick="setBrand(\'' + b + '\',this)">' + b + '</button>';
+  });
+
   document.getElementById('brandFilters').innerHTML = h;
 }
 
 function setBrand(brand, btn) {
   activeBrand = brand;
-  document.querySelectorAll('.brand-filter-pill').forEach(function(b){ b.classList.remove('active'); });
-  if(btn) btn.classList.add('active');
-  curPage = 1; runSearch();
+
+  document.querySelectorAll('.brand-filter-pill').forEach(function(b) {
+    b.classList.remove('active');
+  });
+
+  if (btn) btn.classList.add('active');
+
+  curPage = 1;
+  runSearch(false);
 }
 
 function phoneCard(p) {
   var ic = compareList.indexOf(p.id) >= 0;
-  var sp = p.shortSpecs.map(function(s){ return '<span class="spec-tag">'+s+'</span>'; }).join('');
-  var bd = p.badge ? '<span class="phone-badge">'+p.badge+'</span>' : '';
+
+  var sp = p.shortSpecs.map(function(s) {
+    return '<span class="spec-tag">' + s + '</span>';
+  }).join('');
+
+  var bd = p.badge
+    ? '<span class="phone-badge">' + p.badge + '</span>'
+    : '';
+
   var er = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23eee'/%3E%3C/svg%3E";
-  return '<a href="../phones/'+p.id+'/" class="phone-card" style="text-decoration:none;color:inherit">'
-    + '<div class="phone-card-img"><img src="'+resolveImg(p.image)+'" alt="'+p.name+'" loading="lazy" onerror="this.src=\''+er+'\'">'+bd+'</div>'
+
+  return '<a href="../phones/' + p.id + '/" class="phone-card" style="text-decoration:none;color:inherit">'
+    + '<div class="phone-card-img"><img src="' + resolveImg(p.image) + '" alt="' + p.name + '" loading="lazy" onerror="this.src=\'' + er + '\'">' + bd + '</div>'
     + '<div class="phone-card-body">'
-    + '<div class="phone-brand">'+p.brand+'</div>'
-    + '<div class="phone-name">'+p.name+'</div>'
-    + '<div class="phone-year">'+p.year+'</div>'
-    + '<div class="phone-specs-mini">'+sp+'</div>'
-    + '<div class="phone-card-footer"><div class="phone-rating"><i class="fas fa-star"></i> '+p.rating+'</div>'
+    + '<div class="phone-brand">' + p.brand + '</div>'
+    + '<div class="phone-name">' + p.name + '</div>'
+    + '<div class="phone-year">' + p.year + '</div>'
+    + '<div class="phone-specs-mini">' + sp + '</div>'
+    + '<div class="phone-card-footer"><div class="phone-rating"><i class="fas fa-star"></i> ' + p.rating + '</div>'
     + '<div style="display:flex;gap:6px;align-items:center">'
-    + '<button class="compare-toggle'+(ic?' active':'')+'" data-compare-id="'+p.id+'"'
-    + ' onclick="event.preventDefault();event.stopPropagation();toggleCompare(\''+p.id+'\',\''+p.name+'\',this)"'
+    + '<button class="compare-toggle' + (ic ? ' active' : '') + '" data-compare-id="' + p.id + '"'
+    + ' onclick="event.preventDefault();event.stopPropagation();toggleCompare(\'' + p.id + '\',\'' + p.name + '\',this)"'
     + ' title="Compare"><i class="fas fa-code-compare"></i></button>'
-    + '<span class="btn-specs">'+p.price+'</span></div></div></div></a>';
+    + '<span class="btn-specs">' + p.price + '</span></div></div></div></a>';
 }
 
-function runSearch() {
-  var q = (document.getElementById('mainSearch').value || '').toLowerCase();
+function runSearch(keepPage) {
+  var q = (document.getElementById('mainSearch').value || '').toLowerCase().trim();
   var sort = document.getElementById('sortSelect').value;
+
+  /*
+    Reset to page 1 whenever the search or sorting changes.
+    keepPage=true is used only when we want to keep the current page.
+  */
+  if (keepPage !== true) {
+    curPage = 1;
+  }
+
   var phones = PHONE_DB.phones.slice();
-  if(activeBrand !== 'all') phones = phones.filter(function(p){ return p.brand === activeBrand; });
-  if(q) phones = phones.filter(function(p){
-    return p.name.toLowerCase().indexOf(q) >= 0 || p.brand.toLowerCase().indexOf(q) >= 0
-      || p.shortSpecs.some(function(s){ return s.toLowerCase().indexOf(q) >= 0; });
-  });
-  if(sort === 'rating') phones.sort(function(a,b){ return b.rating - a.rating; });
-  else if(sort === 'year') phones.sort(function(a,b){ return b.year - a.year; });
-  else if(sort === 'name') phones.sort(function(a,b){ return a.name.localeCompare(b.name); });
-  else if(sort === 'price_low') phones.sort(function(a,b){ return parseFloat(a.price.replace(/[^0-9.]/g,'')) - parseFloat(b.price.replace(/[^0-9.]/g,'')); });
-  else phones.sort(function(a,b){ return parseFloat(b.price.replace(/[^0-9.]/g,'')) - parseFloat(a.price.replace(/[^0-9.]/g,'')); });
-  filteredPhones = phones; renderPage();
+
+  /* Brand filter */
+  if (activeBrand !== 'all') {
+    phones = phones.filter(function(p) {
+      return p.brand === activeBrand;
+    });
+  }
+
+  /* Search filter */
+  if (q) {
+    phones = phones.filter(function(p) {
+      return p.name.toLowerCase().indexOf(q) >= 0
+        || p.brand.toLowerCase().indexOf(q) >= 0
+        || (p.shortSpecs || []).some(function(s) {
+          return s.toLowerCase().indexOf(q) >= 0;
+        });
+    });
+  }
+
+  /* Sorting */
+  if (sort === 'rating') {
+    phones.sort(function(a, b) {
+      return b.rating - a.rating;
+    });
+
+  } else if (sort === 'year') {
+    phones.sort(function(a, b) {
+      return b.year - a.year;
+    });
+
+  } else if (sort === 'name') {
+    phones.sort(function(a, b) {
+      return a.name.localeCompare(b.name);
+    });
+
+  } else if (sort === 'price_low') {
+    phones.sort(function(a, b) {
+      return parseFloat(a.price.replace(/[^0-9.]/g, '')) -
+             parseFloat(b.price.replace(/[^0-9.]/g, ''));
+    });
+
+  } else if (sort === 'price_high') {
+    phones.sort(function(a, b) {
+      return parseFloat(b.price.replace(/[^0-9.]/g, '')) -
+             parseFloat(a.price.replace(/[^0-9.]/g, ''));
+    });
+  }
+
+  filteredPhones = phones;
+
+  /* Make sure current page is still valid */
+  var totalPages = Math.ceil(filteredPhones.length / PER_PAGE);
+
+  if (totalPages === 0) {
+    curPage = 1;
+  } else if (curPage > totalPages) {
+    curPage = totalPages;
+  }
+
+  renderPage();
+}
+
+function changePage(page) {
+  var totalPages = Math.ceil(filteredPhones.length / PER_PAGE);
+
+  if (page < 1 || page > totalPages || page === curPage) {
+    return;
+  }
+
+  curPage = page;
+
+  renderPage();
+
+  /* Scroll smoothly back to the search results */
+  var results = document.getElementById('searchResults');
+
+  if (results) {
+    var top = results.getBoundingClientRect().top + window.pageYOffset - 120;
+
+    window.scrollTo({
+      top: top,
+      behavior: 'smooth'
+    });
+  }
 }
 
 function renderPage() {
+  var totalPages = Math.ceil(filteredPhones.length / PER_PAGE);
+
+  /* Make sure page is valid */
+  if (totalPages > 0 && curPage > totalPages) {
+    curPage = totalPages;
+  }
+
+  if (totalPages === 0) {
+    curPage = 1;
+  }
+
   var start = (curPage - 1) * PER_PAGE;
   var slice = filteredPhones.slice(start, start + PER_PAGE);
-  document.getElementById('resultsCount').textContent = 'Showing ' + filteredPhones.length + ' phone' + (filteredPhones.length !== 1 ? 's' : '');
-  document.getElementById('searchResults').innerHTML = slice.map(phoneCard).join('')
-    || '<p style="color:var(--text3);text-align:center;grid-column:1/-1;padding:60px 20px"><i class="fas fa-search" style="font-size:2rem;display:block;margin-bottom:10px;opacity:.4"></i>No phones found. Try a different search.</p>';
-  var pages = Math.ceil(filteredPhones.length / PER_PAGE), pag = '';
-  for(var i = 1; i <= pages; i++) pag += '<button class="page-btn'+(curPage===i?' active':'')+'" onclick="curPage='+i+';renderPage()">'+i+'</button>';
-  document.getElementById('searchPagination').innerHTML = pages > 1 ? pag : '';
+
+  /* Results count */
+  if (filteredPhones.length === 0) {
+    document.getElementById('resultsCount').textContent = 'No phones found';
+  } else {
+    var showingFrom = start + 1;
+    var showingTo = Math.min(start + PER_PAGE, filteredPhones.length);
+
+    document.getElementById('resultsCount').textContent =
+      'Showing ' + showingFrom + '–' + showingTo +
+      ' of ' + filteredPhones.length + ' phone' +
+      (filteredPhones.length !== 1 ? 's' : '');
+  }
+
+  /* Phone cards */
+  document.getElementById('searchResults').innerHTML =
+    slice.map(phoneCard).join('')
+    ||
+    '<p style="color:var(--text3);text-align:center;grid-column:1/-1;padding:60px 20px">'
+    + '<i class="fas fa-search" style="font-size:2rem;display:block;margin-bottom:10px;opacity:.4"></i>'
+    + 'No phones found. Try a different search.'
+    + '</p>';
+
+  /* Pagination */
+  renderPagination(totalPages);
 }
 
+function renderPagination(totalPages) {
+  var container = document.getElementById('searchPagination');
+
+  if (totalPages <= 1) {
+    container.innerHTML = '';
+    return;
+  }
+
+  var pag = '';
+
+  /* Previous button */
+  pag += '<button class="page-btn pagination-prev"'
+    + (curPage === 1 ? ' disabled' : '')
+    + ' onclick="changePage(' + (curPage - 1) + ')"'
+    + ' aria-label="Previous page">'
+    + '<i class="fas fa-chevron-left"></i>'
+    + '<span>Previous</span>'
+    + '</button>';
+
+  /*
+    Create smart page numbers.
+
+    Example with many pages:
+
+    Previous  1  2  3  ...  8  9  10  Next
+  */
+
+  var pages = [];
+
+  if (totalPages <= 7) {
+
+    /* Show every page */
+    for (var i = 1; i <= totalPages; i++) {
+      pages.push(i);
+    }
+
+  } else {
+
+    /* Always show first page */
+    pages.push(1);
+
+    if (curPage <= 4) {
+
+      pages.push(2);
+      pages.push(3);
+      pages.push(4);
+      pages.push(5);
+      pages.push('dots');
+      pages.push(totalPages);
+
+    } else if (curPage >= totalPages - 3) {
+
+      pages.push('dots');
+      pages.push(totalPages - 4);
+      pages.push(totalPages - 3);
+      pages.push(totalPages - 2);
+      pages.push(totalPages - 1);
+      pages.push(totalPages);
+
+    } else {
+
+      pages.push('dots');
+      pages.push(curPage - 1);
+      pages.push(curPage);
+      pages.push(curPage + 1);
+      pages.push('dots');
+      pages.push(totalPages);
+    }
+  }
+
+  /* Page number buttons */
+  pages.forEach(function(page) {
+
+    if (page === 'dots') {
+
+      pag += '<span class="page-dots">...</span>';
+
+    } else {
+
+      pag += '<button class="page-btn'
+        + (curPage === page ? ' active' : '')
+        + '"'
+        + ' onclick="changePage(' + page + ')"'
+        + ' aria-label="Page ' + page + '"'
+        + (curPage === page ? ' aria-current="page"' : '')
+        + '>'
+        + page
+        + '</button>';
+    }
+  });
+
+  /* Next button */
+  pag += '<button class="page-btn pagination-next"'
+    + (curPage === totalPages ? ' disabled' : '')
+    + ' onclick="changePage(' + (curPage + 1) + ')"'
+    + ' aria-label="Next page">'
+    + '<span>Next</span>'
+    + '<i class="fas fa-chevron-right"></i>'
+    + '</button>';
+
+  container.innerHTML = pag;
+}
+
+/* Initialize page */
 document.addEventListener('DOMContentLoaded', function() {
   initFilters();
+
   var urlQ = new URLSearchParams(window.location.search).get('q');
-  if(urlQ) document.getElementById('mainSearch').value = urlQ;
-  runSearch();
+
+  if (urlQ) {
+    document.getElementById('mainSearch').value = urlQ;
+  }
+
+  runSearch(true);
 });
 
 </script>
