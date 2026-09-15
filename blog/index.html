@@ -395,12 +395,29 @@ function filterCat(cat, btn) {
 }
 document.addEventListener('DOMContentLoaded', function(){
   var er = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23eee'/%3E%3C/svg%3E";
-  var top = PHONE_DB.phones.slice().sort(function(a,b){ return b.rating-a.rating; }).slice(0,4);
+
+  var top = PHONE_DB.phones.slice()
+    .sort(function(a,b){
+      return b.rating - a.rating;
+    })
+    .slice(0,4);
+
   document.getElementById('sidebarTopPhones').innerHTML = top.map(function(p){
-return `<div class="sidebar-phone-item" onclick="location.href='/phones/${p.id}/'" style="cursor:pointer">`;
-      +'<div class="sidebar-phone-thumb"><img src="'+resolveImg(p.image)+'" alt="'+p.name+'" onerror="this.src=\''+er+'\'"></div>'
-      +'<div><div class="sidebar-phone-name">'+p.name+'</div>'
-      +'<div class="sidebar-phone-price">'+p.price+' &middot; <span style="color:#F59E0B"><i class="fas fa-star"></i></span> '+p.rating+'</div></div></div>';
+
+    return '<div class="sidebar-phone-item" onclick="location.href=\'/phones/'+p.id+'/\';" style="cursor:pointer">'
+      + '<div class="sidebar-phone-thumb">'
+      + '<img src="'+resolveImg(p.image)+'" alt="'+p.name+'" onerror="this.src=\''+er+'\'">'
+      + '</div>'
+      + '<div>'
+      + '<div class="sidebar-phone-name">'+p.name+'</div>'
+      + '<div class="sidebar-phone-price">'
+      + p.price
+      + ' &middot; <span style="color:#F59E0B"><i class="fas fa-star"></i></span> '
+      + p.rating
+      + '</div>'
+      + '</div>'
+      + '</div>';
+
   }).join('');
 });
 </script>
