@@ -399,10 +399,16 @@ h4 { font-size: 1rem; font-weight: 600; }
 /* ═══════════════════════════════════════════════════════
    AD SPACES
 ═══════════════════════════════════════════════════════ */
-.ad-banner { background: var(--surface2); border: 1px dashed var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text3); font-size: .72rem; text-align: center; min-height: 90px; }
+.ad-banner { background: var(--surface2); border: 1px dashed var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text3); font-size: .72rem; text-align: center; min-height: 90px; display: none !important; }
 .ad-banner.leaderboard { min-height: 90px; }
 .ad-banner.medium-rect { min-height: 250px; min-width: 280px; }
 .ad-banner.sidebar-ad { min-height: 580px; }
+
+/* Hide all advertisement blocks */
+.ad-banner,
+.sidebar-widget:has(.ad-banner) {
+    display: none !important;
+}
 
 /* ═══════════════════════════════════════════════════════
    BREADCRUMB
