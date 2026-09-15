@@ -258,14 +258,11 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('featuredPhones').innerHTML = featured.map(phoneCard).join('');
 
   // Latest
-  var latest = phones.slice().sort(function(a, b) {
-  var dateA = a.releaseDate ? new Date(a.releaseDate) : new Date(a.year + "-01-01");
-  var dateB = b.releaseDate ? new Date(b.releaseDate) : new Date(b.year + "-01-01");
+var latest = phones.slice().sort(function(a,b){
+  return new Date(b.releaseDate) - new Date(a.releaseDate);
+}).slice(0,6);
 
-  return dateB - dateA;
-  }).slice(0, 6);
-
-  document.getElementById('latestPhones').innerHTML = latest.map(phoneCard).join('');
+document.getElementById('latestPhones').innerHTML = latest.map(phoneCard).join('');
 
   // Brands
   document.getElementById('brandsGrid').innerHTML = brands.map(function(b) {
