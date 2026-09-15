@@ -277,8 +277,43 @@ document.getElementById('latestPhones').innerHTML = latest.map(phoneCard).join('
   var pop = phones.slice().sort(function(){return Math.random()-.5;}).slice(0,6);
   document.getElementById('popularPhones').innerHTML = pop.map(phoneCard).join('');
 
+  
   // Compare teasers
-  var pairs = [[phones[0],phones[1]],[phones[2],phones[4]]];
+
+  // Smart random Compare teasers
+  var comparePool = phones.slice().filter(function(p){
+  return p && p.id && p.image;
+  });
+
+  // Give newer + higher-rated phones a better chance
+  comparePool.sort(function(a,b){
+  var scoreA = (Number(a.rating) || 0) * 3 + (Number(a.year) || 0);
+  var scoreB = (Number(b.rating) || 0) * 3 + (Number(b.year) || 0);
+  return scoreB - scoreA;
+  });
+
+  // Keep the best phones, then shuffle them
+  comparePool = comparePool.slice(0, Math.min(40, comparePool.length));
+
+  comparePool.sort(function(){
+  return Math.random() - 0.5;
+  });
+
+// Create two comparisons using different brands where possible
+var pairs = [];
+
+for(var i = 0; i < comparePool.length && pairs.length < 2; i++){
+  var a = comparePool[i];
+
+  for(var j = i + 1; j < comparePool.length; j++){
+    var b = comparePool[j];
+
+    if(a.brand.toLowerCase() !== b.brand.toLowerCase()){
+      pairs.push([a,b]);
+      break;
+    }
+  }
+}
   document.getElementById('compareTeasers').innerHTML = pairs.map(function(pair) {
     var a = pair[0], b = pair[1];
     return '<a href="compare/?phones='+a.id+','+b.id+'" class="phone-card" style="text-decoration:none;color:inherit">'
