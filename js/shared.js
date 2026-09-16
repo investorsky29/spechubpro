@@ -64,32 +64,224 @@ function closeMobileNav() {
 function liveSearch(q, dropId) {
   const drop = document.getElementById(dropId || 'searchDropdown');
   if (!drop) return;
-  if (!q || q.length < 2) { drop.style.display = 'none'; return; }
+
+  q = q.trim();
+
+  if (!q || q.length < 2) {
+    drop.style.display = 'none';
+    return;
+  }
+
   if (typeof PHONE_DB === 'undefined') return;
 
-  const results = PHONE_DB.phones
+  const query = q.toLowerCase();
+
+  /* ── PHONE RESULTS ── */
+  const phoneResults = PHONE_DB.phones
     .filter(p =>
-      p.name.toLowerCase().includes(q.toLowerCase()) ||
-      p.brand.toLowerCase().includes(q.toLowerCase())
+      p.name.toLowerCase().includes(query) ||
+      p.brand.toLowerCase().includes(query)
     )
-    .slice(0, 7);
+    .slice(0, 5);
 
-  if (!results.length) { drop.style.display = 'none'; return; }
 
-  // NOTE: Clean slash URLs — /phones/{id}/ — no .html
-  drop.innerHTML = results.map(p => `
-    <a href="${SITE_BASE}/phones/${p.id}/" class="search-drop-item" style="text-decoration:none;color:inherit">
-      <div class="search-drop-thumb">
-        <img src="${resolveImg(p.image)}" alt="${p.name}"
-          onerror="this.parentElement.innerHTML='<i class=\'fas fa-mobile-alt\' style=\'color:var(--text3)\'></i>'">
-      </div>
-      <div>
-        <div class="search-drop-name">${p.name}</div>
-        <div class="search-drop-meta">${p.brand} &middot; ${p.price}</div>
-      </div>
-    </a>`).join('');
+  /* ── BLOG RESULTS ── */
+  let blogResults = [];
 
-  drop.style.display = 'block';
+  /*
+     Read blog cards from the Blog page.
+     Blog posts are stored directly in HTML, so we fetch
+     /blog/ and read the existing .blog-card elements.
+  */
+  fetch(SITE_BASE + '/blog/')
+    .then(response => {
+      if (!response.ok) throw new Error('Blog page could not be loaded');
+      return response.text();
+    })
+    .then(html => {
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      const cards = Array.from(doc.querySelectorAll('.blog-card'));
+
+      blogResults = cards
+        .map(card => {
+
+          const titleLink = card.querySelector('h3 a');
+          const excerpt = card.querySelector('.blog-excerpt');
+          const category = card.querySelector('.blog-category');
+
+          if (!titleLink) return null;
+
+          const title = titleLink.textContent.trim();
+          const description = excerpt
+            ? excerpt.textContent.trim()
+            : '';
+
+          const cat = category
+            ? category.textContent.trim()
+            : 'Blog';
+
+          const searchText =
+            (title + ' ' + description + ' ' + cat).toLowerCase();
+
+          if (!searchText.includes(query)) return null;
+
+          return {
+            title: title,
+            url: titleLink.getAttribute('href'),
+            category: cat,
+            excerpt: description
+          };
+
+        })
+        .filter(Boolean)
+        .slice(0, 5);
+
+
+      /* ── BUILD DROPDOWN ── */
+
+      let output = '';
+
+      /* Phones */
+      if (phoneResults.length) {
+
+        output += `
+          <div style="padding:8px 10px 5px;
+                      font-size:.7rem;
+                      font-weight:800;
+                      color:var(--text3);
+                      text-transform:uppercase">
+            Phones
+          </div>
+        `;
+
+        output += phoneResults.map(p => `
+          <a href="${SITE_BASE}/phones/${p.id}/"
+             class="search-drop-item"
+             style="text-decoration:none;color:inherit">
+
+            <div class="search-drop-thumb">
+              <img src="${resolveImg(p.image)}"
+                   alt="${p.name}"
+                   onerror="this.parentElement.innerHTML='<i class=\\'fas fa-mobile-alt\\' style=\\'color:var(--text3)\\'></i>'">
+            </div>
+
+            <div>
+              <div class="search-drop-name">${p.name}</div>
+              <div class="search-drop-meta">
+                ${p.brand} &middot; ${p.price}
+              </div>
+            </div>
+
+          </a>
+        `).join('');
+      }
+
+
+      /* Blog posts */
+      if (blogResults.length) {
+
+        output += `
+          <div style="padding:10px 10px 5px;
+                      font-size:.7rem;
+                      font-weight:800;
+                      color:var(--text3);
+                      text-transform:uppercase">
+            Blog Posts
+          </div>
+        `;
+
+        output += blogResults.map(b => {
+
+          /*
+             Blog links are already written in your HTML.
+             Convert relative links to absolute SpecHub links.
+          */
+          let blogUrl = b.url;
+
+          if (blogUrl && !blogUrl.startsWith('http')) {
+
+            if (blogUrl.startsWith('../')) {
+              blogUrl = blogUrl.replace(/^(\.\.\/)+/, '');
+            }
+
+            blogUrl = SITE_BASE + '/' + blogUrl.replace(/^\/+/, '');
+          }
+
+          return `
+            <a href="${blogUrl}"
+               class="search-drop-item"
+               style="text-decoration:none;color:inherit">
+
+              <div class="search-drop-thumb"
+                   style="display:flex;align-items:center;justify-content:center">
+                <i class="fas fa-newspaper"
+                   style="font-size:1.1rem;color:var(--primary)"></i>
+              </div>
+
+              <div>
+                <div class="search-drop-name">${b.title}</div>
+                <div class="search-drop-meta">
+                  ${b.category}
+                </div>
+              </div>
+
+            </a>
+          `;
+
+        }).join('');
+      }
+
+
+      /* Nothing found */
+      if (!output) {
+        drop.style.display = 'none';
+        return;
+      }
+
+
+      drop.innerHTML = output;
+      drop.style.display = 'block';
+
+    })
+    .catch(() => {
+
+      /*
+         If the Blog page cannot be loaded, still show
+         the phone results normally.
+      */
+
+      if (!phoneResults.length) {
+        drop.style.display = 'none';
+        return;
+      }
+
+      drop.innerHTML = `
+        ${phoneResults.map(p => `
+          <a href="${SITE_BASE}/phones/${p.id}/"
+             class="search-drop-item"
+             style="text-decoration:none;color:inherit">
+
+            <div class="search-drop-thumb">
+              <img src="${resolveImg(p.image)}"
+                   alt="${p.name}">
+            </div>
+
+            <div>
+              <div class="search-drop-name">${p.name}</div>
+              <div class="search-drop-meta">
+                ${p.brand} &middot; ${p.price}
+              </div>
+            </div>
+
+          </a>
+        `).join('')}
+      `;
+
+      drop.style.display = 'block';
+    });
 }
 
 /* Close dropdowns on outside click */
@@ -107,8 +299,11 @@ function goSearch() {
   const input = document.getElementById('heroSearch') ||
                 document.getElementById('navSearch') ||
                 document.querySelector('.mobile-nav-search input');
+
   const q = input ? input.value.trim() : '';
-  window.location.href = SITE_BASE + '/search/' + (q ? '?q=' + encodeURIComponent(q) : '');
+
+  window.location.href = SITE_BASE + '/search/' +
+    (q ? '?q=' + encodeURIComponent(q) : '');
 }
 
 /* ── TOAST ── */
