@@ -598,3 +598,24 @@ textarea.form-input { resize: vertical; min-height: 120px; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
   .stats-cards { grid-template-columns: 1fr 1fr; }
 }
+
+/* ── BLOG POST FOOTER SPACE FIX ── */
+
+.blog-post-layout {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    align-items: start !important;
+}
+
+.blog-post-layout > aside {
+    align-self: start !important;
+}
+
+.blog-post-layout > aside .sidebar-widget:has(.ad-banner) {
+    display: none !important;
+}
+
+.blog-post-body {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
