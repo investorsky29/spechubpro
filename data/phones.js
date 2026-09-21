@@ -3401,7 +3401,6 @@ phones: [
       metaDesc:"Apple iPhone 18 Pro full specs, price and review. A20 Pro chip, 6.3-inch 120Hz OLED, 48MP triple camera, Wi-Fi 7 and up to 2TB storage.",
       related:["iphone-18-pro-max","iphone-duo","iphone-17-pro","iphone-17-pro-max"]},
     
-  /*
     {id:"vivo-x300",name:"X300",fullName:"vivo X300",brand:"vivo",brandid:"vivo",year:2025,price:"$649",rating:4.8,
       image:"images/vivo-x300.jpg",badge:"Camera Flagship",
       releaseDate:"October 2025",
@@ -3413,7 +3412,6 @@ phones: [
       review:"The vivo X300 is a compact flagship smartphone built around MediaTek's Dimensity 9500 processor and a 6.31-inch LTPO AMOLED display with a 120Hz adaptive refresh rate. Its camera system includes a 200MP ZEISS main camera, 50MP ZEISS APO telephoto camera and 50MP ultrawide camera. The phone also features a 6040mAh battery, 90W wired charging, 40W wireless charging, IP68/IP69 protection and fast UFS 4.1 storage.",
       metaDesc:"vivo X300 full specs, price and review. 6.31-inch 120Hz AMOLED, Dimensity 9500, 200MP ZEISS camera, 6040mAh battery and 90W charging.",
       related:["vivo-x300-pro","vivo-x200-pro","vivo-x200-ultra","iqoo-15"]},
-    */
     {id:"xiaomi-17",name:"Xiaomi 17",fullName:"Xiaomi 17",brand:"xiaomi",brandid:"xiaomi",year:2026,price:"$899",rating:4.8,
       image:"images/xiaomi-17.jpg",badge:"Compact Flagship",
       releaseDate:"February 28, 2026",
@@ -3448,9 +3446,55 @@ phones: [
       metaDesc:"vivo X300 Pro full specs, price and review. Dimensity 9500, 6.78-inch 120Hz AMOLED, 200MP periscope camera, 6510mAh battery and 90W charging.",
       related:["vivo-x300","xiaomi-17","xiaomi-17","vivo-x-fold-6"]},
 
+    /*
+      {id:"redmi-note-17-pro-max",name:"Redmi Note 17 Pro Max",fullName:"Xiaomi Redmi Note 17 Pro Max 5G",brand:"xiaomi",brandid:"xiaomi",year:2026,price:"₦812,500",rating:4.5,
+      image:"images/redmi-note-17-pro-max.jpg",badge:"Battery Beast",
+      releaseDate:"August 27, 2026",
+      shortSpecs:["6.83\" AMOLED 120Hz","Snapdragon 6 Gen 5","50MP OIS Dual Camera","10,000mAh"],
+      colors:["Black","Purple","Cloud Blush","Green"],
+      pros:["Huge 10,000mAh silicon-carbon battery","100W HyperCharge","6.83-inch 1.5K AMOLED display","120Hz refresh rate","3500 nits peak brightness","Dolby Vision and HDR10+","50MP OIS main camera","32MP 4K selfie camera","IP68/IP69 protection depending on market","UFS 4.1 storage","27W wired reverse charging","Dual speakers with Dolby Atmos"],
+      cons:["Snapdragon 6 Gen 5 is mid-range performance","No telephoto camera","Only 8MP ultrawide camera","No microSD card slot","Large and heavy design","No 3.5mm headphone jack","Battery capacity varies by region"],
+      specs:{"Network":{"Technology":"GSM / HSPA / LTE / 5G","5G":"Yes"},"Body":{"Dimensions":"163.44 x 78.27 x 8.65 mm","Weight":"225.1-229.5 g depending on region","Build":"Glass front, aluminum frame","SIM":"Dual Nano-SIM / Nano-SIM + eSIM / eSIM + eSIM depending on region","Protection":"IP68/IP69 depending on market"},"Display":{"Size":"6.83 inches","Resolution":"2772 x 1280 pixels","Type":"AMOLED","Refresh Rate":"Up to 120Hz","Brightness":"3500 nits UHBM, 2000 nits HBM, 1060 nits typical","Protection":"Corning Gorilla Glass Victus 2","HDR":"HDR10+ / Dolby Vision"},"Platform":{"OS":"Android 16, Xiaomi HyperOS 3","Chipset":"Qualcomm Snapdragon 6 Gen 5 (4nm)","CPU":"Octa-core, up to 2.6GHz","GPU":"Adreno GPU"},"Memory":{"RAM":"8GB / 12GB","Storage":"128GB / 256GB / 512GB","Card Slot":"No","Storage Type":"UFS 4.1 / UFS 2.2 depending on storage configuration"},"Camera":{"Main":"50 MP, OIS, f/1.5, 6P lens","Telephoto":"No","Ultrawide":"8 MP, f/2.2","Front":"32 MP, f/2.2"},"Battery":{"Capacity":"10,000 mAh typical (9,210 mAh in some regions)","Wired Charging":"100W HyperCharge","Wireless":"No","Reverse Charging":"27W wired reverse charging"},"Connectivity":{"Wi-Fi":"Wi-Fi 6","Bluetooth":"6.0","NFC":"Yes","USB":"USB Type-C","Fingerprint":"Optical In-display","Speakers":"Dual Speakers, Dolby Atmos","HeadphoneJack":"No"}},
+      review:"The Xiaomi Redmi Note 17 Pro Max is a 2026 Redmi smartphone focused heavily on battery life, display quality and fast charging. It features a 6.83-inch 1.5K AMOLED display with a 120Hz refresh rate and up to 3500 nits peak brightness, while the Snapdragon 6 Gen 5 provides mid-range performance. The rear camera system combines a 50MP OIS main camera with an 8MP ultrawide camera, while a 32MP front camera supports 4K video recording. Its standout feature is the large silicon-carbon battery, rated at 10,000mAh in some markets and 9,210mAh in others, with 100W HyperCharge and 27W wired reverse charging.",
+      metaDesc:"Redmi Note 17 Pro Max full specs, price and review. 6.83-inch 120Hz AMOLED, Snapdragon 6 Gen 5, 50MP OIS camera, 10,000mAh battery and 100W charging.",
+      related:["redmi-note-17-pro","redmi-note-17","redmi-note-15-pro-plus","redmi-note-16-pro-plus"]},
+      {id:"honor-magic8-lite",name:"Magic8 Lite",fullName:"HONOR Magic8 Lite",brand:"honor",brandid:"honor",year:2025,price:"$438",rating:4.3,
+      image:"images/honor-magic8-lite.jpg",badge:"Battery Champion",
+      releaseDate:"December 8, 2025",
+      shortSpecs:["6.79\" AMOLED 120Hz","Snapdragon 6 Gen 4","108MP OIS Dual Camera","7500mAh"],
+      colors:["Midnight Black","Forest Green","Reddish Brown"],
+      pros:["Huge 7500mAh silicon-carbon battery","66W fast charging","120Hz AMOLED display","6000 nits peak brightness","108MP OIS main camera","IP69 protection","Stereo speakers","Expandable-style large storage options","Slim 7.76mm body","Strong durability certifications"],
+      cons:["Snapdragon 6 Gen 4 is mid-range","No telephoto camera","Only 5MP ultrawide camera","No microSD card slot","No 3.5mm headphone jack","Android 15 at launch"],
+      specs:{"Network":{"Technology":"GSM / HSPA / LTE / 5G","5G":"Yes"},"Body":{"Dimensions":"161.9 x 76.1 x 7.76 mm","Weight":"189 g","Build":"Plastic frame and back","SIM":"Dual Nano-SIM / Nano-SIM + eSIM","Protection":"IP66/IP68/IP69/IP69K"},"Display":{"Size":"6.79 inches","Resolution":"2640 x 1200 pixels","Type":"AMOLED","Refresh Rate":"120Hz","Brightness":"6000 nits peak","Protection":"Not officially specified","HDR":"Yes"},"Platform":{"OS":"Android 15, MagicOS 9.0","Chipset":"Qualcomm Snapdragon 6 Gen 4 (4nm)","CPU":"Octa-core, up to 2.3GHz","GPU":"Adreno 810"},"Memory":{"RAM":"8GB","Storage":"256GB / 512GB","Card Slot":"No","Storage Type":"Not officially specified"},"Camera":{"Main":"108 MP, OIS, f/1.75, PDAF","Telephoto":"No","Ultrawide":"5 MP, f/2.2","Front":"16 MP, f/2.45"},"Battery":{"Capacity":"7500 mAh","Wired Charging":"66W","Wireless":"No","Reverse Charging":"Wired reverse charging"},"Connectivity":{"Wi-Fi":"Wi-Fi 6","Bluetooth":"5.2","NFC":"Yes","USB":"USB Type-C 2.0","Fingerprint":"Optical Under-display","Speakers":"Stereo Speakers","HeadphoneJack":"No"}},
+      review:"The HONOR Magic8 Lite is a mid-range smartphone focused on battery life, durability and display quality. It features a 6.79-inch 120Hz AMOLED display with up to 6000 nits peak brightness, Snapdragon 6 Gen 4 performance and a large 7500mAh silicon-carbon battery with 66W wired charging. Its rear camera setup combines a 108MP OIS main camera with a 5MP ultrawide camera, while the 16MP front camera handles selfies and video calls. The phone also offers strong water and dust resistance with IP66, IP68, IP69 and IP69K ratings.",
+      metaDesc:"HONOR Magic8 Lite full specs, price and review. 6.79-inch 120Hz AMOLED, Snapdragon 6 Gen 4, 108MP OIS camera, 7500mAh battery and 66W charging.",
+      related:["honor-magic7-lite","honor-400","honor-400-pro","redmi-note-17-pro-max"]},
+      {id:"poco-f9-ultra",name:"F9 Ultra",fullName:"POCO F9 Ultra 5G",brand:"poco",brandid:"poco",year:2026,price:"$799",rating:4.8,
+      image:"images/poco-f9-ultra.jpg",badge:"Ultra Performance",
+      releaseDate:"September 2026",
+      shortSpecs:["6.9\" HyperRGB AMOLED 185Hz","Snapdragon 8 Elite Gen 5","200MP Triple Camera","8050mAh"],
+      colors:["Black","Dark Cherry"],
+      pros:["Snapdragon 8 Elite Gen 5 performance","185Hz AMOLED display","200MP OIS main camera","50MP 5x periscope telephoto","50MP ultrawide camera","Huge 8050mAh battery","100W wired charging","50W wireless charging","27W wired reverse charging","22.5W wireless reverse charging","Wi-Fi 7","IP68 water resistance","Bose-tuned 2.1-channel speakers","UFS 4.1 storage"],
+      cons:["Large and heavy design","No microSD card slot","No 3.5mm headphone jack","Only two color options","US availability varies by seller","185Hz refresh rate is mainly useful in supported games"],
+      specs:{"Network":{"Technology":"GSM / HSPA / LTE / 5G","5G":"Yes"},"Body":{"Dimensions":"163.49 x 77.94 x 8.74 mm","Weight":"235 g","Build":"Glass front, fiberglass back, metal frame","SIM":"Dual Nano-SIM / Nano-SIM + eSIM / eSIM + eSIM depending on market","Protection":"IP68 dust and water resistant"},"Display":{"Size":"6.9 inches","Resolution":"2608 x 1200 pixels","Type":"HyperRGB AMOLED","Refresh Rate":"Up to 185Hz","Brightness":"10000 nits peak / 4500 nits multi-scenario peak / 2200 nits HBM","Protection":"Corning Gorilla Glass 7i","HDR":"HDR10+ / Dolby Vision"},"Platform":{"OS":"Android 16, Xiaomi HyperOS 3","Chipset":"Qualcomm Snapdragon 8 Elite Gen 5 (3nm)","CPU":"Octa-core, up to 4.6GHz","GPU":"Adreno GPU"},"Memory":{"RAM":"12GB / 16GB","Storage":"256GB / 512GB / 1TB","Card Slot":"No","Storage Type":"UFS 4.1"},"Camera":{"Main":"200 MP, f/1.68, OIS, 6P lens","Telephoto":"50 MP periscope, f/3.0, 120mm equivalent, OIS, 5x optical zoom","Ultrawide":"50 MP, f/2.4","Front":"32 MP"},"Battery":{"Capacity":"8050 mAh","Wired Charging":"100W HyperCharge","Wireless":"50W HyperCharge","Reverse Charging":"27W wired / 22.5W wireless"},"Connectivity":{"Wi-Fi":"Wi-Fi 7","Bluetooth":"6.0","NFC":"Yes","USB":"USB Type-C 3.2 Gen 1","Fingerprint":"Ultrasonic Under-display","Speakers":"2.1-channel stereo speakers with independent subwoofer, Sound by Bose","HeadphoneJack":"No"}},
+      review:"The POCO F9 Ultra is a 2026 flagship-performance smartphone built around Qualcomm's Snapdragon 8 Elite Gen 5 and a 6.9-inch HyperRGB AMOLED display with an ultra-high 185Hz refresh rate. Its camera system features a 200MP OIS main camera, 50MP 5x periscope telephoto and 50MP ultrawide camera. The phone also packs an 8050mAh battery with 100W wired and 50W wireless charging. Gaming-focused features include the VisionBoost D8 graphics chipset, 4800Hz instant touch sampling, 3D IceLoop cooling and up to 185FPS gaming support. It also features a Bose-tuned 2.1-channel speaker system with a dedicated subwoofer.",
+      metaDesc:"POCO F9 Ultra full specs, price and review. 6.9-inch 185Hz AMOLED, Snapdragon 8 Elite Gen 5, 200MP camera, 8050mAh battery and 100W charging.",
+      related:["poco-f9-pro","poco-f8-ultra","xiaomi-17-ultra","redmi-note-17-pro-max"]},
+      {id:"poco-f9-pro",name:"F9 Pro",fullName:"POCO F9 Pro 5G",brand:"poco",brandid:"poco",year:2026,price:"$649",rating:4.7,
+      image:"images/poco-f9-pro.jpg",badge:"Performance Flagship",
+      releaseDate:"September 2026",
+      shortSpecs:["6.59\" AMOLED 185Hz","Snapdragon 8 Elite Gen 5","200MP OIS Triple Camera","6330mAh"],
+      colors:["Black","Blue","White"],
+      pros:["Snapdragon 8 Elite Gen 5 performance","185Hz AMOLED display","200MP OIS main camera","50MP floating telephoto with OIS","100W wired charging","50W wireless charging","6330mAh battery","4800Hz instant touch sampling","VisionBoost D8 graphics chipset","Wi-Fi 7","IP68 protection","Ultrasonic fingerprint sensor","Bose-tuned stereo speakers"],
+      cons:["8MP ultrawide camera is relatively basic","No microSD card slot","No 3.5mm headphone jack","Large camera module","185Hz refresh rate is mainly useful for supported games"],
+      specs:{"Network":{"Technology":"GSM / HSPA / LTE / 5G","5G":"Yes"},"Body":{"Dimensions":"157.49 x 75.25 x 8.79 mm","Weight":"206 g","Build":"Glass front, fiberglass back, metal frame","SIM":"Dual Nano-SIM / Nano-SIM + eSIM / eSIM + eSIM depending on market","Protection":"IP68 dust and water resistant"},"Display":{"Size":"6.59 inches","Resolution":"2510 x 1156 pixels","Type":"HyperRGB AMOLED","Refresh Rate":"Up to 185Hz","Brightness":"10000 nits peak","Protection":"Corning Gorilla Glass 7i","HDR":"HDR10+ / Dolby Vision"},"Platform":{"OS":"Android 16, Xiaomi HyperOS 3","Chipset":"Qualcomm Snapdragon 8 Elite Gen 5 V Series (3nm)","CPU":"Octa-core, up to 4.6GHz","GPU":"Adreno GPU"},"Memory":{"RAM":"12GB","Storage":"256GB / 512GB","Card Slot":"No","Storage Type":"UFS 4.1"},"Camera":{"Main":"200 MP, OIS, f/1.68, 6P lens","Telephoto":"50 MP floating telephoto, OIS, 60mm equivalent","Ultrawide":"8 MP, f/2.25","Front":"32 MP"},"Battery":{"Capacity":"6330 mAh","Wired Charging":"100W HyperCharge","Wireless":"50W HyperCharge","Reverse Charging":"27W wired / 22.5W wireless"},"Connectivity":{"Wi-Fi":"Wi-Fi 7","Bluetooth":"6.0","NFC":"Yes","USB":"USB Type-C","Fingerprint":"Ultrasonic Under-display","Speakers":"Symmetrical Stereo Speakers, Dolby Atmos, Sound by Bose","HeadphoneJack":"No"}},
+      review:"The POCO F9 Pro is a 2026 performance-focused flagship powered by the Snapdragon 8 Elite Gen 5 V Series. It combines a 6.59-inch 185Hz HyperRGB AMOLED display with a 200MP OIS main camera, 50MP floating telephoto and 8MP ultrawide camera. Its 6330mAh battery supports 100W wired and 50W wireless HyperCharge, while the VisionBoost D8 graphics chipset, 4800Hz instant touch sampling and 185Hz refresh rate target demanding gaming. The phone also includes IP68 protection, Wi-Fi 7, UFS 4.1 storage and Bose-tuned stereo speakers.",
+      metaDesc:"POCO F9 Pro full specs, price and review. 6.59-inch 185Hz AMOLED, Snapdragon 8 Elite Gen 5, 200MP OIS camera, 6330mAh battery and 100W charging.",
+      related:["poco-f9-ultra","poco-f8-ultra","xiaomi-17","redmi-note-17-pro-max"]},
+      
+
+    */
 ], 
-
-
 
 
 
