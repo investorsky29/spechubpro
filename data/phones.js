@@ -3458,6 +3458,7 @@ phones: [
       review:"The Xiaomi Redmi Note 17 Pro Max is a 2026 Redmi smartphone focused heavily on battery life, display quality and fast charging. It features a 6.83-inch 1.5K AMOLED display with a 120Hz refresh rate and up to 3500 nits peak brightness, while the Snapdragon 6 Gen 5 provides mid-range performance. The rear camera system combines a 50MP OIS main camera with an 8MP ultrawide camera, while a 32MP front camera supports 4K video recording. Its standout feature is the large silicon-carbon battery, rated at 10,000mAh in some markets and 9,210mAh in others, with 100W HyperCharge and 27W wired reverse charging.",
       metaDesc:"Redmi Note 17 Pro Max full specs, price and review. 6.83-inch 120Hz AMOLED, Snapdragon 6 Gen 5, 50MP OIS camera, 10,000mAh battery and 100W charging.",
       related:["redmi-note-17-pro","redmi-note-17","redmi-note-15-pro-plus","redmi-note-16-pro-plus"]},
+      
       {id:"honor-magic8-lite",name:"Magic8 Lite",fullName:"HONOR Magic8 Lite",brand:"honor",brandid:"honor",year:2025,price:"$438",rating:4.3,
       image:"images/honor-magic8-lite.jpg",badge:"Battery Champion",
       releaseDate:"December 8, 2025",
@@ -3469,6 +3470,7 @@ phones: [
       review:"The HONOR Magic8 Lite is a mid-range smartphone focused on battery life, durability and display quality. It features a 6.79-inch 120Hz AMOLED display with up to 6000 nits peak brightness, Snapdragon 6 Gen 4 performance and a large 7500mAh silicon-carbon battery with 66W wired charging. Its rear camera setup combines a 108MP OIS main camera with a 5MP ultrawide camera, while the 16MP front camera handles selfies and video calls. The phone also offers strong water and dust resistance with IP66, IP68, IP69 and IP69K ratings.",
       metaDesc:"HONOR Magic8 Lite full specs, price and review. 6.79-inch 120Hz AMOLED, Snapdragon 6 Gen 4, 108MP OIS camera, 7500mAh battery and 66W charging.",
       related:["honor-magic7-lite","honor-400","honor-400-pro","redmi-note-17-pro-max"]},
+      
       {id:"poco-f9-ultra",name:"F9 Ultra",fullName:"POCO F9 Ultra 5G",brand:"poco",brandid:"poco",year:2026,price:"$799",rating:4.8,
       image:"images/poco-f9-ultra.jpg",badge:"Ultra Performance",
       releaseDate:"September 2026",
@@ -3480,6 +3482,7 @@ phones: [
       review:"The POCO F9 Ultra is a 2026 flagship-performance smartphone built around Qualcomm's Snapdragon 8 Elite Gen 5 and a 6.9-inch HyperRGB AMOLED display with an ultra-high 185Hz refresh rate. Its camera system features a 200MP OIS main camera, 50MP 5x periscope telephoto and 50MP ultrawide camera. The phone also packs an 8050mAh battery with 100W wired and 50W wireless charging. Gaming-focused features include the VisionBoost D8 graphics chipset, 4800Hz instant touch sampling, 3D IceLoop cooling and up to 185FPS gaming support. It also features a Bose-tuned 2.1-channel speaker system with a dedicated subwoofer.",
       metaDesc:"POCO F9 Ultra full specs, price and review. 6.9-inch 185Hz AMOLED, Snapdragon 8 Elite Gen 5, 200MP camera, 8050mAh battery and 100W charging.",
       related:["poco-f9-pro","poco-f8-ultra","xiaomi-17-ultra","redmi-note-17-pro-max"]},
+      
       {id:"poco-f9-pro",name:"F9 Pro",fullName:"POCO F9 Pro 5G",brand:"poco",brandid:"poco",year:2026,price:"$649",rating:4.7,
       image:"images/poco-f9-pro.jpg",badge:"Performance Flagship",
       releaseDate:"September 2026",
@@ -3492,6 +3495,30 @@ phones: [
       metaDesc:"POCO F9 Pro full specs, price and review. 6.59-inch 185Hz AMOLED, Snapdragon 8 Elite Gen 5, 200MP OIS camera, 6330mAh battery and 100W charging.",
       related:["poco-f9-ultra","poco-f8-ultra","xiaomi-17","redmi-note-17-pro-max"]},
       
+      {id:"oppo-find-x10-pro",name:"Find X10 Pro",fullName:"OPPO Find X10 Pro",brand:"oppo",brandid:"oppo",year:2026,price:"Not announced",rating:4.7,
+      image:"images/oppo-find-x10-pro.jpg",badge:"Upcoming • Rumored Specs",
+      releaseDate:"Not announced",
+      shortSpecs:["Rumored 6.78\" 1.5K OLED 120Hz","Rumored Dimensity 9600 Pro","Rumored 200MP Triple Camera","Rumored 10,000mAh"],
+      colors:["Not officially announced"],
+      pros:["Rumored Dimensity 9600 Pro flagship performance","Rumored 200MP main camera","Rumored 200MP ultrawide camera","Rumored 50MP telephoto camera","Rumored 10,000mAh battery","Rumored 100W wired charging","Rumored 50W wireless charging","Rumored IP69 protection","Rumored Wi-Fi 7","Expected ColorOS 17"],
+      cons:["Not officially announced","Specifications remain unconfirmed","Release date is unconfirmed","Price is unconfirmed","Camera configuration may change","Battery capacity may differ from current reports"],
+      specs:{"Network":{"Technology":"GSM / HSPA / LTE / 5G (Rumored)","5G":"Yes (Rumored)"},"Body":{"Dimensions":"156.98 x 73.93 x 7.99 mm (Rumored)","Weight":"203 g (Rumored)","Build":"Glass / aluminum construction (Rumored)","SIM":"Dual Nano-SIM (Rumored)","Protection":"IP69 (Rumored)"},"Display":{"Size":"6.78 inches (Rumored)","Resolution":"1.5K (Rumored)","Type":"OLED (Rumored)","Refresh Rate":"120Hz (Rumored)","Brightness":"Not officially specified","Protection":"Not officially specified","HDR":"Not officially specified"},"Platform":{"OS":"Android 17 with ColorOS 17 (Rumored)","Chipset":"MediaTek Dimensity 9600 Pro (Rumored)","CPU":"Octa-core (Rumored)","GPU":"Not officially specified"},"Memory":{"RAM":"12GB (Rumored)","Storage":"256GB (Rumored)","Card Slot":"No (Rumored)","Storage Type":"Not officially specified"},"Camera":{"Main":"200 MP, f/1.6 (Rumored)","Telephoto":"50 MP, f/2.6 (Rumored)","Ultrawide":"200 MP, f/2.0 (Rumored)","Front":"50 MP, f/2.4 (Rumored)"},"Battery":{"Capacity":"10,000 mAh (Rumored)","Wired Charging":"100W (Rumored)","Wireless":"50W (Rumored)","Reverse Charging":"Not officially specified"},"Connectivity":{"Wi-Fi":"Wi-Fi 7 (Rumored)","Bluetooth":"6.0 (Rumored)","NFC":"Yes (Rumored)","USB":"USB Type-C (Rumored)","Fingerprint":"In-display fingerprint sensor (Rumored)","Speakers":"Stereo Speakers (Rumored)","HeadphoneJack":"No (Rumored)"}},
+      review:"The OPPO Find X10 Pro is currently an unannounced smartphone. Reports currently suggest a 6.78-inch 1.5K 120Hz OLED display, MediaTek Dimensity 9600 Pro chipset, 12GB RAM, 256GB storage and a triple rear camera system consisting of 200MP main, 200MP ultrawide and 50MP telephoto cameras. A 10,000mAh battery with 100W wired and 50W wireless charging is also rumored. These specifications have not been officially confirmed by OPPO and may change before any potential launch.",
+      metaDesc:"OPPO Find X10 Pro rumored specs, price and release date. Expected Dimensity 9600 Pro, 200MP triple camera, 120Hz OLED and 10,000mAh battery.",
+      related:["oppo-find-x10","oppo-find-x10-pro-max","oppo-find-x9-pro","xiaomi-17-ultra"]},
+      
+      {id:"honor-magic8-lite",name:"Magic8 Lite",fullName:"HONOR Magic8 Lite",brand:"honor",brandid:"honor",year:2025,price:"€455",rating:4.3,
+      image:"images/honor-magic8-lite.jpg",badge:"Battery Champion",
+      releaseDate:"December 8, 2025",
+      shortSpecs:["6.79\" 1.5K AMOLED 120Hz","Snapdragon 6 Gen 4","108MP OIS Dual Camera","7500mAh"],
+      colors:["Midnight Black","Forest Green","Reddish Brown"],
+      pros:["Huge 7500mAh silicon-carbon battery","66W HONOR SuperCharge","6.79-inch 1.5K AMOLED display","120Hz adaptive refresh rate","6000 nits peak brightness","108MP OIS main camera","16MP selfie camera","IP69K/IP68/IP66 protection","Strong drop resistance","Stereo speakers","NFC support"],
+      cons:["Mid-range Snapdragon 6 Gen 4 chipset","No telephoto camera","5MP ultrawide camera","No microSD card slot","No 3.5mm headphone jack","USB 2.0"],
+      specs:{"Network":{"Technology":"GSM / HSPA / LTE / 5G","5G":"Yes"},"Body":{"Dimensions":"161.9 x 76.1 x 7.76 mm","Weight":"189 g","Build":"Plastic frame and plastic back","SIM":"Dual Nano-SIM","Protection":"IP69K / IP68 / IP66"},"Display":{"Size":"6.79 inches","Resolution":"2640 x 1200 pixels","Type":"AMOLED","Refresh Rate":"120Hz adaptive","Brightness":"6000 nits peak","Protection":"Not officially specified","HDR":"Yes"},"Platform":{"OS":"Android 15, MagicOS 10.0","Chipset":"Qualcomm Snapdragon 6 Gen 4 (4nm)","CPU":"Octa-core, up to 2.3GHz","GPU":"Adreno 810"},"Memory":{"RAM":"8GB","Storage":"256GB / 512GB","Card Slot":"No","Storage Type":"Not officially specified"},"Camera":{"Main":"108 MP, OIS, PDAF, f/1.8","Telephoto":"No","Ultrawide":"5 MP, f/2.2","Front":"16 MP"},"Battery":{"Capacity":"7500 mAh","Wired Charging":"66W HONOR SuperCharge","Wireless":"No","Reverse Charging":"Yes, wired"},"Connectivity":{"Wi-Fi":"Wi-Fi 6","Bluetooth":"5.2","NFC":"Yes","USB":"USB Type-C 2.0","Fingerprint":"Optical Under-display","Speakers":"Stereo Speakers","HeadphoneJack":"No"}},
+      review:"The HONOR Magic8 Lite is a mid-range smartphone focused on battery life, durability and display quality. It features a 6.79-inch 1.5K AMOLED display with a 120Hz adaptive refresh rate and up to 6000 nits peak brightness. The Snapdragon 6 Gen 4 powers the phone, while its 108MP OIS main camera is paired with a 5MP ultrawide camera and 16MP selfie camera. Its standout feature is the 7500mAh silicon-carbon battery with 66W HONOR SuperCharge and wired reverse charging. HONOR also gives the phone IP69K, IP68 and IP66 protection along with enhanced drop resistance.",
+      metaDesc:"HONOR Magic8 Lite full specs, price and review. 6.79-inch 120Hz AMOLED, Snapdragon 6 Gen 4, 108MP OIS camera, 7500mAh battery and 66W charging.",
+      related:["honor-magic7-lite","honor-400","honor-400-pro","redmi-note-17-pro-max"]},
+
 
     */
 ], 
