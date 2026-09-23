@@ -3446,7 +3446,7 @@ phones: [
       metaDesc:"vivo X300 Pro full specs, price and review. Dimensity 9500, 6.78-inch 120Hz AMOLED, 200MP periscope camera, 6510mAh battery and 90W charging.",
       related:["vivo-x300","xiaomi-17","xiaomi-17","vivo-x-fold-6"]},
 
-    /*
+    
       {id:"redmi-note-17-pro-max",name:"Redmi Note 17 Pro Max",fullName:"Xiaomi Redmi Note 17 Pro Max 5G",brand:"xiaomi",brandid:"xiaomi",year:2026,price:"₦812,500",rating:4.5,
       image:"images/redmi-note-17-pro-max.jpg",badge:"Battery Beast",
       releaseDate:"August 27, 2026",
@@ -3458,8 +3458,8 @@ phones: [
       review:"The Xiaomi Redmi Note 17 Pro Max is a 2026 Redmi smartphone focused heavily on battery life, display quality and fast charging. It features a 6.83-inch 1.5K AMOLED display with a 120Hz refresh rate and up to 3500 nits peak brightness, while the Snapdragon 6 Gen 5 provides mid-range performance. The rear camera system combines a 50MP OIS main camera with an 8MP ultrawide camera, while a 32MP front camera supports 4K video recording. Its standout feature is the large silicon-carbon battery, rated at 10,000mAh in some markets and 9,210mAh in others, with 100W HyperCharge and 27W wired reverse charging.",
       metaDesc:"Redmi Note 17 Pro Max full specs, price and review. 6.83-inch 120Hz AMOLED, Snapdragon 6 Gen 5, 50MP OIS camera, 10,000mAh battery and 100W charging.",
       related:["redmi-note-17-pro","redmi-note-17","redmi-note-15-pro-plus","redmi-note-16-pro-plus"]},
-      
-      {id:"honor-magic8-lite",name:"Magic8 Lite",fullName:"HONOR Magic8 Lite",brand:"honor",brandid:"honor",year:2025,price:"$438",rating:4.3,
+    
+      {id:"honor-magic8-lite",name:"Honor Magic8 Lite",fullName:"HONOR Magic8 Lite",brand:"honor",brandid:"honor",year:2025,price:"$438",rating:4.3,
       image:"images/honor-magic8-lite.jpg",badge:"Battery Champion",
       releaseDate:"December 8, 2025",
       shortSpecs:["6.79\" AMOLED 120Hz","Snapdragon 6 Gen 4","108MP OIS Dual Camera","7500mAh"],
@@ -3470,7 +3470,7 @@ phones: [
       review:"The HONOR Magic8 Lite is a mid-range smartphone focused on battery life, durability and display quality. It features a 6.79-inch 120Hz AMOLED display with up to 6000 nits peak brightness, Snapdragon 6 Gen 4 performance and a large 7500mAh silicon-carbon battery with 66W wired charging. Its rear camera setup combines a 108MP OIS main camera with a 5MP ultrawide camera, while the 16MP front camera handles selfies and video calls. The phone also offers strong water and dust resistance with IP66, IP68, IP69 and IP69K ratings.",
       metaDesc:"HONOR Magic8 Lite full specs, price and review. 6.79-inch 120Hz AMOLED, Snapdragon 6 Gen 4, 108MP OIS camera, 7500mAh battery and 66W charging.",
       related:["honor-magic7-lite","honor-400","honor-400-pro","redmi-note-17-pro-max"]},
-      
+     
       {id:"poco-f9-ultra",name:"F9 Ultra",fullName:"POCO F9 Ultra 5G",brand:"poco",brandid:"poco",year:2026,price:"$799",rating:4.8,
       image:"images/poco-f9-ultra.jpg",badge:"Ultra Performance",
       releaseDate:"September 2026",
@@ -3494,7 +3494,7 @@ phones: [
       review:"The POCO F9 Pro is a 2026 performance-focused flagship powered by the Snapdragon 8 Elite Gen 5 V Series. It combines a 6.59-inch 185Hz HyperRGB AMOLED display with a 200MP OIS main camera, 50MP floating telephoto and 8MP ultrawide camera. Its 6330mAh battery supports 100W wired and 50W wireless HyperCharge, while the VisionBoost D8 graphics chipset, 4800Hz instant touch sampling and 185Hz refresh rate target demanding gaming. The phone also includes IP68 protection, Wi-Fi 7, UFS 4.1 storage and Bose-tuned stereo speakers.",
       metaDesc:"POCO F9 Pro full specs, price and review. 6.59-inch 185Hz AMOLED, Snapdragon 8 Elite Gen 5, 200MP OIS camera, 6330mAh battery and 100W charging.",
       related:["poco-f9-ultra","poco-f8-ultra","xiaomi-17","redmi-note-17-pro-max"]},
-      
+    /* 
       {id:"oppo-find-x10-pro",name:"Find X10 Pro",fullName:"OPPO Find X10 Pro",brand:"oppo",brandid:"oppo",year:2026,price:"Not announced",rating:4.7,
       image:"images/oppo-find-x10-pro.jpg",badge:"Upcoming • Rumored Specs",
       releaseDate:"Not announced",
@@ -3506,19 +3506,6 @@ phones: [
       review:"The OPPO Find X10 Pro is currently an unannounced smartphone. Reports currently suggest a 6.78-inch 1.5K 120Hz OLED display, MediaTek Dimensity 9600 Pro chipset, 12GB RAM, 256GB storage and a triple rear camera system consisting of 200MP main, 200MP ultrawide and 50MP telephoto cameras. A 10,000mAh battery with 100W wired and 50W wireless charging is also rumored. These specifications have not been officially confirmed by OPPO and may change before any potential launch.",
       metaDesc:"OPPO Find X10 Pro rumored specs, price and release date. Expected Dimensity 9600 Pro, 200MP triple camera, 120Hz OLED and 10,000mAh battery.",
       related:["oppo-find-x10","oppo-find-x10-pro-max","oppo-find-x9-pro","xiaomi-17-ultra"]},
-      
-      {id:"honor-magic8-lite",name:"Magic8 Lite",fullName:"HONOR Magic8 Lite",brand:"honor",brandid:"honor",year:2025,price:"€455",rating:4.3,
-      image:"images/honor-magic8-lite.jpg",badge:"Battery Champion",
-      releaseDate:"December 8, 2025",
-      shortSpecs:["6.79\" 1.5K AMOLED 120Hz","Snapdragon 6 Gen 4","108MP OIS Dual Camera","7500mAh"],
-      colors:["Midnight Black","Forest Green","Reddish Brown"],
-      pros:["Huge 7500mAh silicon-carbon battery","66W HONOR SuperCharge","6.79-inch 1.5K AMOLED display","120Hz adaptive refresh rate","6000 nits peak brightness","108MP OIS main camera","16MP selfie camera","IP69K/IP68/IP66 protection","Strong drop resistance","Stereo speakers","NFC support"],
-      cons:["Mid-range Snapdragon 6 Gen 4 chipset","No telephoto camera","5MP ultrawide camera","No microSD card slot","No 3.5mm headphone jack","USB 2.0"],
-      specs:{"Network":{"Technology":"GSM / HSPA / LTE / 5G","5G":"Yes"},"Body":{"Dimensions":"161.9 x 76.1 x 7.76 mm","Weight":"189 g","Build":"Plastic frame and plastic back","SIM":"Dual Nano-SIM","Protection":"IP69K / IP68 / IP66"},"Display":{"Size":"6.79 inches","Resolution":"2640 x 1200 pixels","Type":"AMOLED","Refresh Rate":"120Hz adaptive","Brightness":"6000 nits peak","Protection":"Not officially specified","HDR":"Yes"},"Platform":{"OS":"Android 15, MagicOS 10.0","Chipset":"Qualcomm Snapdragon 6 Gen 4 (4nm)","CPU":"Octa-core, up to 2.3GHz","GPU":"Adreno 810"},"Memory":{"RAM":"8GB","Storage":"256GB / 512GB","Card Slot":"No","Storage Type":"Not officially specified"},"Camera":{"Main":"108 MP, OIS, PDAF, f/1.8","Telephoto":"No","Ultrawide":"5 MP, f/2.2","Front":"16 MP"},"Battery":{"Capacity":"7500 mAh","Wired Charging":"66W HONOR SuperCharge","Wireless":"No","Reverse Charging":"Yes, wired"},"Connectivity":{"Wi-Fi":"Wi-Fi 6","Bluetooth":"5.2","NFC":"Yes","USB":"USB Type-C 2.0","Fingerprint":"Optical Under-display","Speakers":"Stereo Speakers","HeadphoneJack":"No"}},
-      review:"The HONOR Magic8 Lite is a mid-range smartphone focused on battery life, durability and display quality. It features a 6.79-inch 1.5K AMOLED display with a 120Hz adaptive refresh rate and up to 6000 nits peak brightness. The Snapdragon 6 Gen 4 powers the phone, while its 108MP OIS main camera is paired with a 5MP ultrawide camera and 16MP selfie camera. Its standout feature is the 7500mAh silicon-carbon battery with 66W HONOR SuperCharge and wired reverse charging. HONOR also gives the phone IP69K, IP68 and IP66 protection along with enhanced drop resistance.",
-      metaDesc:"HONOR Magic8 Lite full specs, price and review. 6.79-inch 120Hz AMOLED, Snapdragon 6 Gen 4, 108MP OIS camera, 7500mAh battery and 66W charging.",
-      related:["honor-magic7-lite","honor-400","honor-400-pro","redmi-note-17-pro-max"]},
-
 
     */
 ], 
@@ -3542,6 +3529,7 @@ brands: [
   {id:"motorola", name:"Motorola", logo:"/images/brands/motorola-logo.png"},
   {id:"huawei",   name:"Huawei",   logo:"/images/brands/huawei-logo.png"},
   {id:"honor",    name:"honor",    logo:"/images/brands/honor-brand-logo.jpg"},
+  /*{id:"nothing", name:"Nothing",   logo:"/images/brands/nothing-brand-logo.jpg"}, */
   {id:"realme",   name:"Realme",   logo:"/images/brands/realme_logo.png"},
   {id:"nokia",    name:"Nokia",    logo:"/images/brands/nokia-logo.png"},
   {id:"itel",     name:"itel",     logo:"/images/brands/Itel_Mobile_logo.png"}
