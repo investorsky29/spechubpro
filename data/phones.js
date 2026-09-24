@@ -3567,8 +3567,8 @@ phones: [
       review:"The OPPO Find X10 Pro Max is the flagship model in the 2026 Find X10 series and features a 6.78-inch AMOLED display with up to a 144Hz refresh rate. It is powered by the MediaTek Dimensity 9600 Pro and introduces a Hasselblad-tuned triple 200MP rear camera system consisting of a 200MP main camera, 200MP ultrawide and 200MP telephoto camera. The phone packs an 8000mAh battery with 80W wired and 50W wireless charging, while IP66, IP68 and IP69 protection, Wi-Fi 7 and UFS 4.1 storage complete the flagship specification.",
       metaDesc:"OPPO Find X10 Pro Max full specs, price and review. 6.78-inch 144Hz AMOLED, Dimensity 9600 Pro, triple 200MP cameras, 8000mAh battery and 80W charging.",
       related:["oppo-find-x10","oppo-find-x10e","oppo-find-x9","oppo-find-x9-ultra"]},
-/*
-      {id:"redmi-note-15-pro",name:"Note 15 Pro",fullName:"Redmi Note 15 Pro",brand:"redmi",brandid:"redmi",year:2026,price:"$299",rating:4.4,
+
+      {id:"redmi-note-15-pro",name:"Redmi Note 15 Pro",fullName:"Redmi Note 15 Pro",brand:"redmi",brandid:"redmi",year:2026,price:"$299",rating:4.4,
       image:"images/redmi-note-15-pro.jpg",badge:"Battery Champion",
       releaseDate:"January 2026",
       shortSpecs:["6.77\" AMOLED 120Hz","Helio G200-Ultra","200MP OIS Dual Camera","6500mAh"],
@@ -3580,7 +3580,7 @@ phones: [
       metaDesc:"Redmi Note 15 Pro full specs, price and review. 6.77-inch 120Hz AMOLED, Helio G200-Ultra, 200MP OIS camera, 6500mAh battery and 45W charging.",
       related:["redmi-note-15","redmi-note-17-pro","redmi-note-15-pro-plus","redmi-note-17-pro-plus"]},
 
-      {id:"redmi-note-15",name:"Note 15",fullName:"Redmi Note 15",brand:"redmi",brandid:"redmi",year:2026,price:"₦279,900",rating:4.2,
+      {id:"redmi-note-15",name:"Redmi Note 15",fullName:"Redmi Note 15",brand:"redmi",brandid:"redmi",year:2026,price:"₦279,900",rating:4.2,
       image:"images/redmi-note-15.jpg",badge:"Value Champion",
       releaseDate:"January 2026",
       shortSpecs:["6.77\" AMOLED 120Hz","Helio G100-Ultra","108MP Dual Camera","6000mAh"],
@@ -3592,9 +3592,6 @@ phones: [
       metaDesc:"Redmi Note 15 full specs, price and review. 6.77-inch 120Hz AMOLED, Helio G100-Ultra, 108MP camera, 6000mAh battery and 33W charging.",
       related:["redmi-note-15-pro","redmi-note-15-pro-plus","redmi-note-17","redmi-note-17-pro"]},
 
- */
-
-      
       {id:"redmi-note-17-pro",name:"Redmi Note 17 Pro",fullName:"Redmi Note 17 Pro 5G",brand:"redmi",brandid:"redmi",year:2026,price:"$299",rating:4.4,
       image:"images/redmi-note-17-pro.jpg",badge:"Battery Champion",
       releaseDate:"January 2026",
