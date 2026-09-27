@@ -3616,6 +3616,19 @@ phones: [
       metaDesc:"Redmi Note 17 5G full specs, price and review. 6.99-inch 120Hz AMOLED, Snapdragon 4 Gen 4, 50MP camera and 7700mAh battery.",
       related:["redmi-note-17-pro","redmi-note-17-pro-max","redmi-note-15","redmi-note-15-pro-plus"]},
 
+      
+    {id:"samsung-galaxy-z-fold8-ultra",name:"Galaxy Z Fold8 Ultra",fullName:"Samsung Galaxy Z Fold8 Ultra",brand:"samsung",brandid:"samsung",year:2026,price:"$2,099",rating:4.9,
+      image:"images/samsung-galaxy-z-fold8-ultra.jpg",badge:"Ultra Foldable",
+      releaseDate:"August 7, 2026",
+      shortSpecs:["8.0\" QXGA+ Dynamic AMOLED 2X 120Hz","Snapdragon 8 Elite Gen 5 for Galaxy","200MP Triple Camera","5000mAh"],
+      colors:["Graphite","Cream","Violet Shadow","Green Shadow"],
+      pros:["8.0-inch QXGA+ foldable AMOLED display","6.5-inch 120Hz cover display","Snapdragon 8 Elite Gen 5 for Galaxy","200MP OIS main camera","50MP ultrawide camera","10MP 3x optical telephoto camera","16GB RAM with 1TB storage option","5000mAh dual battery","45W wired charging","20W wireless charging","Wi-Fi 7","Bluetooth 6.0","IP48 water resistance","Android 17 with One UI 9"],
+      cons:["Very high launch price","No microSD card slot","45W wired charging is modest for its class","IP48 is lower than conventional IP68 protection","215g weight","Cover and main selfie cameras are 10MP"],
+      specs:{"Network":{"Technology":"GSM / HSPA / LTE / 5G","5G":"Yes"},"Body":{"Dimensions":"72.8 x 158.4 x 8.9 mm folded / 143.2 x 158.4 x 4.1 mm unfolded","Weight":"215 g","Build":"Armor Aluminum frame, Corning Gorilla Glass, Flex Titanium display structure","SIM":"Nano-SIM / eSIM depending on market","Protection":"IP48"},"Display":{"Main":"8.0 inches","Cover":"6.5 inches","Resolution":"2504 x 2256 pixels main / 1080 x 2520 pixels cover","Type":"Dynamic AMOLED 2X","Refresh Rate":"1-120Hz adaptive","Brightness":"Up to 3000 nits","Protection":"Flex Titanium / Corning Gorilla Glass","HDR":"Supported"},"Platform":{"OS":"Android 17, One UI 9","Chipset":"Qualcomm Snapdragon 8 Elite Gen 5 for Galaxy","CPU":"Octa-core","GPU":"Adreno"},"Memory":{"RAM":"12GB / 16GB","Storage":"256GB / 512GB / 1TB","Card Slot":"No","Storage Type":"Not officially specified"},"Camera":{"Main":"200 MP Wide, f/1.7, OIS, Quad Pixel AF","Telephoto":"10 MP, f/2.4, OIS, 3x optical zoom","Ultrawide":"50 MP, f/1.9, 120° FOV, Quad Pixel AF","CoverSelfie":"10 MP, f/2.2","InnerSelfie":"10 MP, f/2.2","Video":"Up to 8K video recording"},"Battery":{"Capacity":"5000 mAh typical / 4854 mAh rated","Wired Charging":"45W fast charging","Wireless":"20W fast wireless charging","Reverse Charging":"Wireless PowerShare"},"Connectivity":{"Wi-Fi":"Wi-Fi 7","Bluetooth":"6.0","NFC":"Yes","USB":"USB Type-C","Fingerprint":"Side-mounted","Speakers":"Stereo Speakers","HeadphoneJack":"No"}},
+      review:"The Samsung Galaxy Z Fold8 Ultra is Samsung's flagship foldable for 2026, combining an expansive 8.0-inch QXGA+ Dynamic AMOLED 2X main display with a 6.5-inch 120Hz cover screen. It is powered by the Snapdragon 8 Elite Gen 5 for Galaxy and offers up to 16GB of RAM with 1TB of storage. Its rear camera system features a 200MP OIS main camera, 50MP ultrawide and 10MP 3x optical telephoto camera. The 5000mAh dual battery supports 45W wired charging and 20W wireless charging, while Android 17 and One UI 9 power the software experience.",
+      metaDesc:"Samsung Galaxy Z Fold8 Ultra full specs, price and review. 8-inch 120Hz AMOLED, Snapdragon 8 Elite Gen 5, 200MP camera, 5000mAh battery and 45W charging.",
+      related:["samsung-galaxy-z-fold8","samsung-galaxy-z-fold7","samsung-galaxy-s26-ultra","google-pixel-11-pro-fold"]},
+
     
 ], 
 
