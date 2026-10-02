@@ -73,28 +73,14 @@
 <div id="searchDropdown" style="display:none;position:fixed;top:70px;right:20px;z-index:900;
   background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
   box-shadow:var(--shadow-lg);width:340px;max-height:400px;overflow-y:auto;padding:8px"></div>
-<section class="hero">
+<section class="top-feature">
   <div class="container">
-    <div class="hero-content">
-      <span class="hero-badge"><i class="fas fa-rocket" style="margin-right:6px"></i>Your Smartphone Database</span>
-      <h1>Find The Right Phone<br>Before You Buy.</h1>
-      <p>Compare smartphone specifications, prices, cameras, battery life and performance. Search thousands of phones and make smarter buying decisions.</p>
-      <div class="hero-search" style="position:relative">
-        <input type="text" placeholder="Search by name, brand or specs..." id="heroSearch"
-          oninput="liveSearch(this.value,'heroDropdown')"
-          onkeydown="if(event.key==='Enter')goSearch()">
-        <button onclick="goSearch()"><i class="fas fa-search" style="margin-right:6px"></i>Search</button>
-        <div id="heroDropdown" style="display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;
-          background:var(--surface);border:1px solid var(--border);border-radius:14px;
-          box-shadow:var(--shadow-lg);max-height:320px;overflow-y:auto;z-index:500;padding:8px"></div>
-      </div>
-      <div class="hero-tags">
-        <a href="brands/samsung/"><span>Samsung</span></a>
-        <a href="brands/apple/"><span>Apple</span></a>
-        <a href="brands/xiaomi/"><span>Xiaomi</span></a>
-        <a href="brands/tecno/"><span>Tecno</span></a>
-        <a href="brands/infinix/"><span>Infinix</span></a>
-        <a href="brands/google/"><span>Google</span></a>
+    <h1 class="sr-only">SpecHub – Smartphone Specifications, Reviews &amp; Comparisons</h1>
+    <div class="tf-grid">
+      <a class="tf-main" id="tfFeatured" href="search/"></a>
+      <div class="tf-side">
+        <a class="tf-new" id="tfNew" href="search/"></a>
+        <a class="tf-article" id="tfArticle" href="blog/"></a>
       </div>
     </div>
   </div>
@@ -247,10 +233,103 @@ function phoneCard(p) {
     + '<span class="btn-specs">'+p.price+'</span>'
     + '</div></div></div></a>';
 }
+function renderTopFeature(phones, articles) {
+  var errImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23f0f0f0'/%3E%3C/svg%3E";
+  var withImg = phones.filter(function(p){ return p && p.id && p.image; });
+  if (!withImg.length) return;
+
+  function pickRandom(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
+  // FEATURED: random pick from the 12 top-rated phones
+  var topRated = withImg.slice().sort(function(a,b){
+    return (Number(b.rating)||0) - (Number(a.rating)||0);
+  }).slice(0, Math.min(12, withImg.length));
+  var fp = pickRandom(topRated);
+
+  // NEW PHONE: random pick from the 8 most recently released (never the featured phone)
+  var newest = withImg.slice().sort(function(a,b){
+    return new Date(b.releaseDate) - new Date(a.releaseDate);
+  }).filter(function(p){ return p.id !== fp.id; }).slice(0, 8);
+  var np = newest.length ? pickRandom(newest) : null;
+
+  // FEATURED CARD
+  var fSpecs = (fp.shortSpecs || []).slice(0, 4).map(function(s){
+    return '<span class="spec-tag">'+s+'</span>';
+  }).join('');
+  var fEl = document.getElementById('tfFeatured');
+  fEl.href = 'phones/'+fp.id+'/';
+  fEl.innerHTML =
+      '<div class="tf-main-img">'
+    +   (fp.badge ? '<span class="tf-badge">'+fp.badge+'</span>' : '')
+    +   '<img src="'+resolveImg(fp.image)+'" alt="'+fp.name+'" width="600" height="800" onerror="this.src=\''+errImg+'\'">'
+    + '</div>'
+    + '<div class="tf-main-body">'
+    +   '<div class="tf-eyebrow">Featured Phone &middot; '+fp.brand+'</div>'
+    +   '<div class="tf-name">'+fp.name+'</div>'
+    +   '<div class="tf-specs">'+fSpecs+'</div>'
+    +   '<div class="tf-meta">'
+    +     '<span class="tf-rating"><i class="fas fa-star"></i> '+fp.rating+'</span>'
+    +     '<span class="tf-price">'+fp.price+'</span>'
+    +   '</div>'
+    +   '<span class="tf-link">View Specifications <i class="fas fa-arrow-right"></i></span>'
+    + '</div>';
+
+  // NEW PHONE CARD
+  var nEl = document.getElementById('tfNew');
+  if (np) {
+    var nSpecs = (np.shortSpecs || []).slice(0, 2).map(function(s){
+      return '<span class="spec-tag">'+s+'</span>';
+    }).join('');
+    nEl.href = 'phones/'+np.id+'/';
+    nEl.innerHTML =
+        '<div class="tf-eyebrow">New Phone</div>'
+      + '<div class="tf-new-row">'
+      +   '<img src="'+resolveImg(np.image)+'" alt="'+np.name+'" width="600" height="800" onerror="this.src=\''+errImg+'\'">'
+      +   '<div class="tf-new-info">'
+      +     '<div class="tf-side-name">'+np.name+'</div>'
+      +     '<div class="tf-specs tf-specs-sm">'+nSpecs+'</div>'
+      +   '</div>'
+      + '</div>'
+      + '<span class="tf-link">View Specs <i class="fas fa-arrow-right"></i></span>';
+  } else {
+    nEl.style.display = 'none';
+  }
+
+  // LATEST ARTICLE CARD (newest by date; falls back to first item if dates can't be parsed)
+  var aEl = document.getElementById('tfArticle');
+  if (articles && articles.length) {
+    var art = articles.slice().sort(function(a,b){
+      var da = new Date(a.date).getTime(), db = new Date(b.date).getTime();
+      if (isNaN(da)) da = 0;
+      if (isNaN(db)) db = 0;
+      return db - da;
+    })[0];
+    var catIcons = {'Buying Guides':'fa-list-check','Comparisons':'fa-code-compare','Latest News':'fa-satellite-dish','Phone Reviews':'fa-camera'};
+    var icon = catIcons[art.category] || 'fa-newspaper';
+    var artMedia = art.image
+      ? '<img src="'+resolveImg(art.image)+'" alt="'+art.title+'" loading="lazy" onerror="this.style.display=\'none\'">'
+      : '<i class="fas '+icon+'"></i>';
+    aEl.href = 'blog/'+art.id+'/';
+    aEl.innerHTML =
+        '<div class="tf-eyebrow">Latest Article</div>'
+      + '<div class="tf-art-row">'
+      +   '<div class="tf-art-media">'+artMedia+'</div>'
+      +   '<div class="tf-art-info">'
+      +     '<div class="tf-art-cat">'+art.category+'</div>'
+      +     '<div class="tf-side-name tf-art-title">'+art.title+'</div>'
+      +     '<div class="tf-art-date">'+art.date+'</div>'
+      +   '</div>'
+      + '</div>'
+      + '<span class="tf-link">Read <i class="fas fa-arrow-right"></i></span>';
+  } else {
+    aEl.style.display = 'none';
+  }
+}
 document.addEventListener('DOMContentLoaded', function() {
   var phones = PHONE_DB.phones;
   var brands = PHONE_DB.brands;
   var articles = PHONE_DB.articles;
+  renderTopFeature(phones, articles);
 
   // Featured
   var featured = phones.slice().sort(function(a,b){return b.rating-a.rating;}).slice(0,4);
