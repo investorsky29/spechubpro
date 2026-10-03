@@ -165,41 +165,13 @@
           <a class="social-link" href="https://www.youtube.com/@spechub9278" title="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
-      <div>
-        <div class="footer-heading">Top Brands</div>
-        <div class="footer-links">
-          <a href="brands/samsung/">Samsung</a><a href="brands/apple/">Apple</a>
-          <a href="brands/xiaomi/">Xiaomi</a><a href="brands/tecno/">Tecno</a>
-          <a href="brands/infinix/">Infinix</a><a href="brands/itel/">itel</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-heading">Quick Links</div>
-        <div class="footer-links">
-          <a href="compare/">Compare Phones</a><a href="search/">Search Phones</a>
-          <a href="blog/">Blog &amp; Reviews</a><a href="about/">About Us</a>
-          <a href="contact/">Contact Us</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-heading">Legal</div>
-        <div class="footer-links">
-          <a href="privacy/">Privacy Policy</a>
-          <a href="terms/">Terms &amp; Conditions</a>
-          <a href="disclaimer/">Disclaimer</a>
-        </div>
-        <div class="footer-heading" style="margin-top:20px">Newsletter</div>
-        <div class="footer-newsletter">
-          <input type="email" placeholder="your@email.com">
-          <button onclick="showToast('Subscribed!')">Subscribe</button>
-        </div>
-      </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 SpecHub. All rights reserved.</p>
+      <a href="./"><p>&copy; 2026 SpecHub.</a> All rights reserved.</p>
       <div class="footer-bottom-links">
+        <a href="./">Home</a><a href="about/">About Us</a>
         <a href="privacy/">Privacy</a><a href="terms/">Terms</a>
-        <a href="disclaimer/">Disclaimer</a><a href="contact/">Contact</a>
+        <a href="disclaimer/">Disclaimer</a><a href="contact/">Contact Us</a>
       </div>
     </div>
   </div>
@@ -342,15 +314,33 @@ var latest = phones.slice().sort(function(a,b){
 
 document.getElementById('latestPhones').innerHTML = latest.map(phoneCard).join('');
 
-  // Brands
-  document.getElementById('brandsGrid').innerHTML = brands.map(function(b) {
-    var count = phones.filter(function(p){ return p.brand.toLowerCase()===b.name.toLowerCase(); }).length;
-    var logo = resolveImg(b.logo);
-    return '<a href="brands/'+b.id+'/" class="brand-card" style="text-decoration:none;color:inherit">'
-      + '<img src="'+logo+'" alt="'+b.name+'" class="brand-logo" onerror="this.style.display=\'none\'">'
-      + '<div class="brand-name">'+b.name+'</div>'
-      + '<div class="brand-count">'+count+' phone'+(count!==1?'s':'')+'</div></a>';
-  }).join('');
+// Brands — show 8 selected brands alphabetically, without phone counts
+var selectedBrands = [
+  "Apple",
+  "Google",
+  "Infinix",
+  "Motorola",
+  "OPPO",
+  "Samsung",
+  "TECNO",
+  "Xiaomi"
+];
+
+var homeBrands = brands.filter(function(b) {
+  return selectedBrands.some(function(name) {
+    return b.name.toLowerCase() === name.toLowerCase();
+  });
+}).sort(function(a, b) {
+  return a.name.localeCompare(b.name);
+});
+
+document.getElementById('brandsGrid').innerHTML = homeBrands.map(function(b) {
+  var logo = resolveImg(b.logo);
+
+  return '<a href="brands/'+b.id+'/" class="brand-card" style="text-decoration:none;color:inherit">'
+    + '<img src="'+logo+'" alt="'+b.name+'" class="brand-logo" onerror="this.style.display=\'none\'">'
+    + '<div class="brand-name">'+b.name+'</div></a>';
+}).join('');
 
   // Popular (shuffled)
   var pop = phones.slice().sort(function(){return Math.random()-.5;}).slice(0,6);
