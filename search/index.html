@@ -89,7 +89,7 @@
   <div class="search-results-header">
     <span class="results-count" id="resultsCount">Loading...</span>
     <select class="sort-select-light" id="sortSelect" onchange="runSearch()">
-      <option value="rating">Top Rated</option>
+      <option value="rating">Popular</option>
       <option value="year">Newest First</option>
       <option value="name">Name A–Z</option>
       <option value="price_low">Price: Low to High</option>
@@ -122,7 +122,7 @@
     </div>
 
     <div class="footer-bottom">
-      <a href="./"><p>&copy; 2026 SpecHub.</a> All rights reserved.</p>
+      <p><a href="./">&copy; 2026 SpecHub.</a> All rights reserved.</p>
       <div class="footer-bottom-links">
         <a href="../">Home</a><a href="../about/">About Us</a>
         <a href="../privacy/">Privacy</a><a href="../terms/">Terms</a>
@@ -137,28 +137,103 @@
 var PER_PAGE = 12;
 var filteredPhones = [];
 var curPage = 1;
-var activeBrand = 'all';
+var activeBrand = 'all'; /* stores a normalized (lowercase) brand key, or 'all' */
+
+/* ---------- Helpers ---------- */
+
+function esc(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+/* Normalize a brand name so Apple / apple / APPLE all share one key */
+function brandKey(brand) {
+  return String(brand == null ? '' : brand).trim().replace(/\s+/g, ' ').toLowerCase();
+}
+
+/* Score a brand spelling: mixed case is the nicest, then all caps, then all lowercase */
+function brandScore(name) {
+  var hasUpper = /[A-Z]/.test(name);
+  var hasLower = /[a-z]/.test(name);
+  if (hasUpper && hasLower) return 2;
+  if (hasUpper) return 1;
+  return 0;
+}
+
+function titleCase(str) {
+  return str.replace(/(^|[\s\-])([a-z])/g, function(m, sep, ch) {
+    return sep + ch.toUpperCase();
+  });
+}
+
+function toNumber(value) {
+  if (typeof value === 'number') {
+    return isFinite(value) ? value : NaN;
+  }
+  if (value == null) return NaN;
+  var cleaned = String(value).replace(/[^0-9.]/g, '');
+  if (cleaned === '') return NaN;
+  var n = parseFloat(cleaned);
+  return isFinite(n) ? n : NaN;
+}
+
+function getPhones() {
+  return (typeof PHONE_DB !== 'undefined' && PHONE_DB && PHONE_DB.phones) ? PHONE_DB.phones : [];
+}
+
+function totalPagesFor(count) {
+  return Math.ceil(count / PER_PAGE);
+}
+
+/* ---------- Brand filters ---------- */
 
 function initFilters() {
-  var brands = [];
+  var map = {};   /* key -> { name: bestDisplayName, score: n } */
+  var keys = [];
 
-  PHONE_DB.phones.forEach(function(p) {
-    if (brands.indexOf(p.brand) < 0) brands.push(p.brand);
+  getPhones().forEach(function(p) {
+    var raw = String(p.brand == null ? '' : p.brand).trim();
+    var key = brandKey(raw);
+    if (!key) return;
+
+    var score = brandScore(raw);
+
+    if (!map[key]) {
+      map[key] = { name: raw, score: score };
+      keys.push(key);
+    } else if (score > map[key].score) {
+      map[key].name = raw;
+      map[key].score = score;
+    }
   });
 
-  brands.sort();
-
-  var h = '<button class="brand-filter-pill active" onclick="setBrand(\'all\',this)">All Brands</button>';
-
-  brands.forEach(function(b) {
-    h += '<button class="brand-filter-pill" onclick="setBrand(\'' + b + '\',this)">' + b + '</button>';
+  keys.sort(function(a, b) {
+    return a.localeCompare(b);
   });
 
-  document.getElementById('brandFilters').innerHTML = h;
+  var h = '<button type="button" class="brand-filter-pill active" data-brand="all">All Brands</button>';
+
+  keys.forEach(function(key) {
+    var display = map[key].score === 0 ? titleCase(map[key].name) : map[key].name;
+    h += '<button type="button" class="brand-filter-pill" data-brand="' + esc(key) + '">' + esc(display) + '</button>';
+  });
+
+  var holder = document.getElementById('brandFilters');
+  holder.innerHTML = h;
+
+  holder.addEventListener('click', function(e) {
+    var btn = e.target.closest ? e.target.closest('.brand-filter-pill') : null;
+    if (!btn || !holder.contains(btn)) return;
+    setBrand(btn.getAttribute('data-brand'), btn);
+  });
 }
 
 function setBrand(brand, btn) {
-  activeBrand = brand;
+  activeBrand = brand || 'all';
 
   document.querySelectorAll('.brand-filter-pill').forEach(function(b) {
     b.classList.remove('active');
@@ -170,32 +245,101 @@ function setBrand(brand, btn) {
   runSearch(false);
 }
 
-function phoneCard(p) {
-  var ic = compareList.indexOf(p.id) >= 0;
+/* ---------- Phone card ---------- */
 
-  var sp = p.shortSpecs.map(function(s) {
-    return '<span class="spec-tag">' + s + '</span>';
+function phoneCard(p) {
+  var list = (typeof compareList !== 'undefined' && compareList) ? compareList : [];
+  var ic = list.indexOf(p.id) >= 0;
+
+  var sp = (p.shortSpecs || []).map(function(s) {
+    return '<span class="spec-tag">' + esc(s) + '</span>';
   }).join('');
 
   var bd = p.badge
-    ? '<span class="phone-badge">' + p.badge + '</span>'
+    ? '<span class="phone-badge">' + esc(p.badge) + '</span>'
     : '';
 
   var er = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23eee'/%3E%3C/svg%3E";
 
-  return '<a href="../phones/' + p.id + '/" class="phone-card" style="text-decoration:none;color:inherit">'
-    + '<div class="phone-card-img"><img src="' + resolveImg(p.image) + '" alt="' + p.name + '" loading="lazy" onerror="this.src=\'' + er + '\'">' + bd + '</div>'
+  var imgSrc = (typeof resolveImg === 'function') ? resolveImg(p.image) : p.image;
+
+  return '<a href="../phones/' + encodeURIComponent(p.id) + '/" class="phone-card" style="text-decoration:none;color:inherit">'
+    + '<div class="phone-card-img"><img src="' + esc(imgSrc) + '" alt="' + esc(p.name) + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + er + '\'">' + bd + '</div>'
     + '<div class="phone-card-body">'
-    + '<div class="phone-brand">' + p.brand + '</div>'
-    + '<div class="phone-name">' + p.name + '</div>'
-    + '<div class="phone-year">' + p.year + '</div>'
+    + '<div class="phone-brand">' + esc(p.brand) + '</div>'
+    + '<div class="phone-name">' + esc(p.name) + '</div>'
+    + '<div class="phone-year">' + esc(p.year) + '</div>'
     + '<div class="phone-specs-mini">' + sp + '</div>'
-    + '<div class="phone-card-footer"><div class="phone-rating"><i class="fas fa-star"></i> ' + p.rating + '</div>'
     + '<div style="display:flex;gap:6px;align-items:center">'
-    + '<button class="compare-toggle' + (ic ? ' active' : '') + '" data-compare-id="' + p.id + '"'
-    + ' onclick="event.preventDefault();event.stopPropagation();toggleCompare(\'' + p.id + '\',\'' + p.name + '\',this)"'
-    + ' title="Compare"><i class="fas fa-code-compare"></i></button>'
-    + '<span class="btn-specs">' + p.price + '</span></div></div></div></a>';
+    + '<button type="button" class="compare-toggle' + (ic ? ' active' : '') + '" data-compare-id="' + esc(p.id) + '" data-compare-name="' + esc(p.name) + '"'
+    + ' title="Compare"><i class="fas fa-code-compare"></i></button></div></div></a>';
+}
+
+/* ---------- Search, filter, sort ---------- */
+
+function matchesQuery(p, tokens) {
+  var parts = [
+    p.name,
+    p.brand,
+    p.fullName,
+    p.full_name
+  ];
+
+  if (p.shortSpecs && p.shortSpecs.length) {
+    parts = parts.concat(p.shortSpecs);
+  }
+
+  var haystack = parts.filter(function(x) {
+    return x != null && x !== '';
+  }).join(' ').toLowerCase();
+
+  return tokens.every(function(t) {
+    return haystack.indexOf(t) >= 0;
+  });
+}
+
+function compareName(a, b) {
+  return String(a.name || '').localeCompare(String(b.name || ''));
+}
+
+/* Numeric comparison where missing values (NaN) always go to the end */
+function compareNumbers(a, b, descending) {
+  var aBad = isNaN(a);
+  var bBad = isNaN(b);
+
+  if (aBad && bBad) return 0;
+  if (aBad) return 1;
+  if (bBad) return -1;
+
+  return descending ? (b - a) : (a - b);
+}
+
+function sortPhones(phones, sort) {
+  if (sort === 'rating') {
+    phones.sort(function(a, b) {
+      return compareNumbers(toNumber(a.rating), toNumber(b.rating), true) || compareName(a, b);
+    });
+
+  } else if (sort === 'year') {
+    phones.sort(function(a, b) {
+      return compareNumbers(toNumber(a.year), toNumber(b.year), true) || compareName(a, b);
+    });
+
+  } else if (sort === 'name') {
+    phones.sort(compareName);
+
+  } else if (sort === 'price_low') {
+    phones.sort(function(a, b) {
+      return compareNumbers(toNumber(a.price), toNumber(b.price), false) || compareName(a, b);
+    });
+
+  } else if (sort === 'price_high') {
+    phones.sort(function(a, b) {
+      return compareNumbers(toNumber(a.price), toNumber(b.price), true) || compareName(a, b);
+    });
+  }
+
+  return phones;
 }
 
 function runSearch(keepPage) {
@@ -203,80 +347,60 @@ function runSearch(keepPage) {
   var sort = document.getElementById('sortSelect').value;
 
   /*
-    Reset to page 1 whenever the search or sorting changes.
+    Reset to page 1 whenever the search, brand or sorting changes.
     keepPage=true is used only when we want to keep the current page.
   */
   if (keepPage !== true) {
     curPage = 1;
   }
 
-  var phones = PHONE_DB.phones.slice();
+  var phones = getPhones().slice();
 
-  /* Brand filter */
+  /* Brand filter (case-insensitive) */
   if (activeBrand !== 'all') {
     phones = phones.filter(function(p) {
-      return p.brand === activeBrand;
+      return brandKey(p.brand) === activeBrand;
     });
   }
 
   /* Search filter */
   if (q) {
+    var tokens = q.split(/\s+/).filter(function(t) {
+      return t.length > 0;
+    });
+
     phones = phones.filter(function(p) {
-      return p.name.toLowerCase().indexOf(q) >= 0
-        || p.brand.toLowerCase().indexOf(q) >= 0
-        || (p.shortSpecs || []).some(function(s) {
-          return s.toLowerCase().indexOf(q) >= 0;
-        });
+      return matchesQuery(p, tokens);
     });
   }
 
   /* Sorting */
-  if (sort === 'rating') {
-    phones.sort(function(a, b) {
-      return b.rating - a.rating;
-    });
-
-  } else if (sort === 'year') {
-    phones.sort(function(a, b) {
-      return b.year - a.year;
-    });
-
-  } else if (sort === 'name') {
-    phones.sort(function(a, b) {
-      return a.name.localeCompare(b.name);
-    });
-
-  } else if (sort === 'price_low') {
-    phones.sort(function(a, b) {
-      return parseFloat(a.price.replace(/[^0-9.]/g, '')) -
-             parseFloat(b.price.replace(/[^0-9.]/g, ''));
-    });
-
-  } else if (sort === 'price_high') {
-    phones.sort(function(a, b) {
-      return parseFloat(b.price.replace(/[^0-9.]/g, '')) -
-             parseFloat(a.price.replace(/[^0-9.]/g, ''));
-    });
-  }
+  phones = sortPhones(phones, sort);
 
   filteredPhones = phones;
 
   /* Make sure current page is still valid */
-  var totalPages = Math.ceil(filteredPhones.length / PER_PAGE);
+  var totalPages = totalPagesFor(filteredPhones.length);
 
   if (totalPages === 0) {
     curPage = 1;
   } else if (curPage > totalPages) {
     curPage = totalPages;
+  } else if (curPage < 1) {
+    curPage = 1;
   }
 
   renderPage();
 }
 
-function changePage(page) {
-  var totalPages = Math.ceil(filteredPhones.length / PER_PAGE);
+/* ---------- Pagination ---------- */
 
-  if (page < 1 || page > totalPages || page === curPage) {
+function changePage(page) {
+  var totalPages = totalPagesFor(filteredPhones.length);
+
+  page = parseInt(page, 10);
+
+  if (isNaN(page) || page < 1 || page > totalPages || page === curPage) {
     return;
   }
 
@@ -298,14 +422,13 @@ function changePage(page) {
 }
 
 function renderPage() {
-  var totalPages = Math.ceil(filteredPhones.length / PER_PAGE);
-
-  /* Make sure page is valid */
-  if (totalPages > 0 && curPage > totalPages) {
-    curPage = totalPages;
-  }
+  var totalPages = totalPagesFor(filteredPhones.length);
 
   if (totalPages === 0) {
+    curPage = 1;
+  } else if (curPage > totalPages) {
+    curPage = totalPages;
+  } else if (curPage < 1) {
     curPage = 1;
   }
 
@@ -338,6 +461,59 @@ function renderPage() {
   renderPagination(totalPages);
 }
 
+/* Build a clean list of page numbers and 'dots' markers */
+function buildPageList(current, total) {
+  if (total <= 7) {
+    var all = [];
+    for (var i = 1; i <= total; i++) all.push(i);
+    return all;
+  }
+
+  var set = {};
+
+  function add(n) {
+    if (n >= 1 && n <= total) set[n] = true;
+  }
+
+  add(1);
+  add(total);
+  add(current - 1);
+  add(current);
+  add(current + 1);
+
+  /* Near the edges, show a few more pages so the layout stays stable */
+  if (current <= 3) {
+    add(2); add(3); add(4);
+  }
+  if (current >= total - 2) {
+    add(total - 3); add(total - 2); add(total - 1);
+  }
+
+  var nums = Object.keys(set).map(function(k) {
+    return parseInt(k, 10);
+  }).sort(function(a, b) {
+    return a - b;
+  });
+
+  var list = [];
+
+  for (var j = 0; j < nums.length; j++) {
+    if (j > 0) {
+      var gap = nums[j] - nums[j - 1];
+
+      if (gap === 2) {
+        /* A single hidden page: show it instead of dots */
+        list.push(nums[j] - 1);
+      } else if (gap > 2) {
+        list.push('dots');
+      }
+    }
+    list.push(nums[j]);
+  }
+
+  return list;
+}
+
 function renderPagination(totalPages) {
   var container = document.getElementById('searchPagination');
 
@@ -349,7 +525,7 @@ function renderPagination(totalPages) {
   var pag = '';
 
   /* Previous button */
-  pag += '<button class="page-btn pagination-prev"'
+  pag += '<button type="button" class="page-btn pagination-prev"'
     + (curPage === 1 ? ' disabled' : '')
     + ' onclick="changePage(' + (curPage - 1) + ')"'
     + ' aria-label="Previous page">'
@@ -357,67 +533,14 @@ function renderPagination(totalPages) {
     + '<span>Previous</span>'
     + '</button>';
 
-  /*
-    Create smart page numbers.
-
-    Example with many pages:
-
-    Previous  1  2  3  ...  8  9  10  Next
-  */
-
-  var pages = [];
-
-  if (totalPages <= 7) {
-
-    /* Show every page */
-    for (var i = 1; i <= totalPages; i++) {
-      pages.push(i);
-    }
-
-  } else {
-
-    /* Always show first page */
-    pages.push(1);
-
-    if (curPage <= 4) {
-
-      pages.push(2);
-      pages.push(3);
-      pages.push(4);
-      pages.push(5);
-      pages.push('dots');
-      pages.push(totalPages);
-
-    } else if (curPage >= totalPages - 3) {
-
-      pages.push('dots');
-      pages.push(totalPages - 4);
-      pages.push(totalPages - 3);
-      pages.push(totalPages - 2);
-      pages.push(totalPages - 1);
-      pages.push(totalPages);
-
-    } else {
-
-      pages.push('dots');
-      pages.push(curPage - 1);
-      pages.push(curPage);
-      pages.push(curPage + 1);
-      pages.push('dots');
-      pages.push(totalPages);
-    }
-  }
+  var pages = buildPageList(curPage, totalPages);
 
   /* Page number buttons */
   pages.forEach(function(page) {
-
     if (page === 'dots') {
-
       pag += '<span class="page-dots">...</span>';
-
     } else {
-
-      pag += '<button class="page-btn'
+      pag += '<button type="button" class="page-btn'
         + (curPage === page ? ' active' : '')
         + '"'
         + ' onclick="changePage(' + page + ')"'
@@ -430,7 +553,7 @@ function renderPagination(totalPages) {
   });
 
   /* Next button */
-  pag += '<button class="page-btn pagination-next"'
+  pag += '<button type="button" class="page-btn pagination-next"'
     + (curPage === totalPages ? ' disabled' : '')
     + ' onclick="changePage(' + (curPage + 1) + ')"'
     + ' aria-label="Next page">'
@@ -441,9 +564,23 @@ function renderPagination(totalPages) {
   container.innerHTML = pag;
 }
 
-/* Initialize page */
+/* ---------- Initialize page ---------- */
+
 document.addEventListener('DOMContentLoaded', function() {
   initFilters();
+
+  /* Compare button clicks (delegated so names with quotes are safe) */
+  document.getElementById('searchResults').addEventListener('click', function(e) {
+    var btn = e.target.closest ? e.target.closest('.compare-toggle') : null;
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (typeof toggleCompare === 'function') {
+      toggleCompare(btn.getAttribute('data-compare-id'), btn.getAttribute('data-compare-name'), btn);
+    }
+  });
 
   var urlQ = new URLSearchParams(window.location.search).get('q');
 
