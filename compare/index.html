@@ -180,7 +180,6 @@ function pickPhone(id){ var p=PHONE_DB.phones.find(function(x){return x.id===id;
 
 var ROWS=[
   {s:'Overview'},{l:'Brand',f:function(p){return p.brand;}},{l:'Price',f:function(p){return p.price;}},
-  {l:'Rating',f:function(p){return'<span style="color:#F59E0B"><i class="fas fa-star"></i></span> '+p.rating+'/5';}},
   {l:'Released',f:function(p){return p.releaseDate||p.year;}},
   {s:'Display'},{l:'Size',f:function(p){return(p.specs&&p.specs.Display&&p.specs.Display.Size)||'—';}},
   {l:'Resolution',f:function(p){return(p.specs&&p.specs.Display&&p.specs.Display.Resolution)||'—';}},

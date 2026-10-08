@@ -199,12 +199,10 @@ function phoneCard(p) {
     + '<div class="phone-year">'+p.year+'</div>'
     + '<div class="phone-specs-mini">'+specs+'</div>'
     + '<div class="phone-card-footer">'
-    + '<div class="phone-rating"><i class="fas fa-star"></i> '+p.rating+'</div>'
     + '<div style="display:flex;gap:6px;align-items:center">'
     + '<button class="compare-toggle'+(inCompare?' active':'')+'" data-compare-id="'+p.id+'"'
     + ' onclick="event.preventDefault();event.stopPropagation();toggleCompare(\''+p.id+'\',\''+p.name+'\',this)" title="Compare">'
     + '<i class="fas fa-code-compare"></i></button>'
-    + '<span class="btn-specs">'+p.price+'</span>'
     + '</div></div></div></a>';
 }
 function renderTopFeature(phones, articles) {
@@ -242,8 +240,6 @@ function renderTopFeature(phones, articles) {
     +   '<div class="tf-name">'+fp.name+'</div>'
     +   '<div class="tf-specs">'+fSpecs+'</div>'
     +   '<div class="tf-meta">'
-    +     '<span class="tf-rating"><i class="fas fa-star"></i> '+fp.rating+'</span>'
-    +     '<span class="tf-price">'+fp.price+'</span>'
     +   '</div>'
     +   '<span class="tf-link">View Specifications <i class="fas fa-arrow-right"></i></span>'
     + '</div>';
@@ -325,7 +321,8 @@ var selectedBrands = [
   "OPPO",
   "Samsung",
   "TECNO",
-  "Xiaomi"
+  "Xiaomi",
+  "RedMagic"
 ];
 
 var homeBrands = brands.filter(function(b) {
